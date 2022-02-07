@@ -1,0 +1,15 @@
+current directory: /Users/mitsunaga1218/portfolio/uber-eats-demo/vendor/bundle/ruby/2.7.0/gems/bootsnap-1.10.3/ext/bootsnap
+/Users/mitsunaga1218/.rbenv/versions/2.7.0/bin/ruby -I /Users/mitsunaga1218/.rbenv/versions/2.7.0/lib/ruby/2.7.0 -r ./siteconf20220205-74863-15vfwm2.rb extconf.rb
+creating Makefile
+
+current directory: /Users/mitsunaga1218/portfolio/uber-eats-demo/vendor/bundle/ruby/2.7.0/gems/bootsnap-1.10.3/ext/bootsnap
+make "DESTDIR=" clean
+
+current directory: /Users/mitsunaga1218/portfolio/uber-eats-demo/vendor/bundle/ruby/2.7.0/gems/bootsnap-1.10.3/ext/bootsnap
+make "DESTDIR="
+compiling bootsnap.c
+linking shared-object bootsnap/bootsnap.bundle
+
+current directory: /Users/mitsunaga1218/portfolio/uber-eats-demo/vendor/bundle/ruby/2.7.0/gems/bootsnap-1.10.3/ext/bootsnap
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 bootsnap.bundle ./.gem.20220205-74863-hz6zwg/bootsnap
