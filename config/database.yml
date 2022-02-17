@@ -20,6 +20,8 @@ default: &default
 development:
   <<: *default
   database: uber_eats_demo_development
+  username: <%= ENV['DB_DEVELOPMENT_USERNAME'] %>
+  password: <%= ENV['DB_DEVELOPMENT_PASSWORD'] %>
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".

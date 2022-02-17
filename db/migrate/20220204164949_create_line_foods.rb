@@ -4,8 +4,8 @@ class CreateLineFoods < ActiveRecord::Migration[6.0]
       t.references :food, null: false, foregin_key: true
       t.references :restaurant, null: false, foregin_key: true
       t.references :order, foregin_key: true
-      t.integer :count, null: false, defalut: 0
-      t.booleam :active, null: false, defalut: false
+      t.integer :count, null: false, default: 0
+      t.boolean :active, null: false, default: false
 
       t.timestamps
     end

@@ -29,5 +29,5 @@
 # 環境変数(dotenv-rails)
 /.env
 
-# bundle系
+# bundle系 gem
 /vendor/*
