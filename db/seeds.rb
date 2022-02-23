@@ -5,3 +5,22 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+# レストラン情報ダミーデータ
+# timesメソッドで指定回数繰り返す
+# |n|はブロックパラメータ nは整数オブジェクト-1の値
+3.times do |n|
+  restaurant = Restaurant.new(
+    name: "testレストラン_#{n}",
+    fee: 100,
+    time_required: 10,
+  )
+  12.times do |n|
+    restaurant.foods.build(
+     name: "フード名_#{n}",
+     price: 500,
+    description: "フード_#{n}の説明文"
+   )
+  end
+  restaurant.save!
+end
