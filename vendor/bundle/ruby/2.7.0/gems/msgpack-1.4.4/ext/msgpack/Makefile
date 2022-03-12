@@ -12,12 +12,12 @@ NULLCMD = :
 #### Start of system configuration section. ####
 
 srcdir = .
-topdir = /Users/mitsunaga1218/.rbenv/versions/2.7.0/include/ruby-2.7.0
+topdir = /Users/mitsunaga1218/.rbenv/versions/2.7.5/include/ruby-2.7.0
 hdrdir = $(topdir)
-arch_hdrdir = /Users/mitsunaga1218/.rbenv/versions/2.7.0/include/ruby-2.7.0/x86_64-darwin21
+arch_hdrdir = /Users/mitsunaga1218/.rbenv/versions/2.7.5/include/ruby-2.7.0/x86_64-darwin21
 PATH_SEPARATOR = :
 VPATH = $(srcdir):$(arch_hdrdir)/ruby:$(hdrdir)/ruby
-prefix = $(DESTDIR)/Users/mitsunaga1218/.rbenv/versions/2.7.0
+prefix = $(DESTDIR)/Users/mitsunaga1218/.rbenv/versions/2.7.5
 rubysitearchprefix = $(rubylibprefix)/$(sitearch)
 rubyarchprefix = $(rubylibprefix)/$(arch)
 rubylibprefix = $(libdir)/$(RUBY_BASE_NAME)
@@ -31,8 +31,8 @@ rubyhdrdir = $(includedir)/$(RUBY_VERSION_NAME)
 vendorarchdir = $(vendorlibdir)/$(sitearch)
 vendorlibdir = $(vendordir)/$(ruby_version)
 vendordir = $(rubylibprefix)/vendor_ruby
-sitearchdir = $(DESTDIR)./.gem.20220205-74863-1m6dlvd
-sitelibdir = $(DESTDIR)./.gem.20220205-74863-1m6dlvd
+sitearchdir = $(DESTDIR)./.gem.20220223-4193-1j4ml7n
+sitelibdir = $(DESTDIR)./.gem.20220223-4193-1j4ml7n
 sitedir = $(rubylibprefix)/site_ruby
 rubyarchdir = $(rubylibdir)/$(arch)
 rubylibdir = $(rubylibprefix)/$(ruby_version)
@@ -84,13 +84,13 @@ debugflags = -ggdb3
 warnflags = -Wall -Wextra -Wdeprecated-declarations -Wdivision-by-zero -Wimplicit-function-declaration -Wimplicit-int -Wmisleading-indentation -Wpointer-arith -Wshorten-64-to-32 -Wwrite-strings -Wmissing-noreturn -Wno-constant-logical-operand -Wno-long-long -Wno-missing-field-initializers -Wno-overlength-strings -Wno-parentheses-equality -Wno-self-assign -Wno-tautological-compare -Wno-unused-parameter -Wno-unused-value -Wunused-variable -Wextra-tokens
 cppflags = 
 CCDLFLAGS = -fno-common
-CFLAGS   = $(CCDLFLAGS) $(cflags)  -fno-common -pipe -I.. -Wall -O3 -g -std=gnu99 -DHASH_ASET_DEDUPE=1  -DSTR_UMINUS_DEDUPE=1  -DSTR_UMINUS_DEDUPE_FROZEN=0  $(ARCH_FLAG)
+CFLAGS   = $(CCDLFLAGS) -g -O2 -fno-common -pipe -I.. -Wall -O3 -g -std=gnu99 -DHASH_ASET_DEDUPE=1  -DSTR_UMINUS_DEDUPE=1  -DSTR_UMINUS_DEDUPE_FROZEN=0  $(ARCH_FLAG)
 INCFLAGS = -I. -I$(arch_hdrdir) -I$(hdrdir)/ruby/backward -I$(hdrdir) -I$(srcdir)
 DEFS     = 
-CPPFLAGS = -DHAVE_RUBY_ST_H -DHAVE_ST_H -I/Users/mitsunaga1218/.rbenv/versions/2.7.0/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT $(DEFS) $(cppflags)
+CPPFLAGS = -DHAVE_RUBY_ST_H -DHAVE_ST_H -I/Users/mitsunaga1218/.rbenv/versions/2.7.5/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT $(DEFS) $(cppflags)
 CXXFLAGS = $(CCDLFLAGS) -g -O2 $(ARCH_FLAG)
-ldflags  = -L. -L/Users/mitsunaga1218/.rbenv/versions/2.7.0/lib  -fstack-protector-strong -L/usr/local/lib
-dldflags = -L/Users/mitsunaga1218/.rbenv/versions/2.7.0/lib  -Wl,-undefined,dynamic_lookup -Wl,-multiply_defined,suppress 
+ldflags  = -L. -L/Users/mitsunaga1218/.rbenv/versions/2.7.5/lib  -fstack-protector-strong -L/usr/local/lib
+dldflags = -L/Users/mitsunaga1218/.rbenv/versions/2.7.5/lib  -Wl,-undefined,dynamic_lookup -Wl,-multiply_defined,suppress 
 ARCH_FLAG = 
 DLDFLAGS = $(ldflags) $(dldflags) $(ARCH_FLAG)
 LDSHARED = $(CC) -dynamic -bundle
