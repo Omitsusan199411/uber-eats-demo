@@ -6,9 +6,11 @@ class LineFood < ApplicationRecord
 
   validates :count, numericality: { greater_than: 0 }
 
-  # 返り値はActiveRecord_Relationの形で返す
+  # scopeを使用した場合。返り値は必ずActiveRecord_Relation（インスタンス）の形で返す。「モデル名.スコープ名」という形で使用する
+  # whereメソッドの返り値はActiveRecord_Relationのインスタンスを返す。
   scope :active, -> { where(active: true) }
-  # 例外パターンの処理。他の店舗のLineFoodがあるかどうかをチェックする
+  # 例外パターンの処理。他の店舗のLineFoodがあるかどうかをチェックする.
+  # picked_restaurant_id以外のレコードを取得。picked_restaurant_idは引数を表す
   scope :other_restaurant, -> (picked_restaurant_id) {where.not(restaurant_id: picked_restaurant_id)}
 
   def total_amount
