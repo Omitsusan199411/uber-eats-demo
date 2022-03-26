@@ -8,11 +8,11 @@ class Order < ApplicationRecord
     # トランザクション処理にするのは、LineFoodデータの更新とOrderデータへの保存のうち、どちらか一方が失敗した時にブロック内の処理をなくすため
     ActiveRecord::Base.transaction do
       line_foods.each do |line_food|
-        # update_attributes!はvalidationで引っかかった場合にfalseではなく、例外（ActiveRecord::RecordInvalid エラー文）を返す。
-        # 例外が発生するかもしれない処理
-        line_food.update_attributes!(active: false, order: self)
+        # orderインスタンスの保存に伴い、仮注文（LineFoodsの各インスタンス）のactiveとorder_idを更新する 
+        # order: selfはorder_id: self.idを指す
+        line_food.update_attributes!(active: false, order_id: self.id)
       end
-      # 例外が発生しなかった場合の処理
+      # selfはあるクラス内で使いう場合は、そのクラスのインスタンス自身のこと(ここでは、orders_controller.rbで作成されたorderインスタンスのこと)
       self.save!
     end
   end
