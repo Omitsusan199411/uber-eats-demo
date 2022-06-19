@@ -1,10 +1,15 @@
-import React from 'react';
-import './App.css';
+// 
+import React, { VFC } from 'react';
+import { BrowserRouter } from 'react-router-dom';
 
-export const App = () => {
+// コンポーネント
+import './App.css';
+import { Router } from "./router/Router";
+
+export const App: VFC = () => {
   return (
-    <div>
-      <p>Appコンポーネント</p>
-    </div>
+    <BrowserRouter>
+      <Router />
+    </BrowserRouter>
   );
 };
