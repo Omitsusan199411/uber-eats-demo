@@ -7,6 +7,8 @@ import { Home } from "../components/pages/Home";
 import { Restaurants } from "../components/pages/Restaurants";
 import { Foods } from "../components/pages/Foods";
 import { Orders } from "../components/pages/Orders";
+import { Page404 } from "../components/pages/Page404";
+import { restaurantsRouter } from "./RestaurantsRouter";
 
 export const Router: VFC = memo(() => {
   return (
@@ -14,23 +16,24 @@ export const Router: VFC = memo(() => {
       <Route exact path="/">
         <Home />
       </Route>
-      <Route exact path="/restaurants" render={({ match: { params } }) => (
+      <Route path="/restaurants" render={({ match: { url } }) => (
         <Switch>
-          <Route exact path="/:restaurantsId/foods">
-            <Foods params={`${params}`}/>
-          </Route>
+          {restaurantsRouter.map((route) => (
+            <Route key={route.path}  path={`${url}${route.path}`} exact={route.exact} >
+              {route.children}
+            </Route>
+          ))};
         </Switch>
       )}>
-        <Restaurants />
       </Route>
-      <Route exact path="/foods">
+      <Route path="/foods">
         <Foods />
       </Route>
-      <Route exact path="/orders">
+      <Route path="/orders">
         <Orders />
       </Route>
       <Route path="*">
-        <p>404ページ</p>
+        <Page404 />
       </Route>
     </Switch>
   ); 

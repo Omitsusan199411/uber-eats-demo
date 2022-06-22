@@ -1,22 +1,22 @@
 // ライブラリ
-import React, { VFC, memo, ReactNode } from "react";
+import React, { VFC, memo } from "react";
+import { useParams } from "react-router-dom";
 
 type RouterProps = {
-  params?: string;
+  restaurants_id?: string;
 }
 
 
-export const Foods:VFC<RouterProps> = memo((props) => {
-  const { params } = props;
-  console.log(props);
-  console.log(params);
+export const Foods:VFC = memo(() => {
+  const { restaurants_id } = useParams<RouterProps>();
+  console.log(restaurants_id);
   return (
     <>
       <p>
         Foodsコンポーネント
       </p>
-      {params ? (<p>
-        restaurants_idは{params}です
+      {restaurants_id ? (<p>
+        restaurants_idは{restaurants_id}です
       </p>) : false}
     </>
   );
