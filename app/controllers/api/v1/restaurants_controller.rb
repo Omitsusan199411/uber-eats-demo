@@ -6,6 +6,4 @@ class Api::V1::RestaurantsController < ApplicationController
       restaurants: restaurants
     },status: :ok
   end
-
-
 end
