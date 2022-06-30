@@ -1,6 +1,6 @@
 // ライブラリ
 import axios from "axios";
-import React, { useCallback } from "react";
+import { useCallback } from "react";
 
 // コンポーネント
 import { restaurants } from "../../urls/urlApi";
