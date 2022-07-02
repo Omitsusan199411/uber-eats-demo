@@ -1,9 +1,9 @@
-// 
-import React, { VFC } from 'react';
-import { BrowserRouter } from 'react-router-dom';
+//
+import { VFC } from "react";
+import { BrowserRouter } from "react-router-dom";
 
 // コンポーネント
-import './App.css';
+import "./App.css";
 import { Router } from "./router/Router";
 
 export const App: VFC = () => {

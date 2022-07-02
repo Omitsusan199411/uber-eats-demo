@@ -1,20 +1,45 @@
-// ライブラリ
-import { VFC, memo, useEffect } from "react";
+// ライブラリimport
+import { VFC, memo, useEffect, useReducer } from "react";
 import styled from "styled-components";
 
-// カスタムフック
+// コンポーネントimport
+import {
+  restaurantsReducer,
+  restaurantsActionConditions,
+} from "../../reducers/restaurants";
+
+// 型import
+import { Restaurant } from "../../types/api/Restaurant";
+
+// カスタムフックimport
 // restaurantsのapi
 import { useAuthRestaurants } from "../../hooks/api/useAuthRestaurants";
 
-// images
+// 画像import
 import MainLogo from "../../images/logo.png";
 import MainCoverImage from "../../images/main-cover-image.png";
 
+// 型定義
+export type RestaurantsStateType = {
+  fetchState: string;
+  restaurantsList: Restaurant[] | [];
+};
+
 export const Restaurants: VFC = memo(() => {
   const { fetchRestaurants } = useAuthRestaurants();
+  // const initialState: RestaurantsStateType = {
+  //   fetchState: "INITIAL",
+  //   restaurantsList: [],
+  // };
+  // const [state, dispatch] = useReducer(restaurantsReducer, initialState);
 
   useEffect(() => {
+    // dispatch({ type: restaurantsActionConditions.fetching });
     fetchRestaurants();
+    // dispatch({
+    //   type: restaurantsActionConditions.fetch_success,
+    //   payload: { restaurants: data.restaurants },
+    // });
   }, []);
   return (
     <>
@@ -24,6 +49,9 @@ export const Restaurants: VFC = memo(() => {
       <MainCoverImageWrapper>
         <MainCover src={MainCoverImage} alt="main cover"></MainCover>
       </MainCoverImageWrapper>
+      {/* {state.restaurantsList.map((restaurant: Restaurant) => (
+        <div key={restaurant.id}>{restaurant.name}</div>
+      ))} */}
     </>
   );
 });
