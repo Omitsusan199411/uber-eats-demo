@@ -7,14 +7,14 @@ import { RestaurantsStateType } from "../components/pages/Restaurants";
 
 // action型定義
 export type ReducerActionType = {
-  type: string;
-  payload?: {
+  payload: {
     restaurants: Restaurant[];
   };
+  type: string;
 };
 
 // API通信でrestaurants情報を取得する際のactionのタイプ（今、API通信がどの状態かを指す）
-export const restaurantsActionConditions = {
+export const apiActionConditions = {
   fetching: "fetching",
   fetch_success: "fetch_success",
 };
@@ -24,15 +24,15 @@ export const restaurantsReducer = (
   action: ReducerActionType
 ) => {
   switch (action.type) {
-    case restaurantsActionConditions.fetching:
+    case apiActionConditions.fetching:
       return {
         ...state,
         fetchState: REQUEST_STATE.loading,
       };
-    case restaurantsActionConditions.fetch_success:
+    case apiActionConditions.fetch_success:
       return {
         fetchState: REQUEST_STATE.ok,
-        restaurantsList: action.payload?.restaurants,
+        restaurantsList: action.payload.restaurants,
       };
     default:
       throw new Error();

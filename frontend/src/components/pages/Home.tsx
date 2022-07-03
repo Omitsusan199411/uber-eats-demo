@@ -1,7 +1,5 @@
-import React, { VFC, memo } from "react";
+import { VFC, memo } from "react";
 
 export const Home: VFC = memo(() => {
-  return(
-    <p>Homeコンポーネント</p>
-  );
+  return <p>Homeコンポーネント</p>;
 });

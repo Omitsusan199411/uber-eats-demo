@@ -4,8 +4,8 @@ import styled from "styled-components";
 
 // コンポーネントimport
 import {
+  apiActionConditions,
   restaurantsReducer,
-  restaurantsActionConditions,
 } from "../../reducers/restaurants";
 
 // 型import
@@ -19,27 +19,35 @@ import { useAuthRestaurants } from "../../hooks/api/useAuthRestaurants";
 import MainLogo from "../../images/logo.png";
 import MainCoverImage from "../../images/main-cover-image.png";
 
+// 定数import
+import { REQUEST_STATE } from "../../constants/constants";
+
 // 型定義
 export type RestaurantsStateType = {
   fetchState: string;
-  restaurantsList: Restaurant[] | [];
+  restaurantsList: Restaurant[];
 };
 
 export const Restaurants: VFC = memo(() => {
   const { fetchRestaurants } = useAuthRestaurants();
-  // const initialState: RestaurantsStateType = {
-  //   fetchState: "INITIAL",
-  //   restaurantsList: [],
-  // };
-  // const [state, dispatch] = useReducer(restaurantsReducer, initialState);
+  const initialState: RestaurantsStateType = {
+    fetchState: REQUEST_STATE.initial,
+    restaurantsList: [],
+  };
+  const [state, dispatch] = useReducer(restaurantsReducer, initialState);
 
   useEffect(() => {
-    // dispatch({ type: restaurantsActionConditions.fetching });
-    fetchRestaurants();
-    // dispatch({
-    //   type: restaurantsActionConditions.fetch_success,
-    //   payload: { restaurants: data.restaurants },
-    // });
+    dispatch({
+      type: apiActionConditions.fetching,
+      payload: { restaurants: [] },
+    });
+    const restaurantsApi = new Promise(fetchRestaurants);
+    restaurantsApi.then((restaurantsData: Restaurant[]) => {
+      dispatch({
+        type: apiActionConditions.fetch_success,
+        payload: { restaurants: restaurantsData },
+      });
+    });
   }, []);
   return (
     <>
@@ -49,9 +57,9 @@ export const Restaurants: VFC = memo(() => {
       <MainCoverImageWrapper>
         <MainCover src={MainCoverImage} alt="main cover"></MainCover>
       </MainCoverImageWrapper>
-      {/* {state.restaurantsList.map((restaurant: Restaurant) => (
+      {state.restaurantsList.map((restaurant: Restaurant) => (
         <div key={restaurant.id}>{restaurant.name}</div>
-      ))} */}
+      ))}
     </>
   );
 });
