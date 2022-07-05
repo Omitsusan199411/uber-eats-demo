@@ -7,9 +7,7 @@ import { RestaurantsStateType } from "../components/pages/Restaurants";
 
 // action型定義
 export type ReducerActionType = {
-  payload: {
-    restaurants: Restaurant[];
-  };
+  payload: Restaurant[];
   type: string;
 };
 
@@ -20,19 +18,20 @@ export const apiActionConditions = {
 };
 
 export const restaurantsReducer = (
-  state: RestaurantsStateType,
+  restaurantsData: RestaurantsStateType,
   action: ReducerActionType
 ) => {
   switch (action.type) {
     case apiActionConditions.fetching:
       return {
-        ...state,
+        ...restaurantsData,
         fetchState: REQUEST_STATE.loading,
       };
     case apiActionConditions.fetch_success:
       return {
+        ...restaurantsData,
         fetchState: REQUEST_STATE.ok,
-        restaurantsList: action.payload.restaurants,
+        restaurantsList: action.payload,
       };
     default:
       throw new Error();

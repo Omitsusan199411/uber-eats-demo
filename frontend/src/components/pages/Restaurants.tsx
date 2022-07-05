@@ -29,26 +29,13 @@ export type RestaurantsStateType = {
 };
 
 export const Restaurants: VFC = memo(() => {
-  const { fetchRestaurants } = useAuthRestaurants();
-  const initialState: RestaurantsStateType = {
-    fetchState: REQUEST_STATE.initial,
-    restaurantsList: [],
-  };
-  const [state, dispatch] = useReducer(restaurantsReducer, initialState);
+  const { fetchRestaurants, restaurantsData } = useAuthRestaurants();
 
   useEffect(() => {
-    dispatch({
-      type: apiActionConditions.fetching,
-      payload: { restaurants: [] },
-    });
-    const restaurantsApi = new Promise(fetchRestaurants);
-    restaurantsApi.then((restaurantsData: Restaurant[]) => {
-      dispatch({
-        type: apiActionConditions.fetch_success,
-        payload: { restaurants: restaurantsData },
-      });
-    });
+    fetchRestaurants();
   }, []);
+  console.log(restaurantsData.restaurantsList);
+
   return (
     <>
       <HeaderWapper>
@@ -57,9 +44,13 @@ export const Restaurants: VFC = memo(() => {
       <MainCoverImageWrapper>
         <MainCover src={MainCoverImage} alt="main cover"></MainCover>
       </MainCoverImageWrapper>
-      {state.restaurantsList.map((restaurant: Restaurant) => (
-        <div key={restaurant.id}>{restaurant.name}</div>
-      ))}
+      <div>
+        {restaurantsData
+          ? restaurantsData.restaurantsList.map((restaurant: Restaurant) => (
+              <div key={restaurant.id}>{restaurant.name}</div>
+            ))
+          : false}
+      </div>
     </>
   );
 });
