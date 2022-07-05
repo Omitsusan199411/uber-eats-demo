@@ -3,10 +3,6 @@ import { VFC, memo, useEffect, useReducer } from "react";
 import styled from "styled-components";
 
 // コンポーネントimport
-import {
-  apiActionConditions,
-  restaurantsReducer,
-} from "../../reducers/restaurants";
 
 // 型import
 import { Restaurant } from "../../types/api/Restaurant";
@@ -19,9 +15,6 @@ import { useAuthRestaurants } from "../../hooks/api/useAuthRestaurants";
 import MainLogo from "../../images/logo.png";
 import MainCoverImage from "../../images/main-cover-image.png";
 
-// 定数import
-import { REQUEST_STATE } from "../../constants/constants";
-
 // 型定義
 export type RestaurantsStateType = {
   fetchState: string;
@@ -31,6 +24,7 @@ export type RestaurantsStateType = {
 export const Restaurants: VFC = memo(() => {
   const { fetchRestaurants, restaurantsData } = useAuthRestaurants();
 
+  // restaurants情報をapiから取得
   useEffect(() => {
     fetchRestaurants();
   }, []);
