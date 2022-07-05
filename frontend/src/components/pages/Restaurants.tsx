@@ -39,11 +39,9 @@ export const Restaurants: VFC = memo(() => {
         <MainCover src={MainCoverImage} alt="main cover"></MainCover>
       </MainCoverImageWrapper>
       <div>
-        {restaurantsData
-          ? restaurantsData.restaurantsList.map((restaurant: Restaurant) => (
-              <div key={restaurant.id}>{restaurant.name}</div>
-            ))
-          : false}
+        {restaurantsData.restaurantsList.map((restaurant: Restaurant) => (
+          <div key={restaurant.id}>{restaurant.name}</div>
+        ))}
       </div>
     </>
   );
