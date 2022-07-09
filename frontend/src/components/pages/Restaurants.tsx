@@ -28,7 +28,6 @@ export const Restaurants: VFC = memo(() => {
   useEffect(() => {
     fetchRestaurants();
   }, []);
-  console.log(restaurantsData.restaurantsList);
 
   return (
     <>

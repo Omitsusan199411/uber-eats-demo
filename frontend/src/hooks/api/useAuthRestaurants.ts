@@ -1,5 +1,5 @@
 // ライブラリimport
-import axios, { AxiosResponse } from "axios";
+import axios, { AxiosResponse, AxiosError } from "axios";
 import { useCallback, useReducer } from "react";
 
 // コンポーネントimport
@@ -26,11 +26,13 @@ export const useAuthRestaurants = () => {
     initialState
   );
 
-  const fetchRestaurants = useCallback(() => {
+  // awaitで結果を待ってから後続の処理を実行する
+  const fetchRestaurants = useCallback((): void => {
     dispatch({
       type: apiActionConditions.fetching,
       payload: [],
     });
+    // axiosの戻り値はPromiseオブジェクト、then()の戻り値もPromiseオブジェクト
     axios
       .get<Restaurant[]>(`${restaurants}`)
       .then((res: AxiosResponse<Restaurant[]>) => {
@@ -40,7 +42,7 @@ export const useAuthRestaurants = () => {
           payload: data,
         });
       })
-      .catch((error) => {
+      .catch((error: AxiosError<string>) => {
         console.log(error);
       });
   }, []);
