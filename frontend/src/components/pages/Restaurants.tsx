@@ -14,7 +14,7 @@ import { useAuthRestaurants } from "../../hooks/api/useAuthRestaurants";
 // 画像import
 import MainLogo from "../../images/logo.png";
 import MainCoverImage from "../../images/main-cover-image.png";
-import RestaurantImage from "../../images/restaurant-image.png";
+import RestaurantImage from "../../images/restaurant-image.jpg";
 
 // 定数 import
 import { REQUEST_STATE } from "../../constants/constants";
@@ -58,7 +58,7 @@ export const Restaurants: VFC = memo(() => {
               <RestaurantsContentWrapper>
                 <RestaurantsImageNode src={RestaurantImage} />
                 <MainText>{restaurant.name}</MainText>
-                <SubText>{`配送料:${restaurant.fee}円 ${restaurant.time_required}分}`}</SubText>
+                <SubText>{`配送料:${restaurant.fee}円 ${restaurant.time_required}分`}</SubText>
               </RestaurantsContentWrapper>
             </Link>
           ))
