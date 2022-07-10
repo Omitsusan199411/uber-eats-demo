@@ -19,7 +19,7 @@
     restaurant.foods.build(
      name: "フード名_#{n}",
      price: 500,
-    description: "フード_#{n}の説明文"
+     description: "フード_#{n}の説明文"
    )
   end
   restaurant.save!

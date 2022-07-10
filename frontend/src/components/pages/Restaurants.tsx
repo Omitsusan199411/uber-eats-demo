@@ -1,8 +1,8 @@
 // ライブラリimport
-import { VFC, memo, useEffect, useReducer } from "react";
+import { VFC, memo, useEffect } from "react";
 import styled from "styled-components";
-
-// コンポーネントimport
+import { Link } from "react-router-dom";
+import { Skeleton } from "@mui/material";
 
 // 型import
 import { Restaurant } from "../../types/api/Restaurant";
@@ -14,6 +14,10 @@ import { useAuthRestaurants } from "../../hooks/api/useAuthRestaurants";
 // 画像import
 import MainLogo from "../../images/logo.png";
 import MainCoverImage from "../../images/main-cover-image.png";
+import RestaurantImage from "../../images/restaurant-image.png";
+
+// 定数 import
+import { REQUEST_STATE } from "../../constants/constants";
 
 // 型定義
 export type RestaurantsStateType = {
@@ -37,11 +41,29 @@ export const Restaurants: VFC = memo(() => {
       <MainCoverImageWrapper>
         <MainCover src={MainCoverImage} alt="main cover"></MainCover>
       </MainCoverImageWrapper>
-      <div>
-        {restaurantsData.restaurantsList.map((restaurant: Restaurant) => (
-          <div key={restaurant.id}>{restaurant.name}</div>
-        ))}
-      </div>
+      <RestaurantsContentList>
+        {restaurantsData.fetchState === REQUEST_STATE.loading ? (
+          <>
+            <Skeleton variant="rectangular" width={450} height={300} />
+            <Skeleton variant="rectangular" width={450} height={300} />
+            <Skeleton variant="rectangular" width={450} height={300} />
+          </>
+        ) : (
+          restaurantsData.restaurantsList.map((restaurant, index) => (
+            <Link
+              to={`/restaurants/${restaurant.id}/foods`}
+              key={index}
+              style={{ textDecoration: "none" }}
+            >
+              <RestaurantsContentWrapper>
+                <RestaurantsImageNode src={RestaurantImage} />
+                <MainText>{restaurant.name}</MainText>
+                <SubText>{`配送料:${restaurant.fee}円 ${restaurant.time_required}分}`}</SubText>
+              </RestaurantsContentWrapper>
+            </Link>
+          ))
+        )}
+      </RestaurantsContentList>
     </>
   );
 });
@@ -62,4 +84,30 @@ const MainCoverImageWrapper = styled.div`
 
 const MainCover = styled.img`
   height: 600px;
+`;
+
+const RestaurantsContentList = styled.div`
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 150px;
+`;
+
+const RestaurantsContentWrapper = styled.div`
+  width: 450px;
+  height: 300px;
+  padding: 48px;
+`;
+
+const RestaurantsImageNode = styled.img`
+  width: 100%;
+`;
+
+const MainText = styled.p`
+  color: black;
+  font-size: 18px;
+`;
+
+const SubText = styled.p`
+  color: black;
+  font-size: 12px;
 `;
