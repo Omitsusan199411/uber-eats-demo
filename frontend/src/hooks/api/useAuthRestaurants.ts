@@ -42,7 +42,7 @@ export const useAuthRestaurants = () => {
           payload: data,
         });
       })
-      .catch((error: AxiosError<string>) => {
+      .catch((error: AxiosError<{ error: string }>) => {
         console.log(error);
       });
   }, []);

@@ -34,6 +34,6 @@ export const restaurantsReducer = (
         restaurantsList: action.payload,
       };
     default:
-      throw new Error();
+      throw new Error("店舗情報を取得できませんでした");
   }
 };
