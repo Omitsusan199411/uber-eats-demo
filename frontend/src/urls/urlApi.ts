@@ -6,8 +6,8 @@ const DEFALUT_API_URL = "http://localhost:3000/api/v1";
 export const restaurants = `${DEFALUT_API_URL}/restaurants`;
 
 // api/v1/foods#index
-export const foodsIndex = (restaurantId: number) =>
-  `${DEFALUT_API_URL}/restaurants/${restaurantId}/foods`;
+export const foodsIndex = (restaurant_id: string) =>
+  `${DEFALUT_API_URL}/restaurants/${restaurant_id}/foods`;
 
 // api/v1/line_foods
 export const lineFoods = `${DEFALUT_API_URL}/line_foods`;

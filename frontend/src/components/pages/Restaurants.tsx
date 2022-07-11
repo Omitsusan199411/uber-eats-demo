@@ -19,12 +19,6 @@ import RestaurantImage from "../../images/restaurant-image.jpg";
 // 定数 import
 import { REQUEST_STATE } from "../../constants/constants";
 
-// 型定義
-export type RestaurantsStateType = {
-  fetchState: string;
-  restaurantsList: Restaurant[];
-};
-
 export const Restaurants: VFC = memo(() => {
   const { fetchRestaurants, restaurantsData } = useAuthRestaurants();
 
@@ -42,26 +36,43 @@ export const Restaurants: VFC = memo(() => {
         <MainCover src={MainCoverImage} alt="main cover"></MainCover>
       </MainCoverImageWrapper>
       <RestaurantsContentList>
-        {restaurantsData.fetchState === REQUEST_STATE.loading ? (
+        {restaurantsData.fetchStatus === REQUEST_STATE.loading ? (
           <>
-            <Skeleton variant="rectangular" width={450} height={300} />
-            <Skeleton variant="rectangular" width={450} height={300} />
-            <Skeleton variant="rectangular" width={450} height={300} />
+            <Skeleton
+              variant="rectangular"
+              animation="wave"
+              width={450}
+              height={300}
+            />
+            <Skeleton
+              variant="rectangular"
+              animation="wave"
+              width={450}
+              height={300}
+            />
+            <Skeleton
+              variant="rectangular"
+              animation="wave"
+              width={450}
+              height={300}
+            />
           </>
         ) : (
-          restaurantsData.restaurantsList.map((restaurant, index) => (
-            <Link
-              to={`/restaurants/${restaurant.id}/foods`}
-              key={index}
-              style={{ textDecoration: "none" }}
-            >
-              <RestaurantsContentWrapper>
-                <RestaurantsImageNode src={RestaurantImage} />
-                <MainText>{restaurant.name}</MainText>
-                <SubText>{`配送料:${restaurant.fee}円 ${restaurant.time_required}分`}</SubText>
-              </RestaurantsContentWrapper>
-            </Link>
-          ))
+          restaurantsData.restaurantsList.map(
+            (restaurant: Restaurant, index: number) => (
+              <Link
+                to={`/restaurants/${restaurant.id}/foods`}
+                key={index}
+                style={{ textDecoration: "none" }}
+              >
+                <RestaurantsContentWrapper>
+                  <RestaurantsImageNode src={RestaurantImage} />
+                  <MainText>{restaurant.name}</MainText>
+                  <SubText>{`配送料:${restaurant.fee}円 ${restaurant.time_required}分`}</SubText>
+                </RestaurantsContentWrapper>
+              </Link>
+            )
+          )
         )}
       </RestaurantsContentList>
     </>

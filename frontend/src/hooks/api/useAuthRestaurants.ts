@@ -4,21 +4,20 @@ import { useCallback, useReducer } from "react";
 
 // コンポーネントimport
 import { restaurants } from "../../urls/urlApi";
-import {
-  apiActionConditions,
-  restaurantsReducer,
-} from "../../reducers/restaurants";
+import { restaurantsReducer } from "../../reducers/restaurants";
 
 // 型import
-import { Restaurant } from "../../types/api/Restaurant";
-import { RestaurantsStateType } from "../../components/pages/Restaurants";
+import { Restaurant, RestaurantsStateType } from "../../types/api/Restaurant";
 
 // 定数import
-import { REQUEST_STATE } from "../../constants/constants";
+import {
+  REQUEST_STATE,
+  REDUCER_FETCHING_ACTION,
+} from "../../constants/constants";
 
 export const useAuthRestaurants = () => {
   const initialState: RestaurantsStateType = {
-    fetchState: REQUEST_STATE.initial,
+    fetchStatus: REQUEST_STATE.initial,
     restaurantsList: [],
   };
   const [restaurantsData, dispatch] = useReducer(
@@ -29,7 +28,7 @@ export const useAuthRestaurants = () => {
   // awaitで結果を待ってから後続の処理を実行する
   const fetchRestaurants = useCallback((): void => {
     dispatch({
-      type: apiActionConditions.fetching,
+      type: REDUCER_FETCHING_ACTION.fetching,
       payload: [],
     });
     // axiosの戻り値はPromiseオブジェクト、then()の戻り値もPromiseオブジェクト
@@ -38,7 +37,7 @@ export const useAuthRestaurants = () => {
       .then((res: AxiosResponse<Restaurant[]>) => {
         const { data } = res;
         dispatch({
-          type: apiActionConditions.fetch_success,
+          type: REDUCER_FETCHING_ACTION.fetch_success,
           payload: data,
         });
       })
