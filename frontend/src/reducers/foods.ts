@@ -13,7 +13,6 @@ export const foodsReducer = (
       return {
         ...foodsData,
         fetchStatus: REQUEST_STATE.loading,
-        foodsList: [],
       };
     case REDUCER_FETCHING_ACTION.fetch_success:
       return {

@@ -16,11 +16,11 @@ import {
 } from "../../constants/constants";
 
 export const useAuthFoods = () => {
-  const initialState: FoodsStateType = {
+  const foodsInitialState: FoodsStateType = {
     fetchStatus: REQUEST_STATE.initial,
     foodsList: [],
   };
-  const [foodsData, dispatch] = useReducer(foodsReducer, initialState);
+  const [foodsState, dispatch] = useReducer(foodsReducer, foodsInitialState);
 
   const fetchFoods = useCallback((restaurant_id: string): void => {
     dispatch({ type: REDUCER_FETCHING_ACTION.fetching, payload: [] });
@@ -37,5 +37,5 @@ export const useAuthFoods = () => {
         console.log(error);
       });
   }, []);
-  return { fetchFoods, foodsData };
+  return { fetchFoods, foodsState };
 };

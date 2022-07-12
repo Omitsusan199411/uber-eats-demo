@@ -15,14 +15,23 @@ export const Router: VFC = memo(() => {
       <Route exact path="/">
         <Home />
       </Route>
-      <Route path="/restaurants" render={({ match: { url } }) => (
-        <Switch>
-          {restaurantsRouter.map((route) => (
-            <Route key={route.id}  path={`${url}${route.path}`} exact={route.exact}>
-              {route.children}
-            </Route>
-          ))}
-        </Switch>
+      {/* レンダリングする関数(render)はReact Routerのpropsを受け取れる。受け取れるオブジェクトはmatch、location、history */}
+      {/* RouteのpathとURLのローケーション(aタグ href属性)の値が一致するとrender（props）の引数にmatchオブジェクトが渡せる。
+      matchオブジェクトの中のurlは一致したURL、つまり「/restaurants」が値として代入されている */}
+      <Route
+        path="/restaurants"
+        render={({ match: { url } }) => (
+          <Switch>
+            {restaurantsRouter.map((route) => (
+              <Route
+                key={route.id}
+                path={`${url}${route.path}`}
+                exact={route.exact}
+              >
+                {route.children}
+              </Route>
+            ))}
+          </Switch>
         )}
       />
       <Route path="/foods">
@@ -35,5 +44,5 @@ export const Router: VFC = memo(() => {
         <Page404 />
       </Route>
     </Switch>
-  ); 
+  );
 });

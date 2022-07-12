@@ -16,13 +16,13 @@ import {
 } from "../../constants/constants";
 
 export const useAuthRestaurants = () => {
-  const initialState: RestaurantsStateType = {
+  const restaurantsInitialState: RestaurantsStateType = {
     fetchStatus: REQUEST_STATE.initial,
     restaurantsList: [],
   };
   const [restaurantsData, dispatch] = useReducer(
     restaurantsReducer,
-    initialState
+    restaurantsInitialState
   );
 
   // awaitで結果を待ってから後続の処理を実行する
