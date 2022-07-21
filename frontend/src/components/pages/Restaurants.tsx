@@ -2,7 +2,12 @@
 import { VFC, memo, useEffect } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { Skeleton } from "@mui/material";
+import { Box, Skeleton } from "@mui/material";
+
+// コンポーネントimport
+import { MainText } from "../atoms/MainText";
+import { SubText } from "../atoms/SubText";
+import { Header } from "../templates/Header";
 
 // 型import
 import { Restaurant } from "../../types/api/Restaurant";
@@ -12,9 +17,8 @@ import { Restaurant } from "../../types/api/Restaurant";
 import { useAuthRestaurants } from "../../hooks/api/useAuthRestaurants";
 
 // 画像import
-import MainLogo from "../../images/logo.png";
-import MainCoverImage from "../../images/main-cover-image.png";
-import RestaurantImage from "../../images/restaurant-image.jpg";
+import MainCoverRestaurantImage from "../../images/restaurants/brooke-lark-M4E7X3z80PQ-unsplash.jpg";
+import RestaurantImage from "../../images/restaurants/restaurant-image.jpg";
 
 // 定数 import
 import { REQUEST_STATE } from "../../constants/constants";
@@ -29,12 +33,18 @@ export const Restaurants: VFC = memo(() => {
 
   return (
     <>
-      <HeaderWapper>
-        <MainLogoImage src={MainLogo} alt="main logo"></MainLogoImage>
-      </HeaderWapper>
-      <MainCoverImageWrapper>
-        <MainCover src={MainCoverImage} alt="main cover"></MainCover>
-      </MainCoverImageWrapper>
+      <Header />
+      <Box
+        component="img"
+        src={MainCoverRestaurantImage}
+        alt="main cover"
+        sx={{
+          display: { xs: "none", sm: "none", md: "block" },
+          width: "100vw",
+          aspectRatio: "3/2",
+          pt: "60px",
+        }}
+      />
       <RestaurantsContentList>
         {restaurantsData.fetchStatus === REQUEST_STATE.loading ? (
           <>
@@ -79,28 +89,9 @@ export const Restaurants: VFC = memo(() => {
   );
 });
 
-const HeaderWapper = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  padding: 8px 32px;
-`;
-
-const MainLogoImage = styled.img`
-  height: 90px;
-`;
-
-const MainCoverImageWrapper = styled.div`
-  text-align: center;
-`;
-
-const MainCover = styled.img`
-  height: 600px;
-`;
-
 const RestaurantsContentList = styled.div`
   display: flex;
   justify-content: space-around;
-  margin-bottom: 150px;
 `;
 
 const RestaurantsContentWrapper = styled.div`
@@ -111,14 +102,4 @@ const RestaurantsContentWrapper = styled.div`
 
 const RestaurantsImageNode = styled.img`
   width: 100%;
-`;
-
-const MainText = styled.p`
-  color: black;
-  font-size: 18px;
-`;
-
-const SubText = styled.p`
-  color: black;
-  font-size: 12px;
 `;
