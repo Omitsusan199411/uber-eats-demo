@@ -62,7 +62,7 @@ export const Foods: VFC = memo(() => {
           >
             <List>
               <ListItem disablePadding sx={{ display: "block" }}>
-                {listTest.map((e: number, i: number) => (
+                {[...Array(12).keys()].map((e: number, i: number) => (
                   <ListItemButton key={i}>
                     <ListItemText primary={`カテゴリー${e}`}></ListItemText>
                   </ListItemButton>
