@@ -86,25 +86,6 @@ export const Foods: VFC = memo(() => {
               pr: { sx: "0px", sm: "30px", md: "50px" },
             }}
           >
-            {/* <Box>
-              <Grid container spacing={2} justifyContent="center">
-                <Grid item xs={12} sm={12} md={6}>
-                  {foodsState.fetchStatus === REQUEST_STATE.loading
-                    ? [...Array(12).keys()].map((i) => {
-                        <Skeleton
-                          key={i}
-                          variant="rectangular"
-                          animation="wave"
-                          width={150}
-                          height={120}
-                        />;
-                      })
-                    : foodsState.foodsList.map((food: Food, index: number) => {
-                        <FoodsCard foodInfo={food} key={index} />;
-                      })}
-                </Grid>
-              </Grid>
-            </Box> */}
             {foodsState.fetchStatus === REQUEST_STATE.loading ? (
               <>
                 <Grid container spacing={2} justifyContent="center">
@@ -115,7 +96,6 @@ export const Foods: VFC = memo(() => {
                         animation="wave"
                         width="100%"
                         height="10vh"
-                        sx={{ broderRadius: "6px" }}
                       />
                     </Grid>
                   ))}
