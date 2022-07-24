@@ -1,5 +1,6 @@
 // ライブラリimport
 import { memo } from "react";
+import styled from "styled-components";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
@@ -17,18 +18,34 @@ type FoodsMap = {
 
 export const FoodsCard = memo((props: FoodsMap) => {
   const { foodInfo } = props;
+
+  const onClickFood = () => {
+    console.log(foodInfo.name);
+  };
+
   return (
-    <Card sx={{ manWidth: "180px", borderRadius: "6px" }}>
+    <CardStyle
+      sx={{ width: "100%", borderRadius: "6px", display: "flex" }}
+      onClick={() => {
+        onClickFood();
+      }}
+    >
       <CardMedia
         component="img"
-        height="170px"
         image={foodImage}
         alt="foodImage"
+        sx={{ width: { xs: "40%", sm: "35%" } }}
       />
-      <CardContent>
-        <Typography>{foodInfo.name}</Typography>
-        <Typography>￥{foodInfo.price}</Typography>
+      <CardContent sx={{ width: "100%" }}>
+        <Typography sx={{ fontSize: "16px" }}>{foodInfo.name}</Typography>
+        <Typography sx={{ fontSize: "14px" }}>￥{foodInfo.price}</Typography>
       </CardContent>
-    </Card>
+    </CardStyle>
   );
 });
+
+const CardStyle = styled(Card)`
+  &:hover {
+    cursor: pointer;
+  }
+`;

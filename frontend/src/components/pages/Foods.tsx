@@ -9,6 +9,7 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
+import Skeleton from "@mui/material/Skeleton";
 
 // コンポーネントimport
 import { useAuthFoods } from "../../hooks/api/useAuthFoods";
@@ -22,15 +23,20 @@ import { Food } from "../../types/api/Foods";
 import { REQUEST_STATE } from "../../constants/constants";
 
 export const Foods: VFC = memo(() => {
+  // カスタムフック
   const { fetchFoods, foodsState } = useAuthFoods();
   // react hoolk社必ず関数コンポーネント本体のトップレベルで呼び出すこと
   const { restaurant_id } = useParams<{ restaurant_id: string }>();
 
-  const listTest = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-
   useEffect(() => {
     fetchFoods(restaurant_id);
   }, []);
+
+  console.log(foodsState);
+
+  const foodsListLength = foodsState.foodsList.length;
+
+  console.log(foodsListLength);
 
   return (
     <>
@@ -39,6 +45,7 @@ export const Foods: VFC = memo(() => {
         component="main"
         sx={{
           backgroundColor: "#F4F5F7",
+          height: "100vh",
         }}
       >
         <Box
@@ -54,7 +61,7 @@ export const Foods: VFC = memo(() => {
             sx={{
               mt: "150px",
               p: "20px",
-              width: "20%",
+              width: "18%",
               backgroundColor: "#ffffff",
               borderRadius: "16px",
               display: { xs: "none", sm: "block" },
@@ -74,17 +81,50 @@ export const Foods: VFC = memo(() => {
             sx={{
               mt: "150px",
               width: "70%",
-              backgroundColor: "#ffffff",
-              borderRadius: "16px",
-              p: "50px",
+              backgroundColor: "#F4F5F7",
+              pl: { sx: "0px", sm: "30px", md: "50px" },
+              pr: { sx: "0px", sm: "30px", md: "50px" },
             }}
           >
+            {/* <Box>
+              <Grid container spacing={2} justifyContent="center">
+                <Grid item xs={12} sm={12} md={6}>
+                  {foodsState.fetchStatus === REQUEST_STATE.loading
+                    ? [...Array(12).keys()].map((i) => {
+                        <Skeleton
+                          key={i}
+                          variant="rectangular"
+                          animation="wave"
+                          width={150}
+                          height={120}
+                        />;
+                      })
+                    : foodsState.foodsList.map((food: Food, index: number) => {
+                        <FoodsCard foodInfo={food} key={index} />;
+                      })}
+                </Grid>
+              </Grid>
+            </Box> */}
             {foodsState.fetchStatus === REQUEST_STATE.loading ? (
-              <p style={{ fontSize: "28px" }}>ロード中...</p>
+              <>
+                <Grid container spacing={2} justifyContent="center">
+                  {[...Array(20).keys()].map((index: number) => (
+                    <Grid item xs={12} sm={12} md={6} key={index}>
+                      <Skeleton
+                        variant="rectangular"
+                        animation="wave"
+                        width="100%"
+                        height="10vh"
+                        sx={{ broderRadius: "6px" }}
+                      />
+                    </Grid>
+                  ))}
+                </Grid>
+              </>
             ) : (
-              <Grid container spacing={7} justifyContent="center">
+              <Grid container spacing={2} justifyContent="center">
                 {foodsState.foodsList.map((food: Food, index: number) => (
-                  <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
+                  <Grid item xs={12} sm={12} md={6} key={index}>
                     <FoodsCard foodInfo={food} />
                   </Grid>
                 ))}
