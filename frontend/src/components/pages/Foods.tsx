@@ -1,5 +1,5 @@
 // ライブラリimport
-import { VFC, memo, useEffect } from "react";
+import { VFC, memo, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -15,28 +15,36 @@ import Skeleton from "@mui/material/Skeleton";
 import { useAuthFoods } from "../../hooks/api/useAuthFoods";
 import { Header } from "../templates/Header";
 import { FoodsCard } from "../organisms/foods/FoodsCard";
+import { FoodDetailModal } from "../organisms/foods/FoodDetailModal";
 
 // 型import
 import { Food } from "../../types/api/Foods";
+import { FoodModal } from "../../types/layout/FoodModal";
 
 // 定数import
 import { REQUEST_STATE } from "../../constants/constants";
 
 export const Foods: VFC = memo(() => {
-  // カスタムフック
+  // food Modalの初期State
+  const FoodModalInitialState: FoodModal = {
+    isOpen: false,
+    selectedFood: null,
+    selectedFoodCount: 1,
+  };
+  // food api用のカスタムフック
   const { fetchFoods, foodsState } = useAuthFoods();
-  // react hoolk社必ず関数コンポーネント本体のトップレベルで呼び出すこと
+
+  // react hooks（useParams）は必ず関数コンポーネント本体のトップレベルで呼び出すこと
   const { restaurant_id } = useParams<{ restaurant_id: string }>();
+
+  // food Modal用のuseState
+  const [FoodModalState, setFoodModalState] = useState<FoodModal>(
+    FoodModalInitialState
+  );
 
   useEffect(() => {
     fetchFoods(restaurant_id);
   }, []);
-
-  console.log(foodsState);
-
-  const foodsListLength = foodsState.foodsList.length;
-
-  console.log(foodsListLength);
 
   return (
     <>
@@ -69,11 +77,13 @@ export const Foods: VFC = memo(() => {
           >
             <List>
               <ListItem disablePadding sx={{ display: "block" }}>
-                {[...Array(12).keys()].map((e: number, i: number) => (
-                  <ListItemButton key={i}>
-                    <ListItemText primary={`カテゴリー${e}`}></ListItemText>
-                  </ListItemButton>
-                ))}
+                {[...Array.from(Array(12).keys())].map(
+                  (e: number, i: number) => (
+                    <ListItemButton key={i}>
+                      <ListItemText primary={`カテゴリー${e}`}></ListItemText>
+                    </ListItemButton>
+                  )
+                )}
               </ListItem>
             </List>
           </Box>
@@ -89,7 +99,8 @@ export const Foods: VFC = memo(() => {
             {foodsState.fetchStatus === REQUEST_STATE.loading ? (
               <>
                 <Grid container spacing={2} justifyContent="center">
-                  {[...Array(20).keys()].map((index: number) => (
+                  {/* ...Array(20).keys()とすることで0~19の値を配列として代入できる。keys()がない場合はundefinedが20個配列として格納される */}
+                  {[...Array.from(Array(20).keys())].map((index: number) => (
                     <Grid item xs={12} sm={12} md={6} key={index}>
                       <Skeleton
                         variant="rectangular"
@@ -105,13 +116,33 @@ export const Foods: VFC = memo(() => {
               <Grid container spacing={2} justifyContent="center">
                 {foodsState.foodsList.map((food: Food, index: number) => (
                   <Grid item xs={12} sm={12} md={6} key={index}>
-                    <FoodsCard foodInfo={food} />
+                    <FoodsCard
+                      foodInfo={food}
+                      onClickFood={() =>
+                        setFoodModalState({
+                          isOpen: true,
+                          selectedFood: food,
+                          selectedFoodCount: 1,
+                        })
+                      }
+                    />
                   </Grid>
                 ))}
               </Grid>
             )}
           </Box>
         </Box>
+        {FoodModalState.isOpen && (
+          <FoodDetailModal
+            selectedFoodModal={FoodModalState}
+            onClose={() =>
+              setFoodModalState({
+                ...FoodModalState,
+                isOpen: false,
+              })
+            }
+          />
+        )}
       </Box>
     </>
   );

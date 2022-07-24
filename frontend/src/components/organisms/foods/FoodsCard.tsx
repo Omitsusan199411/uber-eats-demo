@@ -1,5 +1,5 @@
 // ライブラリimport
-import { memo } from "react";
+import { memo, VFC, MouseEvent } from "react";
 import styled from "styled-components";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
@@ -12,23 +12,19 @@ import { Food } from "../../../types/api/Foods";
 // 画像import
 import foodImage from "../../../images/foods/food-image.jpg";
 
-type FoodsMap = {
+// 型定義
+type FoodsCardProps = {
   foodInfo: Food;
+  onClickFood: () => void;
 };
 
-export const FoodsCard = memo((props: FoodsMap) => {
-  const { foodInfo } = props;
-
-  const onClickFood = () => {
-    console.log(foodInfo.name);
-  };
+export const FoodsCard: VFC<FoodsCardProps> = memo((props) => {
+  const { foodInfo, onClickFood } = props;
 
   return (
     <CardStyle
       sx={{ width: "100%", borderRadius: "6px", display: "flex" }}
-      onClick={() => {
-        onClickFood();
-      }}
+      onClick={() => onClickFood()}
     >
       <CardMedia
         component="img"
