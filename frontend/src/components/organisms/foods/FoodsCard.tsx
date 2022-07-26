@@ -23,14 +23,18 @@ export const FoodsCard: VFC<FoodsCardProps> = memo((props) => {
 
   return (
     <CardStyle
-      sx={{ width: "100%", borderRadius: "6px", display: "flex" }}
+      sx={{
+        width: "100%",
+        borderRadius: "6px",
+        display: { xs: "block", sm: "flex" },
+      }}
       onClick={onClickFood}
     >
       <CardMedia
         component="img"
         image={foodImage}
         alt="foodImage"
-        sx={{ width: { xs: "40%", sm: "35%" } }}
+        sx={{ width: { xs: "100%", sm: "35%" } }}
       />
       <CardContent sx={{ width: "100%" }}>
         <Typography sx={{ fontSize: "16px" }}>{foodInfo.name}</Typography>

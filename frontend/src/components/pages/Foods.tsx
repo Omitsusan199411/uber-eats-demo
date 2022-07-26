@@ -53,7 +53,7 @@ export const Foods: VFC = memo(() => {
         component="main"
         sx={{
           backgroundColor: "#F4F5F7",
-          height: "100vh",
+          height: "100%",
         }}
       >
         <Box
@@ -90,10 +90,10 @@ export const Foods: VFC = memo(() => {
           <Box
             sx={{
               mt: "150px",
-              width: "70%",
+              width: { xs: "45%", sm: "60%", md: "70%" },
               backgroundColor: "#F4F5F7",
-              pl: { sx: "0px", sm: "30px", md: "50px" },
-              pr: { sx: "0px", sm: "30px", md: "50px" },
+              pl: { xs: "0px", sm: "30px", md: "50px" },
+              pr: { xs: "0px", sm: "30px", md: "50px" },
             }}
           >
             {foodsState.fetchStatus === REQUEST_STATE.loading ? (

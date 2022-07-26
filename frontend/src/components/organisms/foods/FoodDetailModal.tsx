@@ -6,13 +6,17 @@ import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogActions from "@mui/material/DialogActions";
-import Button from "@mui/material/Button";
+
+// コンポーネント import
+import { CloseButton } from "../../atoms/buttons/CloseButton";
+import { SubmitButton } from "../../atoms/buttons/SubmitButton";
+import { CountForm } from "../../moleciles/form/CountForm";
 
 // 型 import
 import { FoodModal } from "../../../types/layout/FoodModal";
 
 // 画像 import
-import foodModalImage from "../../../images/foods/food-modal.png";
+import foodModalImage from "../../../images/foods/food-image.jpg";
 
 // 型定義
 type FoodDetailModalType = {
@@ -21,12 +25,11 @@ type FoodDetailModalType = {
 };
 
 export const FoodDetailModal: VFC<FoodDetailModalType> = memo((props) => {
-  console.log(props);
-  console.log(Object.prototype.toString.call(props));
   const { selectedFoodModal, onClose } = props;
 
   return (
     <Dialog open={selectedFoodModal.isOpen} onClose={onClose}>
+      <CloseButton onClick={onClose} />
       <Box
         component="img"
         src={`${foodModalImage}`}
@@ -38,10 +41,9 @@ export const FoodDetailModal: VFC<FoodDetailModalType> = memo((props) => {
           {selectedFoodModal.selectedFood?.description}
         </DialogContentText>
       </DialogContent>
+      <CountForm />
       <DialogActions>
-        <Button onClick={onClose} sx={{ color: "black" }}>
-          キャンセル
-        </Button>
+        <SubmitButton>仮注文</SubmitButton>
       </DialogActions>
     </Dialog>
   );

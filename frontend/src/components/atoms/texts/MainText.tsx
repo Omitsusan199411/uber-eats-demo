@@ -2,7 +2,7 @@
 import Box from "@mui/material/Box";
 
 // 型import
-import { MainTextType } from "../../types/text/MainText";
+import { MainTextType } from "../../../types/text/MainText";
 
 export const MainText = (props: MainTextType) => {
   const { children } = props;

@@ -5,8 +5,8 @@ import { Link } from "react-router-dom";
 import { Box, Skeleton } from "@mui/material";
 
 // コンポーネントimport
-import { MainText } from "../atoms/MainText";
-import { SubText } from "../atoms/SubText";
+import { MainText } from "../atoms/texts/MainText";
+import { SubText } from "../atoms/texts/SubText";
 import { Header } from "../templates/Header";
 
 // 型import
