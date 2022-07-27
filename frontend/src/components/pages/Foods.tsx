@@ -29,7 +29,7 @@ export const Foods: VFC = memo(() => {
   const FoodModalInitialState: FoodModal = {
     isOpen: false,
     selectedFood: null,
-    selectedFoodCount: 1,
+    initialFoodCount: 1,
   };
   // food api用のカスタムフック
   const { fetchFoods, foodsState } = useAuthFoods();
@@ -122,7 +122,7 @@ export const Foods: VFC = memo(() => {
                         setFoodModalState({
                           isOpen: true,
                           selectedFood: food,
-                          selectedFoodCount: 1,
+                          initialFoodCount: 1,
                         })
                       }
                     />

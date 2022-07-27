@@ -41,8 +41,8 @@ export const FoodDetailModal: VFC<FoodDetailModalType> = memo((props) => {
           {selectedFoodModal.selectedFood?.description}
         </DialogContentText>
       </DialogContent>
-      <CountForm />
-      <DialogActions>
+      <DialogActions sx={{ justifyContent: "space-between" }}>
+        <CountForm initialFoodCount={selectedFoodModal.initialFoodCount} />
         <SubmitButton>仮注文</SubmitButton>
       </DialogActions>
     </Dialog>
