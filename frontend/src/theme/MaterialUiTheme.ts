@@ -21,10 +21,10 @@ export const MaterialUiTheme = createTheme({
       main: "#ffffff",
     },
     secondary: {
-      main: "#00e676",
+      main: "#008000",
     },
     info: {
-      main: "#333333",
+      main: "#222222",
     },
   },
   breakpoints: {

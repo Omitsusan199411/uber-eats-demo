@@ -1,5 +1,5 @@
 // ライブラリ import
-import { memo, VFC } from "react";
+import { memo, VFC, useState } from "react";
 import Box from "@mui/material/Box";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
@@ -27,6 +27,22 @@ type FoodDetailModalType = {
 export const FoodDetailModal: VFC<FoodDetailModalType> = memo((props) => {
   const { selectedFoodModal, onClose } = props;
 
+  // フード数量の状態を持つ
+  const [selectedFoodCount, setSelectedFoodCount] = useState<number>(
+    selectedFoodModal.initialFoodCount
+  );
+
+  // 注文数量の変更
+  const CountUp = (): void => {
+    setSelectedFoodCount(selectedFoodCount + 1);
+  };
+  const CountDown = (): void => {
+    setSelectedFoodCount(selectedFoodCount - 1);
+  };
+
+  // 合計値
+  const FoodPrice: number | undefined = selectedFoodModal.selectedFood?.price;
+
   return (
     <Dialog open={selectedFoodModal.isOpen} onClose={onClose}>
       <CloseButton onClick={onClose} />
@@ -41,9 +57,18 @@ export const FoodDetailModal: VFC<FoodDetailModalType> = memo((props) => {
           {selectedFoodModal.selectedFood?.description}
         </DialogContentText>
       </DialogContent>
-      <DialogActions sx={{ justifyContent: "space-between" }}>
-        <CountForm initialFoodCount={selectedFoodModal.initialFoodCount} />
-        <SubmitButton>仮注文</SubmitButton>
+      <DialogActions sx={{ justifyContent: "space-between", pt: "25px" }}>
+        <CountForm
+          CountUp={CountUp}
+          CountDown={CountDown}
+          FoodCount={selectedFoodCount}
+        />
+        <SubmitButton>
+          <Box
+            sx={{ display: { xs: "none", sm: "block" } }}
+          >{`${selectedFoodCount}点を注文に追加`}</Box>
+          <Box>{`￥${FoodPrice * selectedFoodCount}`}</Box>
+        </SubmitButton>
       </DialogActions>
     </Dialog>
   );

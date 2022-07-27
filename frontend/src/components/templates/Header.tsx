@@ -28,10 +28,10 @@ export const Header = () => {
             <Box>
               <Link to={`/orders`}>
                 <LocalMalllcon
+                  color="secondary"
                   sx={{
                     display: { xs: "none", sm: "inline" },
                     fontSize: { sm: "18px", md: "22px", lg: "24px" },
-                    color: "#008000",
                   }}
                 />
               </Link>

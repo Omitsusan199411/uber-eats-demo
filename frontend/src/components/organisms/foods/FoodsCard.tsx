@@ -1,5 +1,5 @@
 // ライブラリimport
-import { memo, VFC, MouseEvent } from "react";
+import { memo, VFC } from "react";
 import styled from "styled-components";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
