@@ -1,37 +1,38 @@
 // ライブラリ import
-import { memo, VFC } from "react";
+import { memo, VFC, Dispatch, SetStateAction } from "react";
 import Box from "@mui/material/Box";
-import IconButton from "@mui/material/IconButton";
 
 // コンポーネント import
 import { CountUpButton } from "../../atoms/buttons/CountUpButton";
 import { CountDownButton } from "../../atoms/buttons/CountDownButton";
 
+// 型定義
 type Count = {
-  CountUp: () => void;
-  CountDown: () => void;
-  FoodCount: number;
+  selectedFoodCount: number;
+  setSelectedFoodCount: Dispatch<SetStateAction<number>>;
 };
 
 export const CountForm: VFC<Count> = memo((props) => {
-  const { CountUp, CountDown, FoodCount } = props;
+  const { selectedFoodCount, setSelectedFoodCount } = props;
+
+  // 注文数量の変更
+  const CountUp = (): void => {
+    setSelectedFoodCount(selectedFoodCount + 1);
+  };
+  const CountDown = (): void => {
+    setSelectedFoodCount(selectedFoodCount - 1);
+  };
 
   return (
     <Box sx={{ display: "flex", alignItems: "center" }}>
-      <IconButton onClick={CountUp}>
-        <CountUpButton />
-      </IconButton>
+      <CountUpButton CountUp={CountUp} />
       <Box color="info" component="span" sx={{ textAlign: "center" }}>
-        {FoodCount}
+        {selectedFoodCount}
       </Box>
-      {FoodCount === 1 ? (
-        <IconButton color="info" onClick={CountDown} disabled>
-          <CountDownButton />
-        </IconButton>
+      {selectedFoodCount === 1 ? (
+        <CountDownButton CountDown={CountDown} isDisabled={true} />
       ) : (
-        <IconButton color="info" onClick={CountDown}>
-          <CountDownButton />
-        </IconButton>
+        <CountDownButton CountDown={CountDown} isDisabled={false} />
       )}
     </Box>
   );

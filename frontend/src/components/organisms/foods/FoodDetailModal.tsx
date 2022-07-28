@@ -32,17 +32,6 @@ export const FoodDetailModal: VFC<FoodDetailModalType> = memo((props) => {
     selectedFoodModal.initialFoodCount
   );
 
-  // 注文数量の変更
-  const CountUp = (): void => {
-    setSelectedFoodCount(selectedFoodCount + 1);
-  };
-  const CountDown = (): void => {
-    setSelectedFoodCount(selectedFoodCount - 1);
-  };
-
-  // 合計値
-  const FoodPrice: number | undefined = selectedFoodModal.selectedFood?.price;
-
   return (
     <Dialog open={selectedFoodModal.isOpen} onClose={onClose}>
       <CloseButton onClick={onClose} />
@@ -59,15 +48,16 @@ export const FoodDetailModal: VFC<FoodDetailModalType> = memo((props) => {
       </DialogContent>
       <DialogActions sx={{ justifyContent: "space-between", pt: "25px" }}>
         <CountForm
-          CountUp={CountUp}
-          CountDown={CountDown}
-          FoodCount={selectedFoodCount}
+          selectedFoodCount={selectedFoodCount}
+          setSelectedFoodCount={setSelectedFoodCount}
         />
         <SubmitButton>
           <Box
             sx={{ display: { xs: "none", sm: "block" } }}
           >{`${selectedFoodCount}点を注文に追加`}</Box>
-          <Box>{`￥${FoodPrice * selectedFoodCount}`}</Box>
+          <Box>{`￥${(
+            selectedFoodModal.selectedFood?.price * selectedFoodCount
+          ).toLocaleString()}`}</Box>
         </SubmitButton>
       </DialogActions>
     </Dialog>

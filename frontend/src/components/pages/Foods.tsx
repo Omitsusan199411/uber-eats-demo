@@ -27,7 +27,7 @@ export const Foods: VFC = memo(() => {
   // food Modalの初期State
   const FoodModalInitialState: FoodModal = {
     isOpen: false,
-    selectedFood: null,
+    selectedFood: {},
     initialFoodCount: 1,
   };
   // food api用のカスタムフック

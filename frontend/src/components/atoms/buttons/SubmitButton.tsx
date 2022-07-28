@@ -18,7 +18,7 @@ export const SubmitButton: VFC<ButtonProps> = memo((props) => {
         alignItems: "center",
         justifyContent: "space-around",
         p: "8px",
-        pl: "20px",
+        pl: "15px",
         pr: "20px",
       }}
     >
