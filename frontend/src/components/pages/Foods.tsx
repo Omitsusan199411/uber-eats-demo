@@ -133,7 +133,7 @@ export const Foods: VFC = memo(() => {
         </Box>
         {FoodModalState.isOpen && (
           <FoodDetailModal
-            selectedFoodModal={FoodModalState}
+            selectedFoodInfo={FoodModalState}
             onClose={() =>
               setFoodModalState({
                 ...FoodModalState,

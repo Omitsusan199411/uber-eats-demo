@@ -1,4 +1,7 @@
-// Foods型定義
+// 型 import
+import { EmptyObject } from "../../types/object/EmptyObject";
+
+// Food型定義
 export type Food = {
   id: number;
   restaurant_id: number;
@@ -30,10 +33,13 @@ export type FoodPostRequest = {
   count: number;
 };
 
-// // api(Postメソッド) 通信 foods axiosレスポンス型定義
-// export type FoodsPostResponse = {};
-
 // api(Postメソッド) 通信 foods axiosエラーレスポンス型定義
 export type FoodsPostErrorResponse = {
   error: string;
+};
+
+// foodReplace
+export type NewFoodReplace = {
+  isOpen: boolean;
+  newReplaceSelectedFood: Food | EmptyObject;
 };

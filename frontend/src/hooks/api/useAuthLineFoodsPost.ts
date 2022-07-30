@@ -15,7 +15,7 @@ import { EmptyObject } from "../../types/object/EmptyObject";
 import { LineFood } from "../../types/api/LineFood";
 
 // URL import
-import { lineFoods, orders } from "../../urls/urlApi";
+import { lineFoods } from "../../urls/urlApi";
 
 export const useAuthLineFoodsPost = () => {
   // React hooksは
@@ -33,9 +33,6 @@ export const useAuthLineFoodsPost = () => {
           history.push("/orders");
         })
         .catch((error: AxiosError<FoodsPostErrorResponse>) => {
-          console.log(error.request);
-          console.log(error.response);
-          console.log(error.message);
           throw error;
         });
     },

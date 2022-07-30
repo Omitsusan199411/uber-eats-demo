@@ -12,7 +12,7 @@ import { FoodLineSubmitProps } from "../../../types/button/FoodLineSubmitProps";
 export const SubmitButton: VFC<FoodLineSubmitProps> = memo((props) => {
   const { children, selectedFoodInfo, selectedFoodCount } = props;
 
-  // 仮注文(line_foods登録) カスタムフック
+  // 仮注文(LineFoods) カスタムフック
   const { lineFoodsPost } = useAuthLineFoodsPost();
 
   return (
