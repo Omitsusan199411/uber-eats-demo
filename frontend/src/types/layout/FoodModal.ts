@@ -1,5 +1,5 @@
 // 型import
-import { Food } from "../api/Foods";
+import { Food } from "../api/Food";
 import { EmptyObject } from "../object/EmptyObject";
 
 export type FoodModal = {

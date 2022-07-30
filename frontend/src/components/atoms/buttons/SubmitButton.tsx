@@ -3,11 +3,18 @@ import { memo, VFC } from "react";
 import Button from "@mui/material/Button";
 import SendIcon from "@mui/icons-material/Send";
 
-// 型 import
-import { ButtonProps } from "../../../types/button/ButtonProps";
+// コンポーネント import
+import { useAuthLineFoodsPost } from "../../../hooks/api/useAuthLineFoodsPost";
 
-export const SubmitButton: VFC<ButtonProps> = memo((props) => {
-  const { children, onClick } = props;
+// 型 import
+import { FoodLineSubmitProps } from "../../../types/button/FoodLineSubmitProps";
+
+export const SubmitButton: VFC<FoodLineSubmitProps> = memo((props) => {
+  const { children, selectedFoodInfo, selectedFoodCount } = props;
+
+  // 仮注文(line_foods登録) カスタムフック
+  const { lineFoodsPost } = useAuthLineFoodsPost();
+
   return (
     <Button
       color="info"
@@ -20,6 +27,9 @@ export const SubmitButton: VFC<ButtonProps> = memo((props) => {
         p: "8px",
         pl: "15px",
         pr: "20px",
+      }}
+      onClick={() => {
+        lineFoodsPost(selectedFoodInfo, selectedFoodCount);
       }}
     >
       {children}

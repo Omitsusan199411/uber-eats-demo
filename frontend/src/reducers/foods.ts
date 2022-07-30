@@ -1,5 +1,5 @@
 // 型import
-import { FoodsReducerActionType, FoodsStateType } from "../types/api/Foods";
+import { FoodsReducerActionType, FoodsStateType } from "../types/api/Food";
 
 // 定数import
 import { REQUEST_STATE, REDUCER_FETCHING_ACTION } from "../constants/constants";

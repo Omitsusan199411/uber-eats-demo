@@ -7,7 +7,7 @@ import CancelIcon from "@mui/icons-material/Cancel";
 import { ButtonProps } from "../../../types/button/ButtonProps";
 
 export const CloseButton: VFC<ButtonProps> = memo((props) => {
-  const { children, onClick } = props;
+  const { onClick } = props;
   return (
     <IconButton
       onClick={onClick}

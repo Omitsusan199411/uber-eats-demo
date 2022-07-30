@@ -51,7 +51,10 @@ export const FoodDetailModal: VFC<FoodDetailModalType> = memo((props) => {
           selectedFoodCount={selectedFoodCount}
           setSelectedFoodCount={setSelectedFoodCount}
         />
-        <SubmitButton>
+        <SubmitButton
+          selectedFoodInfo={selectedFoodModal.selectedFood}
+          selectedFoodCount={selectedFoodCount}
+        >
           <Box
             sx={{ display: { xs: "none", sm: "block" } }}
           >{`${selectedFoodCount}点を注文に追加`}</Box>

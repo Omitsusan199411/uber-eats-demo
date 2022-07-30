@@ -17,7 +17,7 @@ import { FoodsCard } from "../organisms/foods/FoodsCard";
 import { FoodDetailModal } from "../organisms/foods/FoodDetailModal";
 
 // 型import
-import { Food } from "../../types/api/Foods";
+import { Food } from "../../types/api/Food";
 import { FoodModal } from "../../types/layout/FoodModal";
 
 // 定数import

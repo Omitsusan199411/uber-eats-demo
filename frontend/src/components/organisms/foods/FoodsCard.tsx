@@ -7,7 +7,7 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 
 // 型import
-import { Food } from "../../../types/api/Foods";
+import { Food } from "../../../types/api/Food";
 
 // 画像import
 import foodImage from "../../../images/foods/food-image.jpg";
