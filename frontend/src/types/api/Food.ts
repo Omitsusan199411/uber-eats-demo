@@ -1,3 +1,6 @@
+// ライブラリ import
+import { Dispatch, SetStateAction } from "react";
+
 // 型 import
 import { EmptyObject } from "../../types/object/EmptyObject";
 
@@ -8,6 +11,12 @@ export type Food = {
   name: string;
   price: number;
   description: string;
+};
+
+// FoodCard Props型定義
+export type FoodsCardProps = {
+  foodInfo: Food;
+  onClickFood: Dispatch<SetStateAction<FoodModal>>;
 };
 
 // api(Getメソッド)通信で取得するfoodsStateの型定義
@@ -27,15 +36,20 @@ export type RestaurantId = {
   restaurant_id: number;
 };
 
+// Food Modalのstateの型
+export type FoodModal = {
+  isFoodModalOpen: boolean;
+  isFoodReplaceModalOpen: boolean;
+  selectedFood: Food | EmptyObject;
+  initialFoodCount: number;
+  existingRestaurant: string;
+  newRestaurant: string;
+};
+
 // api（Postメソッド）通信 foods axiosリクエスト型定義
 export type FoodPostRequest = {
   food_id: number;
   count: number;
-};
-
-// api(Postメソッド) 通信 foods axiosエラーレスポンス型定義
-export type FoodsPostErrorResponse = {
-  error: string;
 };
 
 // foodReplace

@@ -1,5 +1,13 @@
 // ライブラリimport
-import { VFC, memo, useEffect, useState } from "react";
+import {
+  VFC,
+  memo,
+  useEffect,
+  useState,
+  createContext,
+  Dispatch,
+  SetStateAction,
+} from "react";
 import { useParams } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -15,20 +23,31 @@ import { useAuthFoods } from "../../hooks/api/useAuthFoods";
 import { Header } from "../templates/Header";
 import { FoodsCard } from "../organisms/foods/FoodsCard";
 import { FoodDetailModal } from "../organisms/foods/FoodDetailModal";
+import { NewFoodReplaceModal } from "../organisms/foods/NewFoodReplaceModal";
 
 // 型import
-import { Food } from "../../types/api/Food";
-import { FoodModal } from "../../types/layout/FoodModal";
+import { Food, FoodModal } from "../../types/api/Food";
 
 // 定数import
 import { REQUEST_STATE } from "../../constants/constants";
 
+// createContext(FoodModalContext)定義(as以下はFoodModalContextの型定義)
+export const FoodModalContext = createContext(
+  {} as {
+    FoodModalState: FoodModal;
+    setFoodModalState: Dispatch<SetStateAction<FoodModal>>;
+  }
+);
+
 export const Foods: VFC = memo(() => {
   // food Modalの初期State
   const FoodModalInitialState: FoodModal = {
-    isOpen: false,
+    isFoodModalOpen: false,
+    isFoodReplaceModalOpen: false,
     selectedFood: {},
     initialFoodCount: 1,
+    existingRestaurant: "",
+    newRestaurant: "",
   };
   // food api用のカスタムフック
   const { fetchFoods, foodsState } = useAuthFoods();
@@ -119,9 +138,12 @@ export const Foods: VFC = memo(() => {
                       foodInfo={food}
                       onClickFood={() =>
                         setFoodModalState({
-                          isOpen: true,
+                          isFoodModalOpen: true,
+                          isFoodReplaceModalOpen: false,
                           selectedFood: food,
                           initialFoodCount: 1,
+                          existingRestaurant: "",
+                          newRestaurant: "",
                         })
                       }
                     />
@@ -131,17 +153,12 @@ export const Foods: VFC = memo(() => {
             )}
           </Box>
         </Box>
-        {FoodModalState.isOpen && (
-          <FoodDetailModal
-            selectedFoodInfo={FoodModalState}
-            onClose={() =>
-              setFoodModalState({
-                ...FoodModalState,
-                isOpen: false,
-              })
-            }
-          />
-        )}
+        <FoodModalContext.Provider
+          value={{ FoodModalState, setFoodModalState }}
+        >
+          {FoodModalState.isFoodModalOpen && <FoodDetailModal />};
+          {FoodModalState.isFoodReplaceModalOpen && <NewFoodReplaceModal />}
+        </FoodModalContext.Provider>
       </Box>
     </>
   );

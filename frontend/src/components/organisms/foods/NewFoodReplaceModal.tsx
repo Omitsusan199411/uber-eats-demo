@@ -1,24 +1,24 @@
 // import ライブラリ
-import { memo, VFC } from "react";
+import { memo, VFC, useContext } from "react";
 import Box from "@mui/material/Box";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 
-// 型 import
-import { NewFoodReplace } from "../../../types/api/Food";
+import { FoodModalContext } from "../../pages/Foods";
 
-type NewFoodReplaceProps = {
-  NewFoodReplaceState: NewFoodReplace;
-  onClose: () => void;
-};
-
-export const NewFoodReplaceModal: VFC<NewFoodReplaceProps> = memo((props) => {
-  const { NewFoodReplaceState } = props;
+export const NewFoodReplaceModal: VFC = memo(() => {
+  const { FoodModalState, setFoodModalState } = useContext(FoodModalContext);
   return (
-    <Dialog open={NewFoodReplaceState.isOpen}>
-      <DialogContent>
-        {NewFoodReplaceState.newReplaceSelectedFood.name}
-      </DialogContent>
+    <Dialog
+      open={FoodModalState.isFoodReplaceModalOpen}
+      onClose={() => {
+        setFoodModalState({
+          ...FoodModalState,
+          isFoodReplaceModalOpen: false,
+        });
+      }}
+    >
+      <DialogContent>{FoodModalState.newRestaurant}</DialogContent>
     </Dialog>
   );
 });
