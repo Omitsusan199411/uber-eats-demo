@@ -21,12 +21,11 @@ export const useAuthLineFoodsPost = () => {
   const lineFoodsPost = useCallback(
     (
       FoodModalState: FoodModal,
-      setFoodModalState: Dispatch<SetStateAction<FoodModal>>,
-      selectedFoodCount: number
+      setFoodModalState: Dispatch<SetStateAction<FoodModal>>
     ): void => {
       const params: FoodPostRequest = {
         food_id: FoodModalState.selectedFood.id,
-        count: selectedFoodCount,
+        count: FoodModalState.selectedFoodCount,
       };
       axios
         .post<LineFood>(`${lineFoods}`, params)
@@ -40,14 +39,13 @@ export const useAuthLineFoodsPost = () => {
             console.log(error);
             console.log(error.response);
             setFoodModalState({
+              ...FoodModalState,
               isFoodModalOpen: false,
               isFoodReplaceModalOpen: true,
-              selectedFood: {},
-              initialFoodCount: 1,
-              existingRestaurant: "",
-              newRestaurant: "",
+              existingRestaurant: error.response.data.existing_restaurant,
+              newRestaurant: error.response.data.new_restaurant,
             });
-            history.push("/orders");
+            console.log(FoodModalState);
           } else {
             throw error;
           }

@@ -45,11 +45,11 @@ export const Foods: VFC = memo(() => {
     isFoodModalOpen: false,
     isFoodReplaceModalOpen: false,
     selectedFood: {},
-    initialFoodCount: 1,
+    selectedFoodCount: 1,
     existingRestaurant: "",
     newRestaurant: "",
   };
-  // food api用のカスタムフック
+  // food一覧を取得 カスタムフック
   const { fetchFoods, foodsState } = useAuthFoods();
 
   // react hooks（useParams）は必ず関数コンポーネント本体のトップレベルで呼び出すこと
@@ -60,6 +60,7 @@ export const Foods: VFC = memo(() => {
     FoodModalInitialState
   );
 
+  // food一覧を表示
   useEffect(() => {
     fetchFoods(restaurant_id);
   }, []);
@@ -141,7 +142,7 @@ export const Foods: VFC = memo(() => {
                           isFoodModalOpen: true,
                           isFoodReplaceModalOpen: false,
                           selectedFood: food,
-                          initialFoodCount: 1,
+                          selectedFoodCount: 1,
                           existingRestaurant: "",
                           newRestaurant: "",
                         })

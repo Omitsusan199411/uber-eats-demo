@@ -25,7 +25,7 @@ class Api::V1::LineFoodsController < ApplicationController
     # LineFoodテーブルにactive: trueであり、かつordered_food以外のレストランIDが存在した場合で分岐させる
     if LineFood.active.other_restaurant(@ordered_food.restaurant.id).exists?
       return render json: {
-        existing_restaurant: LineFood.other_restaurant(@ordered_food.restaurant.id).first.restaurant.name,
+        existing_restaurant: LineFood.active.other_restaurant(@ordered_food.restaurant.id).first.restaurant.name,
         new_restaurant: Food.find(params[:food_id]).restaurant.name,
       },status: 406
       # HTTPステータスコード406はnot_acceptableで指定されたフォーマットで返せない場合
@@ -44,7 +44,7 @@ class Api::V1::LineFoodsController < ApplicationController
   end
 
   def replace
-    # eachメソッドはmapメソッドと違い繰り返し処理を行うだけ。配列で返さない
+    # eachメソッドはmapメソッドと違い繰り返し処理を行うだけ。eachメソッドは配列で返さない
     LineFood.active.other_restaurant(@ordered_food.restaurant.id).each do |line_food|
       line_food.update_attribute(:active, false)
     end
@@ -70,6 +70,8 @@ class Api::V1::LineFoodsController < ApplicationController
     @ordered_food = Food.find(params[:food_id])
   end
 
+  # @ordered_foodに紐づくline_foodインスタンスを更新・新規作成
+  # 既に@ordered_foodに紐づくline_foodインスタンスが存在する場合は、line_foodインスタンスの中のcountとactiveの値を書き換え
   def set_line_food(ordered_food)
     if ordered_food.line_food.present?
       @line_food = ordered_food.line_food

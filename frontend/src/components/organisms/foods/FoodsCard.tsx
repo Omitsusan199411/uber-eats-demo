@@ -22,9 +22,7 @@ export const FoodsCard: VFC<FoodsCardProps> = memo((props) => {
         borderRadius: "6px",
         display: { xs: "block", sm: "flex" },
       }}
-      onClick={() => {
-        onClickFood;
-      }}
+      onClick={onClickFood}
     >
       <CardMedia
         component="img"

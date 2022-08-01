@@ -16,7 +16,7 @@ export type Food = {
 // FoodCard Props型定義
 export type FoodsCardProps = {
   foodInfo: Food;
-  onClickFood: Dispatch<SetStateAction<FoodModal>>;
+  onClickFood: () => void;
 };
 
 // api(Getメソッド)通信で取得するfoodsStateの型定義
@@ -41,7 +41,7 @@ export type FoodModal = {
   isFoodModalOpen: boolean;
   isFoodReplaceModalOpen: boolean;
   selectedFood: Food | EmptyObject;
-  initialFoodCount: number;
+  selectedFoodCount: number;
   existingRestaurant: string;
   newRestaurant: string;
 };
