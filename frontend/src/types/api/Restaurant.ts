@@ -6,13 +6,13 @@ export type Restaurant = {
   time_required: number;
 };
 
-// api通信 restaurants型定義
+// api通信 lineFoods型定義
 export type RestaurantsStateType = {
   fetchStatus: string;
   restaurantsList: Restaurant[];
 };
 
-// api restaurants ReducerAction型定義
+// api lineFoods ReducerAction型定義
 export type ReducerActionType = {
   payload: Restaurant[];
   type: string;
