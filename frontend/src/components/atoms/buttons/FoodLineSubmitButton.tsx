@@ -52,6 +52,7 @@ export const FoodLineSubmitButton: VFC<FoodLineSubmitButtonChildrenProps> =
             startIcon={<SendIcon />}
             sx={{
               width: "50%",
+
               p: "8px",
               pl: "15px",
               pr: "20px",

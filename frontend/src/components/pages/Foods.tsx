@@ -46,8 +46,8 @@ export const Foods: VFC = memo(() => {
     isFoodReplaceModalOpen: false,
     selectedFood: {},
     selectedFoodCount: 1,
-    existingRestaurant: "",
-    newRestaurant: "",
+    existingRestaurant: null,
+    newRestaurant: null,
   };
   // food一覧を取得 カスタムフック
   const { fetchFoods, foodsState } = useAuthFoods();

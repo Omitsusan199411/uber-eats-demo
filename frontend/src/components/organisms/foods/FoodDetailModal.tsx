@@ -20,7 +20,6 @@ import { FoodModalContext } from "../../pages/Foods";
 
 export const FoodDetailModal: VFC = memo(() => {
   const { FoodModalState, setFoodModalState } = useContext(FoodModalContext);
-  console.log(FoodModalState);
 
   return (
     <Dialog

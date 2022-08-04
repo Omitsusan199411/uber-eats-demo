@@ -1,13 +1,23 @@
 // ライブラリ import
 import { VFC, memo, useEffect } from "react";
+import Box from "@mui/material/Box";
 
 // コンポーネント import
 import { useAuthLineFoodsGet } from "../../hooks/api/useAuthLineFoodsGet";
 
 export const Orders: VFC = memo(() => {
-  const { lineFoodsGet } = useAuthLineFoodsGet();
+  const { lineFoodsGet, lineFoodsData } = useAuthLineFoodsGet();
+  // カスタムフックの呼び出し
   useEffect(() => {
-    console.log(lineFoodsGet());
+    lineFoodsGet();
   }, []);
-  return <p>aaa</p>;
+  return (
+    <>
+      {lineFoodsData.fetchStatus === "ok" ? (
+        <Box>{`${lineFoodsData.lineFoodsList?.restaurant.name}`}</Box>
+      ) : (
+        <Box>ロード中</Box>
+      )}
+    </>
+  );
 });

@@ -33,8 +33,12 @@ export const useAuthFoods = () => {
           payload: data,
         });
       })
-      .catch((error: AxiosError<{ error: string }>) => {
-        console.log(error);
+      .catch((error) => {
+        try {
+          throw new Error(error);
+        } catch(error){
+          console.log(error);
+        }
       });
   }, []);
   return { fetchFoods, foodsState };

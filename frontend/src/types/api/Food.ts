@@ -42,8 +42,8 @@ export type FoodModal = {
   isFoodReplaceModalOpen: boolean;
   selectedFood: Food | EmptyObject;
   selectedFoodCount: number;
-  existingRestaurant: string;
-  newRestaurant: string;
+  existingRestaurant: string | null;
+  newRestaurant: string | null;
 };
 
 // api（Postメソッド）通信 foods axiosリクエスト型定義

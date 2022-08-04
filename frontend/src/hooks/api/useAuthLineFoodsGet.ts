@@ -6,7 +6,7 @@ import axios, { AxiosResponse, AxiosError } from "axios";
 import { lineFoodsReducer } from "../../reducers/lineFoods";
 
 // 型 import
-import { LineFood, LineFoodsStateType } from "../../types/api/LineFood";
+import { LineFoodsStateType, LineFoodsList } from "../../types/api/LineFood";
 
 // URL import
 import { lineFoods } from "../../urls/urlApi";
@@ -20,7 +20,7 @@ import {
 export const useAuthLineFoodsGet = () => {
   const initialLineFoodsState: LineFoodsStateType = {
     fetchStatus: REQUEST_STATE.initial,
-    lineFoodsList: [],
+    lineFoodsList: null,
   };
   const [lineFoodsData, dispatch] = useReducer(
     lineFoodsReducer,
@@ -28,24 +28,21 @@ export const useAuthLineFoodsGet = () => {
   );
 
   const lineFoodsGet = useCallback((): void => {
-    dispatch({ type: REDUCER_FETCHING_ACTION.fetching, payload: [] });
+    dispatch({ type: REDUCER_FETCHING_ACTION.fetching, payload: null });
     axios
-      .get<LineFood[]>(`${lineFoods}`)
-      .then((res: AxiosResponse<LineFood[]>) => {
-        console.log(res.data);
+      .get<LineFoodsList>(`${lineFoods}`)
+      .then((res: AxiosResponse<LineFoodsList>) => {
         const { data } = res;
         dispatch({
           type: REDUCER_FETCHING_ACTION.fetch_success,
           payload: data,
         });
-        console.log(lineFoodsData);
       })
       .catch((error) => {
         try {
-          console.log(error);
           throw new Error(error);
         } catch (error) {
-          console.error;
+          console.log(error);
         }
       });
   }, []);

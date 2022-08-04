@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import axios, { AxiosError } from "axios";
 
 // コンポーネント import
+// import { useAuthLineFoodsGet } from "./useAuthLineFoodsGet";
 
 // 型 import
 import { FoodModal, FoodPostRequest } from "../../types/api/Food";
@@ -16,7 +17,8 @@ import { lineFoods } from "../../urls/urlApi";
 import { HTTP_STATUS_CODE } from "../../constants/constants";
 
 export const useAuthLineFoodsPost = () => {
-  // React hooksは
+  // const { lineFoodsGet } = useAuthLineFoodsGet();
+  // React hooksはトップレベルで定義する
   const history = useHistory();
   const lineFoodsPost = useCallback(
     (
@@ -29,15 +31,12 @@ export const useAuthLineFoodsPost = () => {
       };
       axios
         .post<LineFood>(`${lineFoods}`, params)
-        .then((res) => {
-          console.log(res.data);
+        .then(() => {
           history.push("/orders");
         })
         .catch((error) => {
           // replace用の処理 setNewFoodReplaceStateを実行しreplace用のモーダルを開く
-          if (error.response.status === HTTP_STATUS_CODE.not_acceptable) {
-            console.log(error);
-            console.log(error.response);
+          if (error.response?.status === HTTP_STATUS_CODE.not_acceptable) {
             setFoodModalState({
               ...FoodModalState,
               isFoodModalOpen: false,
@@ -45,9 +44,12 @@ export const useAuthLineFoodsPost = () => {
               existingRestaurant: error.response.data.existing_restaurant,
               newRestaurant: error.response.data.new_restaurant,
             });
-            console.log(FoodModalState);
           } else {
-            throw error;
+            try {
+              throw new Error(error);
+            } catch (error) {
+              console.log(error);
+            }
           }
         });
     },

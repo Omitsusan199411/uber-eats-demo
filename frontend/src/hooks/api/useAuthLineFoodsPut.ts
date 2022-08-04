@@ -16,10 +16,18 @@ export const useAuthLineFoodsPut = () => {
       food_id: FoodModalState.selectedFood.id,
       count: FoodModalState.selectedFoodCount,
     };
-    axios.put(lineFoodsReplace, params).then((res) => {
-      console.log(res.data);
-      history.push("/orders");
-    });
+    axios
+      .put(lineFoodsReplace, params)
+      .then(() => {
+        history.push("/orders");
+      })
+      .catch((error) => {
+        try {
+          throw new Error(error);
+        } catch (error) {
+          console.log(error);
+        }
+      });
   }, []);
   return { lineFoodsPut };
 };
