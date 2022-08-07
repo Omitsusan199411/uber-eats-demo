@@ -42,11 +42,7 @@ export const useAuthRestaurants = () => {
         });
       })
       .catch((error) => {
-        try {
-          throw new Error(error);
-        }catch(error) {
-          console.log(error);
-        }
+        throw new Error(error);
       });
   }, []);
   return { fetchRestaurants, restaurantsData };

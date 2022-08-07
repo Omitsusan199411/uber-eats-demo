@@ -44,12 +44,7 @@ export const useAuthLineFoodsPost = () => {
               existingRestaurant: error.response.data.existing_restaurant,
               newRestaurant: error.response.data.new_restaurant,
             });
-          } else {
-            try {
-              throw new Error(error);
-            } catch (error) {
-              console.log(error);
-            }
+            throw new Error(error);
           }
         });
     },

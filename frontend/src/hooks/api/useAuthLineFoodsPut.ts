@@ -22,11 +22,7 @@ export const useAuthLineFoodsPut = () => {
         history.push("/orders");
       })
       .catch((error) => {
-        try {
-          throw new Error(error);
-        } catch (error) {
-          console.log(error);
-        }
+        throw new Error(error);
       });
   }, []);
   return { lineFoodsPut };
