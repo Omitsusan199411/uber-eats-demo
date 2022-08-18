@@ -7,6 +7,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 
 // コンポーネント import
 import "./App.css";
+import "./GoogleFonts.css";
 import { MaterialUiTheme } from "./theme/MaterialUiTheme";
 
 export const App: VFC = () => {

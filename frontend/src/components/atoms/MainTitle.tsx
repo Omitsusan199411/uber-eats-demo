@@ -1,9 +1,6 @@
 // ライブラリ import
 import Box from "@mui/material/Box";
 
-// コンポーネント import
-import "../../GoogleFont.css";
-
 export const MainTitle = () => {
   return (
     <Box
