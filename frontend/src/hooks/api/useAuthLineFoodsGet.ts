@@ -18,21 +18,26 @@ import {
 } from "../../constants/constants";
 
 export const useAuthLineFoodsGet = () => {
-  const initialLineFoodsState: LineFoodsStateType = {
+  const initialLineFoodsGetState: LineFoodsStateType = {
     fetchStatus: REQUEST_STATE.initial,
-    lineFoodsList: null,
+    postStatus: REQUEST_STATE.initial,
+    lineFoodsList: {} as LineFoodsList,
   };
-  const [lineFoodsData, dispatch] = useReducer(
+  const [lineFoodsGetData, dispatch] = useReducer(
     lineFoodsReducer,
-    initialLineFoodsState
+    initialLineFoodsGetState
   );
 
   const lineFoodsGet = useCallback((): void => {
-    dispatch({ type: REDUCER_FETCHING_ACTION.fetching, payload: null });
+    dispatch({
+      type: REDUCER_FETCHING_ACTION.fetching,
+      payload: {} as LineFoodsList,
+    });
     axios
       .get<LineFoodsList>(`${lineFoods}`)
       .then((res: AxiosResponse<LineFoodsList>) => {
         const { data } = res;
+        console.log(data);
         dispatch({
           type: REDUCER_FETCHING_ACTION.fetch_success,
           payload: data,
@@ -42,5 +47,5 @@ export const useAuthLineFoodsGet = () => {
         throw new Error(error);
       });
   }, []);
-  return { lineFoodsGet, lineFoodsData };
+  return { lineFoodsGet, lineFoodsGetData };
 };

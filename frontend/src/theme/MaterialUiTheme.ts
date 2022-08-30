@@ -37,6 +37,7 @@ export const MaterialUiTheme = createTheme({
     },
   },
   typography: {
+    fontFamily: "Roboto",
     button: {
       textTransform: "none",
     },

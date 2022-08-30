@@ -15,6 +15,7 @@ class Api::V1::OrdersController < ApplicationController
 
   private
 
+  # 注文する際のトータルコストは仮注文商品のコスト+その店舗の固定費（fee）
   def total_price(posted_line_foods)
     posted_line_foods.sum {|line_food| line_food.total_amount} + posted_line_foods.first.restaurant.fee
   end

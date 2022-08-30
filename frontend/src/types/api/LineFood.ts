@@ -20,11 +20,12 @@ export type LineFoodsList = {
 // api通信 restaurants型定義
 export type LineFoodsStateType = {
   fetchStatus: string;
-  lineFoodsList: LineFoodsList | null;
+  postStatus: string;
+  lineFoodsList: LineFoodsList;
 };
 
 // api restaurants ReducerAction型定義
 export type ReducerActionType = {
   type: string;
-  payload: LineFoodsList | null;
+  payload: LineFoodsList;
 };

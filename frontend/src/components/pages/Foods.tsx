@@ -11,7 +11,6 @@ import {
 import { useParams } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
@@ -32,6 +31,7 @@ import { Food, FoodModal } from "../../types/api/Food";
 import { REQUEST_STATE } from "../../constants/constants";
 
 // createContext(FoodModalContext)定義(as以下はFoodModalContextの型定義)
+// Dispatchはvoidを返す
 export const FoodModalContext = createContext(
   {} as {
     FoodModalState: FoodModal;

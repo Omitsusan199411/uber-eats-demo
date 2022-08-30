@@ -1,6 +1,3 @@
-// ライブラリ import
-import { Dispatch, SetStateAction } from "react";
-
 // 型 import
 import { EmptyObject } from "../../types/object/EmptyObject";
 

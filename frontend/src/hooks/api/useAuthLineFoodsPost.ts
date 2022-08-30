@@ -17,7 +17,6 @@ import { lineFoods } from "../../urls/urlApi";
 import { HTTP_STATUS_CODE } from "../../constants/constants";
 
 export const useAuthLineFoodsPost = () => {
-  // const { lineFoodsGet } = useAuthLineFoodsGet();
   // React hooksはトップレベルで定義する
   const history = useHistory();
   const lineFoodsPost = useCallback(

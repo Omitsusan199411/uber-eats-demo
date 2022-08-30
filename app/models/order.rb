@@ -12,7 +12,8 @@ class Order < ApplicationRecord
         # order: selfはorder_id: self.idを指す
         line_food.update_attributes!(active: false, order_id: self.id)
       end
-      # selfはあるクラス内で使いう場合は、そのクラスのインスタンス自身のこと(ここでは、orders_controller.rbで作成されたorderインスタンスのこと)
+      # selfはあるクラス内で使う場合は、そのクラスのインスタンス自身のこと(ここでは、orders_controller.rbで作成されたorderインスタンスのこと)
+      # 更新するorderインスタンス自体を保存
       self.save!
     end
   end

@@ -1,7 +1,6 @@
 // ライブラリ import
 import { memo, VFC, useContext } from "react";
 import Box from "@mui/material/Box";
-
 // コンポーネント import
 import { CountUpButton } from "../../atoms/buttons/CountUpButton";
 import { CountDownButton } from "../../atoms/buttons/CountDownButton";
@@ -12,6 +11,7 @@ import { FoodModalContext } from "../../pages/Foods";
 export const CountForm: VFC = memo(() => {
   const { FoodModalState, setFoodModalState } = useContext(FoodModalContext);
   // 注文数量の変更
+  // イベントオブジェクトは呼び出される関数内で使用しないので、イベントの型定義は不要になる。
   const CountUp = (): void => {
     setFoodModalState({
       ...FoodModalState,
