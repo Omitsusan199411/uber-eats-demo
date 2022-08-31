@@ -37,7 +37,6 @@ export const useAuthLineFoodsGet = () => {
       .get<LineFoodsList>(`${lineFoods}`)
       .then((res: AxiosResponse<LineFoodsList>) => {
         const { data } = res;
-        console.log(data);
         dispatch({
           type: REDUCER_FETCHING_ACTION.fetch_success,
           payload: data,
@@ -46,6 +45,7 @@ export const useAuthLineFoodsGet = () => {
       .catch((error) => {
         throw new Error(error);
       });
+    console.log(lineFoodsGetData);
   }, []);
   return { lineFoodsGet, lineFoodsGetData };
 };

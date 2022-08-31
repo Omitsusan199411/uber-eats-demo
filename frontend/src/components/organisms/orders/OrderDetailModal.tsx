@@ -1,5 +1,5 @@
 // ライブラリ import
-import { memo, VFC, useContext } from "react";
+import { memo, VFC, Dispatch, SetStateAction } from "react";
 import Box from "@mui/material/Box";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
@@ -11,31 +11,26 @@ import DialogActions from "@mui/material/DialogActions";
 import { OrderButton } from "../../atoms/buttons/OrderButton";
 import { useAuthOrdersPost } from "../../../hooks/api/useAuthOrdersPost";
 
-// createContext import
-import { OrderModalContext } from "../../pages/Orders";
-
 // 型 import
 import { Restaurant } from "../../../types/api/Restaurant";
+import { LineFoodsList } from "../../../types/api/LineFood";
+
+type OrderModalProps = {
+  lineFoodsList: LineFoodsList;
+  orderModalFlagState: boolean;
+  setOrderModalFlagState: Dispatch<SetStateAction<boolean>>;
+};
 
 // Orders.tsxからpropsをもらう。propsの中身はModalのon,offのbooleanとlineFoodsDataの中身をstateとしてもらう
-export const OrderDetailModal: VFC = memo((props) => {
-  // const { ordersPost } = useAuthOrdersPost();
-  const { OrderModalState, setOrderModalState } = useContext(OrderModalContext);
-  const { line_food_ids, restaurant, count, amount, isOrdersModalOpen } =
-    OrderModalState;
-  console.log(line_food_ids);
+export const OrderDetailModal: VFC<OrderModalProps> = memo((props) => {
+  const { lineFoodsList, orderModalFlagState, setOrderModalFlagState } = props;
+  const { restaurant, count, amount } = lineFoodsList;
   return (
     <>
       <Dialog
-        open={isOrdersModalOpen}
+        open={orderModalFlagState}
         onClose={() => {
-          setOrderModalState({
-            line_food_ids: [],
-            restaurant: {} as Restaurant,
-            count: 0,
-            amount: 0,
-            isOrdersModalOpen: false,
-          });
+          setOrderModalFlagState(!orderModalFlagState);
         }}
       >
         <DialogContent>
@@ -55,7 +50,7 @@ export const OrderDetailModal: VFC = memo((props) => {
           </Box>
           <Box>
             <Box>合計</Box>
-            <Box>{`¥${restaurant.fee + amount}`}</Box>
+            <Box>{`¥${restaurant.fee + amount}円`}</Box>
           </Box>
           {/* OrderButtonの押下をトリガーにorderPostを発火 PropsとしてordersPostを渡す*/}
           <OrderButton />

@@ -14,59 +14,34 @@ import Box from "@mui/material/Box";
 import { useAuthLineFoodsGet } from "../../hooks/api/useAuthLineFoodsGet";
 import { OrderDetailModal } from "../organisms/orders/OrderDetailModal";
 
-// 型 import
-import { isOrdersModalOpenFlag } from "../../types/api/Order";
-import { LineFoodsList } from "../../types/api/LineFood";
-
-export const OrderModalContext = createContext(
-  {} as {
-    OrderModalState: LineFoodsList & isOrdersModalOpenFlag;
-    setOrderModalState: Dispatch<
-      SetStateAction<LineFoodsList & isOrdersModalOpenFlag>
-    >;
-  }
-);
-
 export const Orders: VFC = memo(() => {
   const { lineFoodsGet, lineFoodsGetData } = useAuthLineFoodsGet();
-  const initialOrderModalState: LineFoodsList & isOrdersModalOpenFlag = {
-    line_food_ids: [],
-    restaurant: {} as {
-      id: number;
-      name: string;
-      fee: number;
-      time_required: number;
-    },
-    count: 0,
-    amount: 0,
-    isOrdersModalOpen: false,
-  };
-  const [OrderModalState, setOrderModalState] = useState<
-    LineFoodsList & isOrdersModalOpenFlag
-  >(initialOrderModalState);
+
+  const [OrderModalFlagState, setOrderModalFlagState] =
+    useState<boolean>(false);
 
   // カスタムフックの呼び出し
+  // useEffectは第二引数に空の配列を指定すると初回のレンダリング後に実行される。第二引数を設定すると、設定した値が変更されたタイミングで実行される（デフォルト）
+  // OrderModalStateの値は次回のレンダリングの前に反映されるようになっている（デフォルト）
   useEffect(() => {
     lineFoodsGet();
-    setOrderModalState({
-      line_food_ids: lineFoodsGetData.lineFoodsList.line_food_ids,
-      restaurant: lineFoodsGetData.lineFoodsList.restaurant,
-      count: lineFoodsGetData.lineFoodsList.count,
-      amount: lineFoodsGetData.lineFoodsList.amount,
-      isOrdersModalOpen: true,
-    });
+    setOrderModalFlagState(!OrderModalFlagState);
   }, []);
+
+  console.log(lineFoodsGetData);
+  console.log(OrderModalFlagState);
+
   return (
     <>
-      <OrderModalContext.Provider
-        value={{ OrderModalState, setOrderModalState }}
-      >
-        {lineFoodsGetData.fetchStatus === "ok" ? (
-          <OrderDetailModal />
-        ) : (
-          <Box>ロード中</Box>
-        )}
-      </OrderModalContext.Provider>
+      {lineFoodsGetData.fetchStatus === "ok" ? (
+        <OrderDetailModal
+          lineFoodsList={lineFoodsGetData.lineFoodsList}
+          orderModalFlagState={OrderModalFlagState}
+          setOrderModalFlagState={setOrderModalFlagState}
+        />
+      ) : (
+        <Box>ロード中</Box>
+      )}
     </>
   );
 });

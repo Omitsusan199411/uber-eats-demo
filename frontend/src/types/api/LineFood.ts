@@ -26,6 +26,6 @@ export type LineFoodsStateType = {
 
 // api restaurants ReducerAction型定義
 export type ReducerActionType = {
-  type: string;
   payload: LineFoodsList;
+  type: string;
 };
