@@ -1,19 +1,5 @@
 import { createTheme } from "@mui/material/styles";
 
-// themeのpaletteにキーワードの追加
-declare module "@mui/material/styles" {
-  interface Palette {
-    mainText: Palette["primary"];
-    subText: Palette["primary"];
-  }
-
-  // allow configuration using `createTheme`
-  interface PaletteOptions {
-    mainText?: PaletteOptions["primary"];
-    subText?: PaletteOptions["primary"];
-  }
-}
-
 export const MaterialUiTheme = createTheme({
   palette: {
     mode: "light",
@@ -23,8 +9,8 @@ export const MaterialUiTheme = createTheme({
     secondary: {
       main: "#008000",
     },
-    info: {
-      main: "#222222",
+    basis: {
+      main: "#333333",
     },
   },
   breakpoints: {

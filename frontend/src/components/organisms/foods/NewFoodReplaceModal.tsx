@@ -7,8 +7,8 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 
 // コンポーネント import
-import { FoodLineSubmitButton } from "../../atoms/buttons/FoodLineSubmitButton";
-import { CloseButton } from "../../atoms/buttons/CloseButton";
+import { FoodLineSubmitButton } from "../../atoms/buttons/foods/FoodLineSubmitButton";
+import { CloseButton } from "../../atoms/buttons/foods/CloseButton";
 
 // createContext import
 import { FoodModalContext } from "../../pages/Foods";

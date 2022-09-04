@@ -1,15 +1,14 @@
 // ライブラリ import
 import { memo, VFC, useContext, ReactNode } from "react";
-import styled from "styled-components";
-import Button from "@mui/material/Button";
 import SendIcon from "@mui/icons-material/Send";
 
 // コンポーネント import
-import { useAuthLineFoodsPost } from "../../../hooks/api/useAuthLineFoodsPost";
-import { useAuthLineFoodsPut } from "../../../hooks/api/useAuthLineFoodsPut";
+import { useAuthLineFoodsPost } from "../../../../hooks/api/useAuthLineFoodsPost";
+import { useAuthLineFoodsPut } from "../../../../hooks/api/useAuthLineFoodsPut";
+import { CustomBasicButton } from "../BasicButton";
 
 // createContextの定義
-import { FoodModalContext } from "../../pages/Foods";
+import { FoodModalContext } from "../../../pages/Foods";
 
 type FoodLineSubmitButtonChildrenProps = {
   children: ReactNode | string;
@@ -26,51 +25,45 @@ export const FoodLineSubmitButton: VFC<FoodLineSubmitButtonChildrenProps> =
     return (
       <>
         {FoodModalState.isFoodModalOpen && (
-          <CustomButton
-            color="info"
+          <CustomBasicButton
+            color="basis"
             variant="contained"
-            startIcon={<SendIcon />}
+            startIcon={<SendIcon sx={{ mr: { xs: "10px", sm: "-10px" } }} />}
             sx={{
               width: { xs: "50%", md: "60%" },
               alignItems: "center",
-              justifyContent: "space-around",
+              justifyContent: { xs: "row", sm: "space-around" },
               p: "8px",
               pl: "15px",
               pr: "20px",
+              color: "primary.main",
             }}
             onClick={() => {
               lineFoodsPost(FoodModalState, setFoodModalState);
             }}
           >
             {children}
-          </CustomButton>
+          </CustomBasicButton>
         )}
         {FoodModalState.isFoodReplaceModalOpen && (
-          <CustomButton
-            color="info"
+          <CustomBasicButton
+            color="basis"
             variant="contained"
             startIcon={<SendIcon />}
             sx={{
               width: "50%",
-
               p: "8px",
               pl: "15px",
               pr: "20px",
+              color: "primary.main",
             }}
             onClick={() => {
               lineFoodsPut(FoodModalState);
             }}
           >
             {children}
-          </CustomButton>
+          </CustomBasicButton>
         )}
       </>
     );
   });
-
-export const CustomButton = styled(Button)`
-  &:hover {
-    opacity: 0.7;
-    cursor: pointer;
-  }
-`;

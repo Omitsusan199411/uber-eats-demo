@@ -8,8 +8,8 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogActions from "@mui/material/DialogActions";
 
 // コンポーネント import
-import { CloseButton } from "../../atoms/buttons/CloseButton";
-import { FoodLineSubmitButton } from "../../atoms/buttons/FoodLineSubmitButton";
+import { CloseButton } from "../../atoms/buttons/foods/CloseButton";
+import { FoodLineSubmitButton } from "../../atoms/buttons/foods/FoodLineSubmitButton";
 import { CountForm } from "../../moleciles/form/CountForm";
 
 // 画像 import
@@ -56,7 +56,7 @@ export const FoodDetailModal: VFC = memo(() => {
           <Box>{`￥${(
             FoodModalState.selectedFood?.price *
             FoodModalState.selectedFoodCount
-          ).toLocaleString()}`}</Box>
+          ).toLocaleString()} 円`}</Box>
         </FoodLineSubmitButton>
       </DialogActions>
     </Dialog>

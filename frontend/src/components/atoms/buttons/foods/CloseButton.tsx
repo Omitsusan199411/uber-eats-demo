@@ -4,7 +4,7 @@ import IconButton from "@mui/material/Button";
 import CancelIcon from "@mui/icons-material/Cancel";
 
 // createContext import
-import { FoodModalContext } from "../../pages/Foods";
+import { FoodModalContext } from "../../../pages/Foods";
 
 export const CloseButton: VFC = memo(() => {
   const { FoodModalState, setFoodModalState } = useContext(FoodModalContext);

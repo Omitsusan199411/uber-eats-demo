@@ -2,8 +2,8 @@
 import { memo, VFC, useContext } from "react";
 import Box from "@mui/material/Box";
 // コンポーネント import
-import { CountUpButton } from "../../atoms/buttons/CountUpButton";
-import { CountDownButton } from "../../atoms/buttons/CountDownButton";
+import { CountUpButton } from "../../atoms/buttons/foods/CountUpButton";
+import { CountDownButton } from "../../atoms/buttons/foods/CountDownButton";
 
 // createContext import
 import { FoodModalContext } from "../../pages/Foods";

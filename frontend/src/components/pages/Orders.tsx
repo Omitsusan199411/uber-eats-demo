@@ -1,13 +1,5 @@
 // ライブラリ import
-import {
-  VFC,
-  memo,
-  useEffect,
-  createContext,
-  useState,
-  Dispatch,
-  SetStateAction,
-} from "react";
+import { VFC, memo, useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 
 // コンポーネント import
@@ -22,7 +14,7 @@ export const Orders: VFC = memo(() => {
 
   // カスタムフックの呼び出し
   // useEffectは第二引数に空の配列を指定すると初回のレンダリング後に実行される。第二引数を設定すると、設定した値が変更されたタイミングで実行される（デフォルト）
-  // OrderModalStateの値は次回のレンダリングの前に反映されるようになっている（デフォルト）
+  // OrderModalStateの値(useState値)は次回のレンダリングの前に反映されるようになっている（デフォルト）
   useEffect(() => {
     lineFoodsGet();
     setOrderModalFlagState(!OrderModalFlagState);
