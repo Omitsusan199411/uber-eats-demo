@@ -1,5 +1,5 @@
 // ライブラリ import
-import { memo, VFC, useContext } from "react";
+import { memo, VFC, useContext, useCallback } from "react";
 import Box from "@mui/material/Box";
 // コンポーネント import
 import { CountUpButton } from "../../atoms/buttons/foods/CountUpButton";
@@ -12,18 +12,19 @@ export const CountForm: VFC = memo(() => {
   const { FoodModalState, setFoodModalState } = useContext(FoodModalContext);
   // 注文数量の変更
   // イベントオブジェクトは呼び出される関数内で使用しないので、イベントの型定義は不要になる。
-  const CountUp = (): void => {
+  // useCallbackで関数の更新(キャッシュを持たせ不変の値とする)に伴うprops（CountUpButton、CountDownButtonコンポーネントへのprops）の更新を防ぎ、不要な再レンダリングを防ぐ
+  const CountUp = useCallback((): void => {
     setFoodModalState({
       ...FoodModalState,
       selectedFoodCount: FoodModalState.selectedFoodCount + 1,
     });
-  };
-  const CountDown = (): void => {
+  }, []);
+  const CountDown = useCallback((): void => {
     setFoodModalState({
       ...FoodModalState,
       selectedFoodCount: FoodModalState.selectedFoodCount - 1,
     });
-  };
+  }, []);
 
   return (
     <Box sx={{ display: "flex", alignItems: "center" }}>

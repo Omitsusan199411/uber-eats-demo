@@ -5,3 +5,8 @@ export type ButtonProps = {
   children?: ReactNode;
   onClick: () => void;
 };
+
+export type OrderButtonProps = {
+  lineFoodIds: number[];
+  children: ReactNode;
+};

@@ -45,7 +45,6 @@ export const useAuthLineFoodsGet = () => {
       .catch((error) => {
         throw new Error(error);
       });
-    console.log(lineFoodsGetData);
   }, []);
   return { lineFoodsGet, lineFoodsGetData };
 };

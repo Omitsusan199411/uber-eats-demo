@@ -9,7 +9,6 @@ import styled from "styled-components";
 
 // コンポーネント import
 import { OrderButton } from "../../atoms/buttons/orders/OrderButton";
-import { useAuthOrdersPost } from "../../../hooks/api/useAuthOrdersPost";
 import { MaterialUiTheme } from "../../../theme/MaterialUiTheme";
 
 // 型 import
@@ -24,7 +23,7 @@ type OrderModalProps = {
 // Orders.tsxからpropsをもらう。propsの中身はModalのon,offのbooleanとlineFoodsDataの中身をstateとしてもらう
 export const OrderDetailModal: VFC<OrderModalProps> = memo((props) => {
   const { lineFoodsList, orderModalFlagState, setOrderModalFlagState } = props;
-  const { restaurant, count, amount } = lineFoodsList;
+  const { line_food_ids, restaurant, count, amount } = lineFoodsList;
   return (
     <>
       <Dialog
@@ -43,7 +42,7 @@ export const OrderDetailModal: VFC<OrderModalProps> = memo((props) => {
           }}
         >
           <OrderDialogBox>
-            <OrderDialogContentText>購入店舗</OrderDialogContentText>
+            <OrderDialogContentText>店舗名</OrderDialogContentText>
             <OrderDialogContentText>{restaurant.name}</OrderDialogContentText>
           </OrderDialogBox>
           <OrderDialogBox>
@@ -71,13 +70,13 @@ export const OrderDetailModal: VFC<OrderModalProps> = memo((props) => {
             ).toLocaleString()}円`}</OrderDialogContentText>
           </OrderDialogBox>
           <DialogContentText sx={{ mt: "15px", fontSize: "14px" }}>
-            ※ 到着時間は10分を予定しています。
+            ※ 到着時間は10分を予定
           </DialogContentText>
           {/* OrderButtonの押下をトリガーにorderPostを発火 PropsとしてordersPostを渡す*/}
           <DialogActions
             sx={{ justifyContent: "center", alignItems: "center" }}
           >
-            <OrderButton />
+            <OrderButton lineFoodIds={line_food_ids}>注文の確定</OrderButton>
           </DialogActions>
         </DialogContent>
       </Dialog>
