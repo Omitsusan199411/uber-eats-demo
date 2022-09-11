@@ -1,6 +1,8 @@
 // ライブラリ import
 import { VFC, memo } from "react";
 import SendIcon from "@mui/icons-material/Send";
+import Box from "@mui/material/Box";
+import CircularProgress from "@mui/material/CircularProgress";
 
 // コンポーネント import
 import { CustomBasicButton } from "../BasicButton";
@@ -9,14 +11,38 @@ import { useAuthOrdersPost } from "../../../../hooks/api/useAuthOrdersPost";
 // 型 import
 import { OrderButtonProps } from "../../../../types/button/ButtonProps";
 
+// 定義 import
+import { REQUEST_STATE } from "../../../../constants/constants";
+
+const ordersPostFlagFunction = (ordersPostFlag: { postStatus: string }) => {
+  switch (ordersPostFlag.postStatus) {
+    case REQUEST_STATE.loading:
+      return <CircularProgress color="primary" thickness={3.0} size={30} />;
+      break;
+    default:
+      return (
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <SendIcon sx={{ mr: "20px" }} />
+          <Box>注文を確定する</Box>
+        </Box>
+      );
+  }
+};
+
 export const OrderButton: VFC<OrderButtonProps> = memo((props) => {
-  const { ordersPost } = useAuthOrdersPost();
-  const { lineFoodIds, children } = props;
+  const { ordersPost, ordersPostFlag } = useAuthOrdersPost();
+  const { lineFoodIds } = props;
+  console.log(ordersPostFlag);
   return (
     <CustomBasicButton
       variant="contained"
       color="basis"
-      startIcon={<SendIcon />}
       sx={{
         color: "primary.main",
         width: { xs: "90%", md: "100%" },
@@ -30,7 +56,7 @@ export const OrderButton: VFC<OrderButtonProps> = memo((props) => {
         ordersPost(lineFoodIds);
       }}
     >
-      {children}
+      {ordersPostFlagFunction(ordersPostFlag)}
     </CustomBasicButton>
   );
 });

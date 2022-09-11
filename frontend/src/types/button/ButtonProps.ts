@@ -8,5 +8,4 @@ export type ButtonProps = {
 
 export type OrderButtonProps = {
   lineFoodIds: number[];
-  children: ReactNode;
 };

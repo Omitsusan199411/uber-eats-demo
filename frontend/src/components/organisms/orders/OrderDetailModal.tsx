@@ -76,7 +76,7 @@ export const OrderDetailModal: VFC<OrderModalProps> = memo((props) => {
           <DialogActions
             sx={{ justifyContent: "center", alignItems: "center" }}
           >
-            <OrderButton lineFoodIds={line_food_ids}>注文の確定</OrderButton>
+            <OrderButton lineFoodIds={line_food_ids} />
           </DialogActions>
         </DialogContent>
       </Dialog>

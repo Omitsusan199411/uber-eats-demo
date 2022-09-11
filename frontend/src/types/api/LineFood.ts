@@ -20,7 +20,6 @@ export type LineFoodsList = {
 // api通信 restaurants型定義
 export type LineFoodsStateType = {
   fetchStatus: string;
-  postStatus: string;
   lineFoodsList: LineFoodsList;
 };
 

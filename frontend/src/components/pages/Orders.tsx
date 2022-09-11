@@ -1,5 +1,7 @@
 // ライブラリ import
 import { VFC, memo, useEffect, useState } from "react";
+import CircularProgress from "@mui/material/CircularProgress";
+import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
 
 // コンポーネント import
@@ -8,6 +10,7 @@ import { OrderDetailModal } from "../organisms/orders/OrderDetailModal";
 
 export const Orders: VFC = memo(() => {
   const { lineFoodsGet, lineFoodsGetData } = useAuthLineFoodsGet();
+  // const [BackDropFlagState, setBackDropFlagState] = useState<boolean>(false);
 
   const [OrderModalFlagState, setOrderModalFlagState] =
     useState<boolean>(false);
@@ -18,6 +21,7 @@ export const Orders: VFC = memo(() => {
   useEffect(() => {
     lineFoodsGet();
     setOrderModalFlagState(!OrderModalFlagState);
+    // setBackDropFlagState(!BackDropFlagState);
   }, []);
 
   console.log(lineFoodsGetData);
@@ -25,14 +29,17 @@ export const Orders: VFC = memo(() => {
 
   return (
     <>
-      {lineFoodsGetData.fetchStatus === "ok" ? (
+      {lineFoodsGetData.fetchStatus === "loading" && (
+        <Backdrop open={true}>
+          <CircularProgress color="primary" thickness={4.0} />
+        </Backdrop>
+      )}
+      {lineFoodsGetData.fetchStatus === "ok" && (
         <OrderDetailModal
           lineFoodsList={lineFoodsGetData.lineFoodsList}
           orderModalFlagState={OrderModalFlagState}
           setOrderModalFlagState={setOrderModalFlagState}
         />
-      ) : (
-        <Box>ロード中</Box>
       )}
     </>
   );

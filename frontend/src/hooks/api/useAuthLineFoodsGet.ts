@@ -20,7 +20,6 @@ import {
 export const useAuthLineFoodsGet = () => {
   const initialLineFoodsGetState: LineFoodsStateType = {
     fetchStatus: REQUEST_STATE.initial,
-    postStatus: REQUEST_STATE.initial,
     lineFoodsList: {} as LineFoodsList,
   };
   const [lineFoodsGetData, dispatch] = useReducer(
