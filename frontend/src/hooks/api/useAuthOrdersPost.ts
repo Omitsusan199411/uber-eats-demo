@@ -4,24 +4,30 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 
 // コンポーネント import
-import { ordersReducer } from "../../reducers/orders";
 import {
-  REQUEST_STATE,
   REDUCER_POSTING_ACTION,
+  REQUEST_STATE,
 } from "../../constants/constants";
+import { ordersReducer } from "../../reducers/orders";
 
 // URL import
 import { orders } from "../../urls/urlApi";
 
+// 型 import
+import { LineFoodsList } from "../../types/api/LineFood";
+
 export const useAuthOrdersPost = () => {
-  const intialOrdersPostFlag: { postStatus: string } = {
+  const history = useHistory();
+
+  const initialOrdersPostFlag = {
     postStatus: REQUEST_STATE.initial,
   };
-  const [ordersPostFlag, dispatch] = useReducer(
+
+  const [ordersPostFlag, ordersDispatch] = useReducer(
     ordersReducer,
-    intialOrdersPostFlag
+    initialOrdersPostFlag
   );
-  const history = useHistory();
+
   const ordersPost = useCallback((lineFoodsIds: number[]): void => {
     // paramsには、orders_controllerの中のposted_line_foodsに仮注文のactive状態のid群（line_foods_controllerのindexメソッドで返る値（lineFoodsGet()の値））を代入できるようにparamsの値を設定する。
     // Ruby側で見ると、キーはシンボル型、値は配列型のハッシュ形式で送られる
@@ -30,15 +36,15 @@ export const useAuthOrdersPost = () => {
     };
     axios
       .post(`${orders}`, params)
-      .then((res) => {
-        console.log(res.data);
-        history.push("/");
+      .then(() => {
+        ordersDispatch({
+          type: REDUCER_POSTING_ACTION.post_success,
+        });
       })
-      .catch((error) => {
-        console.log(error.data);
+      .catch(() => {
         history.push("/");
       });
-    dispatch({
+    ordersDispatch({
       type: REDUCER_POSTING_ACTION.posting,
     });
   }, []);

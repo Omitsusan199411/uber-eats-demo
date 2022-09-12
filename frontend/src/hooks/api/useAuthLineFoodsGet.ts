@@ -1,6 +1,6 @@
 // ライブラリ import
 import { useCallback, useReducer } from "react";
-import axios, { AxiosResponse, AxiosError } from "axios";
+import axios, { AxiosResponse } from "axios";
 
 // コンポーネント import
 import { lineFoodsReducer } from "../../reducers/lineFoods";
@@ -22,13 +22,13 @@ export const useAuthLineFoodsGet = () => {
     fetchStatus: REQUEST_STATE.initial,
     lineFoodsList: {} as LineFoodsList,
   };
-  const [lineFoodsGetData, dispatch] = useReducer(
+  const [lineFoodsGetData, lineFoodsDispatch] = useReducer(
     lineFoodsReducer,
     initialLineFoodsGetState
   );
 
   const lineFoodsGet = useCallback((): void => {
-    dispatch({
+    lineFoodsDispatch({
       type: REDUCER_FETCHING_ACTION.fetching,
       payload: {} as LineFoodsList,
     });
@@ -36,7 +36,7 @@ export const useAuthLineFoodsGet = () => {
       .get<LineFoodsList>(`${lineFoods}`)
       .then((res: AxiosResponse<LineFoodsList>) => {
         const { data } = res;
-        dispatch({
+        lineFoodsDispatch({
           type: REDUCER_FETCHING_ACTION.fetch_success,
           payload: data,
         });
@@ -45,5 +45,5 @@ export const useAuthLineFoodsGet = () => {
         throw new Error(error);
       });
   }, []);
-  return { lineFoodsGet, lineFoodsGetData };
+  return { lineFoodsGet, lineFoodsGetData, lineFoodsDispatch };
 };

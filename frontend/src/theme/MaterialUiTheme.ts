@@ -5,6 +5,7 @@ export const MaterialUiTheme = createTheme({
     mode: "light",
     primary: {
       main: "#ffffff",
+      sub: "rgba(0, 0, 0, 0.5)",
     },
     secondary: {
       main: "#008000",

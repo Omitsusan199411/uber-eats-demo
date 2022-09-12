@@ -16,13 +16,21 @@ import { LineFoodsList } from "../../../types/api/LineFood";
 
 type OrderModalProps = {
   lineFoodsList: LineFoodsList;
+  postStatus: string;
+  ordersPost: (ids: number[]) => void;
   orderModalFlagState: boolean;
   setOrderModalFlagState: Dispatch<SetStateAction<boolean>>;
 };
 
 // Orders.tsxからpropsをもらう。propsの中身はModalのon,offのbooleanとlineFoodsDataの中身をstateとしてもらう
 export const OrderDetailModal: VFC<OrderModalProps> = memo((props) => {
-  const { lineFoodsList, orderModalFlagState, setOrderModalFlagState } = props;
+  const {
+    lineFoodsList,
+    postStatus,
+    ordersPost,
+    orderModalFlagState,
+    setOrderModalFlagState,
+  } = props;
   const { line_food_ids, restaurant, count, amount } = lineFoodsList;
   return (
     <>
@@ -76,7 +84,11 @@ export const OrderDetailModal: VFC<OrderModalProps> = memo((props) => {
           <DialogActions
             sx={{ justifyContent: "center", alignItems: "center" }}
           >
-            <OrderButton lineFoodIds={line_food_ids} />
+            <OrderButton
+              lineFoodIds={line_food_ids}
+              postStatus={postStatus}
+              ordersPost={ordersPost}
+            />
           </DialogActions>
         </DialogContent>
       </Dialog>

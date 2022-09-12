@@ -1,5 +1,5 @@
 // ライブラリ import
-import { ReactNode } from "react";
+import { ReactNode, Dispatch, SetStateAction } from "react";
 
 export type ButtonProps = {
   children?: ReactNode;
@@ -8,4 +8,6 @@ export type ButtonProps = {
 
 export type OrderButtonProps = {
   lineFoodIds: number[];
+  postStatus: string;
+  ordersPost: (ids: number[]) => void;
 };

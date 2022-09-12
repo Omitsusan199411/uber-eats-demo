@@ -6,7 +6,6 @@ import CircularProgress from "@mui/material/CircularProgress";
 
 // コンポーネント import
 import { CustomBasicButton } from "../BasicButton";
-import { useAuthOrdersPost } from "../../../../hooks/api/useAuthOrdersPost";
 
 // 型 import
 import { OrderButtonProps } from "../../../../types/button/ButtonProps";
@@ -14,11 +13,10 @@ import { OrderButtonProps } from "../../../../types/button/ButtonProps";
 // 定義 import
 import { REQUEST_STATE } from "../../../../constants/constants";
 
-const ordersPostFlagFunction = (ordersPostFlag: { postStatus: string }) => {
-  switch (ordersPostFlag.postStatus) {
+const ordersPostFlagFunction = (postStatus: string) => {
+  switch (postStatus) {
     case REQUEST_STATE.loading:
-      return <CircularProgress color="primary" thickness={3.0} size={30} />;
-      break;
+      return <CircularProgress color="primary" thickness={3.5} size={30} />;
     default:
       return (
         <Box
@@ -36,9 +34,8 @@ const ordersPostFlagFunction = (ordersPostFlag: { postStatus: string }) => {
 };
 
 export const OrderButton: VFC<OrderButtonProps> = memo((props) => {
-  const { ordersPost, ordersPostFlag } = useAuthOrdersPost();
-  const { lineFoodIds } = props;
-  console.log(ordersPostFlag);
+  const { lineFoodIds, postStatus, ordersPost } = props;
+  console.log(postStatus);
   return (
     <CustomBasicButton
       variant="contained"
@@ -56,7 +53,7 @@ export const OrderButton: VFC<OrderButtonProps> = memo((props) => {
         ordersPost(lineFoodIds);
       }}
     >
-      {ordersPostFlagFunction(ordersPostFlag)}
+      {ordersPostFlagFunction(postStatus)}
     </CustomBasicButton>
   );
 });

@@ -1,16 +1,19 @@
 // ライブラリ import
 import { VFC, memo, useEffect, useState } from "react";
+
 import CircularProgress from "@mui/material/CircularProgress";
 import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
 
 // コンポーネント import
 import { useAuthLineFoodsGet } from "../../hooks/api/useAuthLineFoodsGet";
+import { useAuthOrdersPost } from "../../hooks/api/useAuthOrdersPost";
 import { OrderDetailModal } from "../organisms/orders/OrderDetailModal";
+import { BasicLink } from "../atoms/buttons/BasicLink";
 
 export const Orders: VFC = memo(() => {
   const { lineFoodsGet, lineFoodsGetData } = useAuthLineFoodsGet();
-  // const [BackDropFlagState, setBackDropFlagState] = useState<boolean>(false);
+  const { ordersPost, ordersPostFlag } = useAuthOrdersPost();
 
   const [OrderModalFlagState, setOrderModalFlagState] =
     useState<boolean>(false);
@@ -21,26 +24,66 @@ export const Orders: VFC = memo(() => {
   useEffect(() => {
     lineFoodsGet();
     setOrderModalFlagState(!OrderModalFlagState);
-    // setBackDropFlagState(!BackDropFlagState);
   }, []);
-
-  console.log(lineFoodsGetData);
-  console.log(OrderModalFlagState);
-
   return (
     <>
       {lineFoodsGetData.fetchStatus === "loading" && (
         <Backdrop open={true}>
-          <CircularProgress color="primary" thickness={4.0} />
+          <CircularProgress color="primary" thickness={5.0} />
         </Backdrop>
       )}
-      {lineFoodsGetData.fetchStatus === "ok" && (
-        <OrderDetailModal
-          lineFoodsList={lineFoodsGetData.lineFoodsList}
-          orderModalFlagState={OrderModalFlagState}
-          setOrderModalFlagState={setOrderModalFlagState}
-        />
-      )}
+      {lineFoodsGetData.fetchStatus === "ok" &&
+        ordersPostFlag.postStatus !== "ok" && (
+          <OrderDetailModal
+            lineFoodsList={lineFoodsGetData.lineFoodsList}
+            postStatus={ordersPostFlag.postStatus}
+            ordersPost={ordersPost}
+            orderModalFlagState={OrderModalFlagState}
+            setOrderModalFlagState={setOrderModalFlagState}
+          />
+        )}
+      {lineFoodsGetData.fetchStatus === "ok" &&
+        ordersPostFlag.postStatus === "ok" && (
+          <Backdrop
+            open={true}
+            sx={{
+              backgroundColor: "primary.sub",
+            }}
+          >
+            <Box
+              sx={{
+                minWidth: { xs: "300px", sm: "500px" },
+                backgroundColor: "primary.main",
+                // border: "dashed 3px primary.sub",
+                borderRadius: "4px",
+              }}
+            >
+              <Box
+                component="p"
+                sx={{
+                  fontWeight: "bold",
+                  fontSize: { xs: "15px", sm: "18px" },
+                  textAlign: "center",
+                  mb: "50px",
+                  mt: "100px",
+                }}
+              >
+                注文予定の商品はありません
+              </Box>
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  mb: "100px",
+                  fontSize: { xs: "15px", sm: "18px" },
+                }}
+              >
+                <BasicLink to={"/"}>ホームページへ</BasicLink>
+              </Box>
+            </Box>
+          </Backdrop>
+        )}
     </>
   );
 });
