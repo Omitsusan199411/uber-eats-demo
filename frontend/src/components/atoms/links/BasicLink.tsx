@@ -20,12 +20,11 @@ export const BasicLink: VFC<BasicLinkType> = memo((props) => {
 });
 
 const CustomBasicLink = styled(Link)`
-  color: rgba(0, 0, 0, 0.5);
+  color: #1a0dab;
   display: flex;
   align-items: center;
   &:hover {
     cursor: pointer;
-    color: #008000;
-    font-weight: bold;
+    opacity: 0.7;
   }
 `;

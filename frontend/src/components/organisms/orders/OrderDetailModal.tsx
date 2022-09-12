@@ -43,10 +43,11 @@ export const OrderDetailModal: VFC<OrderModalProps> = memo((props) => {
       >
         <DialogContent
           sx={{
-            maxWidth: { xs: "300px", sm: "400px" },
+            maxWidth: { xs: "350px", sm: "450px" },
             width: "100vw",
-            pl: "40px",
-            pr: "40px",
+            pt: "30px",
+            pl: { xs: "55px", sm: "65px" },
+            pr: { xs: "55px", sm: "65px" },
           }}
         >
           <OrderDialogBox>

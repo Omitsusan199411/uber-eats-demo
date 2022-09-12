@@ -9,7 +9,7 @@ import Box from "@mui/material/Box";
 import { useAuthLineFoodsGet } from "../../hooks/api/useAuthLineFoodsGet";
 import { useAuthOrdersPost } from "../../hooks/api/useAuthOrdersPost";
 import { OrderDetailModal } from "../organisms/orders/OrderDetailModal";
-import { BasicLink } from "../atoms/buttons/BasicLink";
+import { BasicLink } from "../atoms/links/BasicLink";
 
 export const Orders: VFC = memo(() => {
   const { lineFoodsGet, lineFoodsGetData } = useAuthLineFoodsGet();
@@ -25,6 +25,9 @@ export const Orders: VFC = memo(() => {
     lineFoodsGet();
     setOrderModalFlagState(!OrderModalFlagState);
   }, []);
+
+  console.log(lineFoodsGetData);
+
   return (
     <>
       {lineFoodsGetData.fetchStatus === "loading" && (
@@ -52,7 +55,7 @@ export const Orders: VFC = memo(() => {
           >
             <Box
               sx={{
-                minWidth: { xs: "300px", sm: "500px" },
+                minWidth: { xs: "350px", sm: "450px" },
                 backgroundColor: "primary.main",
                 // border: "dashed 3px primary.sub",
                 borderRadius: "4px",
@@ -62,10 +65,10 @@ export const Orders: VFC = memo(() => {
                 component="p"
                 sx={{
                   fontWeight: "bold",
-                  fontSize: { xs: "15px", sm: "18px" },
+                  fontSize: { xs: "18px", sm: "20px" },
                   textAlign: "center",
-                  mb: "50px",
-                  mt: "100px",
+                  mb: "40px",
+                  mt: "120px",
                 }}
               >
                 注文予定の商品はありません
@@ -76,7 +79,7 @@ export const Orders: VFC = memo(() => {
                   alignItems: "center",
                   justifyContent: "center",
                   mb: "100px",
-                  fontSize: { xs: "15px", sm: "18px" },
+                  fontSize: { xs: "16px", sm: "18px" },
                 }}
               >
                 <BasicLink to={"/"}>ホームページへ</BasicLink>

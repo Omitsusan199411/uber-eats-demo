@@ -26,7 +26,7 @@ const ordersPostFlagFunction = (postStatus: string) => {
             justifyContent: "center",
           }}
         >
-          <SendIcon sx={{ mr: "20px" }} />
+          <SendIcon sx={{ mr: "20px", fontSize: { xs: "16px", sm: "20px" } }} />
           <Box>注文を確定する</Box>
         </Box>
       );
@@ -35,7 +35,6 @@ const ordersPostFlagFunction = (postStatus: string) => {
 
 export const OrderButton: VFC<OrderButtonProps> = memo((props) => {
   const { lineFoodIds, postStatus, ordersPost } = props;
-  console.log(postStatus);
   return (
     <CustomBasicButton
       variant="contained"

@@ -13,12 +13,10 @@ import { ordersReducer } from "../../reducers/orders";
 // URL import
 import { orders } from "../../urls/urlApi";
 
-// 型 import
-import { LineFoodsList } from "../../types/api/LineFood";
-
 export const useAuthOrdersPost = () => {
   const history = useHistory();
 
+  // OrdersPostFlagの初期値を作成
   const initialOrdersPostFlag = {
     postStatus: REQUEST_STATE.initial,
   };

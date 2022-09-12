@@ -45,5 +45,5 @@ export const useAuthLineFoodsGet = () => {
         throw new Error(error);
       });
   }, []);
-  return { lineFoodsGet, lineFoodsGetData, lineFoodsDispatch };
+  return { lineFoodsGet, lineFoodsGetData };
 };
