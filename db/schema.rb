@@ -23,15 +23,14 @@ ActiveRecord::Schema.define(version: 2022_02_04_165015) do
   end
 
   create_table "line_foods", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.bigint "food_id", null: false
+    t.integer "food_id"
     t.bigint "restaurant_id", null: false
-    t.bigint "order_id"
+    t.integer "order_id"
     t.integer "count", default: 0, null: false
     t.boolean "active", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["food_id"], name: "index_line_foods_on_food_id"
-    t.index ["order_id"], name: "index_line_foods_on_order_id"
+    t.index ["food_id", "order_id"], name: "index_line_foods_on_food_id_and_order_id", unique: true
     t.index ["restaurant_id"], name: "index_line_foods_on_restaurant_id"
   end
 

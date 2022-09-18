@@ -5,7 +5,9 @@ class Api::V1::LineFoodsController < ApplicationController
   def index
     # line_foodsはLineFood.where(active: true)から取得した配列であり、インスタンスである。
     # total_amountは、line_foodのインスタンスメソッドである
+    # line_foodsのactiveがtrueでorder_idが空のline_foodsだけ取得する
     line_foods = LineFood.active
+    # line_foods = LineFood.active
     if line_foods.exists?
       render json: {
         # mapメソッドで特定のカラムを抽出し、配列で返す
@@ -35,24 +37,26 @@ class Api::V1::LineFoodsController < ApplicationController
     
     # @line_foodはset_line_food関数の返り値
     if @line_food.save
+      binding.pry
       render json:{
         line_food: @line_food
       }, status: 201
     else
-      render json: {},status: 500
+      render json: {ErrorMessage: "仮注文を新規登録、更新できませんでした"},status: 500
     end
   end
 
   def replace
     # eachメソッドはmapメソッドと違い繰り返し処理を行うだけ。eachメソッドは配列で返さない
     LineFood.active.other_restaurant(@ordered_food.restaurant.id).each do |line_food|
-      line_food.update_attribute(:active, false)
+      line_food.update(:active, false)
     end
 
     set_line_food(@ordered_food)
 
     # @line_foodはset_line_food関数の返り値
     if @line_food.save
+      binding.pry
       render json: {
         line_food: @line_food
       },status: 201
@@ -73,18 +77,29 @@ class Api::V1::LineFoodsController < ApplicationController
   # @ordered_foodに紐づくline_foodインスタンスを更新・新規作成
   # 既に@ordered_foodに紐づくline_foodインスタンスが存在する場合は、line_foodインスタンスの中のcountとactiveの値を書き換え
   def set_line_food(ordered_food)
-    if ordered_food.line_food.present?
-      @line_food = ordered_food.line_food
-      @line_food.attributes = {
-        count: ordered_food.line_food.count + params[:count],
-        active: true
-      }
-    else
-      @line_food = ordered_food.build_line_food(
-        count: params[:count],
-        restaurant: ordered_food.restaurant,
-        active: true
-      )
+    begin 
+      if LineFood.exists?(food_id: ordered_food, order_id: nil)
+        # 選択したfoodのid（@ordered_food）かつ、order_idがNULLのレコードを抽出
+        @line_food = LineFood.find_by(food_id: ordered_food, order_id: nil)
+        binding.pry
+        @line_food.attributes = {
+          count: @line_food.count + params[:count],
+          active: true
+        }
+        binding.pry
+      # 選択したfoodのid（@ordered_food）、つまりfood_idがline_foodsテーブルに存在しなかった場合（仮注文に登録されていないfood）
+      else
+        binding.pry
+        @line_food = ordered_food.line_foods.build(
+          count: params[:count],
+          restaurant: ordered_food.restaurant,
+          active: true,
+        )
+        binding.pry
+      end
+    rescue => e
+      binding.pry
+      puts "#{e}"
     end
   end
 end
