@@ -1,10 +1,7 @@
 // ライブラリ import
 import { useCallback, Dispatch, SetStateAction } from "react";
 import { useHistory } from "react-router-dom";
-import axios, { AxiosError } from "axios";
-
-// コンポーネント import
-// import { useAuthLineFoodsGet } from "./useAuthLineFoodsGet";
+import axios from "axios";
 
 // 型 import
 import { FoodModal, FoodPostRequest } from "../../types/api/Food";
@@ -43,6 +40,11 @@ export const useAuthLineFoodsPost = () => {
               existingRestaurant: error.response.data.existing_restaurant,
               newRestaurant: error.response.data.new_restaurant,
             });
+            throw new Error(error);
+          } else if (
+            error.response?.status === HTTP_STATUS_CODE.internal_server_error
+          ) {
+            console.log(error);
             throw new Error(error);
           }
         });

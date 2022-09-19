@@ -5,8 +5,12 @@ export const REQUEST_STATE = {
   ok: "ok",
 };
 
-export const HTTP_STATUS_CODE: { not_acceptable: number } = {
+export const HTTP_STATUS_CODE: {
+  not_acceptable: number;
+  internal_server_error: number;
+} = {
   not_acceptable: 406,
+  internal_server_error: 500,
 };
 
 // useReducerの処理でrestaurants情報、foods情報を取得する際の分岐を定義（actionのタイプ）

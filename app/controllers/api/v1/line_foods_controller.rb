@@ -32,17 +32,20 @@ class Api::V1::LineFoodsController < ApplicationController
       },status: 406
       # HTTPステータスコード406はnot_acceptableで指定されたフォーマットで返せない場合
     end
-
+    # set_line_foodはprivate以下で定義。@ordered_foodはset_food関数の返り値。before_actionで実行している
     set_line_food(@ordered_food)
-    
-    # @line_foodはset_line_food関数の返り値
-    if @line_food.save
+    begin 
+      # @line_foodはset_line_food関数の返り値
+      @line_food.save!
       binding.pry
       render json:{
         line_food: @line_food
       }, status: 201
-    else
-      render json: {ErrorMessage: "仮注文を新規登録、更新できませんでした"},status: 500
+    rescue => e
+      puts e
+      puts e.class
+      puts e.class.superclass
+      render json: {ErrorMessage: "仮注文に新規登録、更新できませんでした"},status: 500
     end
   end
 
@@ -51,19 +54,17 @@ class Api::V1::LineFoodsController < ApplicationController
     LineFood.active.other_restaurant(@ordered_food.restaurant.id).each do |line_food|
       line_food.update(:active, false)
     end
-
     set_line_food(@ordered_food)
-
-    # @line_foodはset_line_food関数の返り値
-    if @line_food.save
-      binding.pry
+    begin
+      @line_food.save!
       render json: {
         line_food: @line_food
       },status: 201
-      # HTTPステータスコード201はリクエストは成功し、新規作成されたリソースのURLを返す。
-    else
-      # HTTPステータスコード500はサーバー内部にエラーが発生した場合に返す。
-      render json: {},status: 500
+    rescue => e
+      puts e
+      puts e.class
+      puts e.class.superclass
+      render json: {ErrorMessage: "既にactive状態の仮注文を入れ替えることができませんでした"}, status: 500
     end
   end
 
@@ -74,32 +75,29 @@ class Api::V1::LineFoodsController < ApplicationController
     @ordered_food = Food.find(params[:food_id])
   end
 
-  # @ordered_foodに紐づくline_foodインスタンスを更新・新規作成
-  # 既に@ordered_foodに紐づくline_foodインスタンスが存在する場合は、line_foodインスタンスの中のcountとactiveの値を書き換え
+  # 既に@ordered_foodに紐づくline_foodインスタンスが存在するかの有無を確認し条件分岐。
+  # line_foodインスタンスの中のcountとactiveの値を書き換え。
   def set_line_food(ordered_food)
     begin 
-      if LineFood.exists?(food_id: ordered_food, order_id: nil)
+      (LineFood.exists?(food_id: ordered_food, order_id: nil)) ? (
         # 選択したfoodのid（@ordered_food）かつ、order_idがNULLのレコードを抽出
         @line_food = LineFood.find_by(food_id: ordered_food, order_id: nil)
-        binding.pry
         @line_food.attributes = {
           count: @line_food.count + params[:count],
           active: true
         }
-        binding.pry
+      binding.pry
       # 選択したfoodのid（@ordered_food）、つまりfood_idがline_foodsテーブルに存在しなかった場合（仮注文に登録されていないfood）
-      else
-        binding.pry
-        @line_food = ordered_food.line_foods.build(
+      ):(@line_food = ordered_food.line_foods.new(
           count: params[:count],
           restaurant: ordered_food.restaurant,
           active: true,
-        )
-        binding.pry
-      end
-    rescue => e
+       ))
       binding.pry
-      puts "#{e}"
+    rescue => e
+      puts e
+      puts e.class
+      puts e.class.superclass
     end
   end
 end

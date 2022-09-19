@@ -1,11 +1,10 @@
 class LineFood < ApplicationRecord
   # optional: trueとすることで関連付け（外部キー）がなくてもエラーが出ないことを指す。任意の関連付け。
-  belongs_to :food, optional: true
+  belongs_to :food
   belongs_to :restaurant
   belongs_to :order, optional: true
 
   validates :count, numericality: { greater_than: 0 }
-
   # 一意な複合キーのバリデーション（アプリケーション側でチェック。DB側のチェックはmigrationで記述している）
   validates :order_id, uniqueness: { scope: :food_id }
 
