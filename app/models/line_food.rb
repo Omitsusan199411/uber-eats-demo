@@ -13,7 +13,7 @@ class LineFood < ApplicationRecord
   scope :active, -> { where(active: true) }
   # 例外パターンの処理。他の店舗のLineFoodがあるかどうかをチェックする.
   # picked_restaurant_id以外のレコードを取得。picked_restaurant_idは引数を表す
-  scope :other_restaurant, -> (picked_restaurant_id) {where.not(restaurant_id: picked_restaurant_id)}
+  scope :other_restaurant, ->(picked_restaurant_id) { where.not(restaurant_id: picked_restaurant_id) }
 
   def total_amount
     food.price * count

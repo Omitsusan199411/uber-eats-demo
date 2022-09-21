@@ -1,6 +1,5 @@
 class Api::V1::LineFoodsController < ApplicationController
-  before_action :set_food, only: [:create, :replace]
-
+  before_action :set_food, only: %i[create replace]
 
   def index
     # line_foodsはLineFood.where(active: true)から取得した配列であり、インスタンスである。
@@ -14,11 +13,11 @@ class Api::V1::LineFoodsController < ApplicationController
         line_food_ids: line_foods.map { |line_food| line_food.id },
         restaurant: line_foods[0].restaurant,
         count: line_foods.sum { |line_food| line_food[:count] },
-        amount: line_foods.sum { |line_food| line_food.total_amount },
-      },status: 200
+        amount: line_foods.sum { |line_food| line_food.total_amount }
+      }, status: :ok
     else
       # HTTPレスポンスコード204は、「リクエストは成功したが、空データ」を指す
-      render json: {}, status: 204
+      render json: {}, status: :no_content
     end
   end
 
@@ -28,24 +27,24 @@ class Api::V1::LineFoodsController < ApplicationController
     if LineFood.active.other_restaurant(@ordered_food.restaurant.id).exists?
       return render json: {
         existing_restaurant: LineFood.active.other_restaurant(@ordered_food.restaurant.id).first.restaurant.name,
-        new_restaurant: Food.find(params[:food_id]).restaurant.name,
-      },status: 406
+        new_restaurant: Food.find(params[:food_id]).restaurant.name
+      }, status: :not_acceptable
       # HTTPステータスコード406はnot_acceptableで指定されたフォーマットで返せない場合
     end
     # set_line_foodはprivate以下で定義。@ordered_foodはset_food関数の返り値。before_actionで実行している
     set_line_food(@ordered_food)
-    begin 
+    begin
       # @line_foodはset_line_food関数の返り値
       @line_food.save!
       binding.pry
-      render json:{
+      render json: {
         line_food: @line_food
-      }, status: 201
-    rescue => e
+      }, status: :created
+    rescue StandardError => e
       puts e
       puts e.class
       puts e.class.superclass
-      render json: {ErrorMessage: "仮注文に新規登録、更新できませんでした"},status: 500
+      render json: { ErrorMessage: '仮注文に新規登録、更新できませんでした' }, status: :internal_server_error
     end
   end
 
@@ -59,18 +58,18 @@ class Api::V1::LineFoodsController < ApplicationController
       @line_food.save!
       render json: {
         line_food: @line_food
-      },status: 201
-    rescue => e
+      }, status: :created
+    rescue StandardError => e
       puts e
       puts e.class
       puts e.class.superclass
-      render json: {ErrorMessage: "既にactive状態の仮注文を入れ替えることができませんでした"}, status: 500
+      render json: { ErrorMessage: '既にactive状態の仮注文を入れ替えることができませんでした' }, status: :internal_server_error
     end
   end
 
-
   # line_foodsコントローラー以外からは呼び出せない。
   private
+
   def set_food
     @ordered_food = Food.find(params[:food_id])
   end
@@ -78,26 +77,28 @@ class Api::V1::LineFoodsController < ApplicationController
   # 既に@ordered_foodに紐づくline_foodインスタンスが存在するかの有無を確認し条件分岐。
   # line_foodインスタンスの中のcountとactiveの値を書き換え。
   def set_line_food(ordered_food)
-    begin 
-      (LineFood.exists?(food_id: ordered_food, order_id: nil)) ? (
-        # 選択したfoodのid（@ordered_food）かつ、order_idがNULLのレコードを抽出
-        @line_food = LineFood.find_by(food_id: ordered_food, order_id: nil)
-        @line_food.attributes = {
-          count: @line_food.count + params[:count],
-          active: true
-        }
-      binding.pry
-      # 選択したfoodのid（@ordered_food）、つまりfood_idがline_foodsテーブルに存在しなかった場合（仮注文に登録されていないfood）
-      ):(@line_food = ordered_food.line_foods.new(
-          count: params[:count],
-          restaurant: ordered_food.restaurant,
-          active: true,
-       ))
-      binding.pry
-    rescue => e
-      puts e
-      puts e.class
-      puts e.class.superclass
+    if LineFood.exists?(food_id: ordered_food, order_id: nil)
+      (
+            # 選択したfoodのid（@ordered_food）かつ、order_idがNULLのレコードを抽出
+            @line_food = LineFood.find_by(food_id: ordered_food, order_id: nil)
+            @line_food.attributes = {
+              count: @line_food.count + params[:count],
+              active: true
+            }
+            binding.pry
+            # 選択したfoodのid（@ordered_food）、つまりfood_idがline_foodsテーブルに存在しなかった場合（仮注文に登録されていないfood）
+          )
+    else
+      (@line_food = ordered_food.line_foods.new(
+        count: params[:count],
+        restaurant: ordered_food.restaurant,
+        active: true
+      ))
     end
+    binding.pry
+  rescue StandardError => e
+    puts e
+    puts e.class
+    puts e.class.superclass
   end
 end
