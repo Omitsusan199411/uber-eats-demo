@@ -29,6 +29,11 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'pry-rails'
+  # rubocopはターミナル上で使用するため、require: falseにすることでアプリ側に不要な読み込むをさせないようにする（アプリ側で自動読み込みさせないようにする）
+  gem 'rubocop', require: false
+  gem 'rubocop-performance', require: false
+  gem 'rubocop-rails', require: false
+  gem 'rubocop-rspec'
 end
 
 group :development do

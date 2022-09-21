@@ -17,6 +17,7 @@ require "rails/test_unit/railtie"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
+# Gemfileに記載されているライブラリを一括でrequireしている。(bundler自体のrequireはconfig/boot.rbに記載されている)
 Bundler.require(*Rails.groups)
 
 module UberEatsDemo
