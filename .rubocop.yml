@@ -45,5 +45,9 @@ Style/FrozenStringLiteralComment:
 Metrics/AbcSize:
   Max: 25
 
+# 1つのメソッドの上限行数を25行までとする。
+Metrics/MethodLength:
+  Max: 20
+
 Layout/LineLength:
   Enabled: false

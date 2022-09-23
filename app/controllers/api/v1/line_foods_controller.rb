@@ -1,5 +1,5 @@
 class Api::V1::LineFoodsController < ApplicationController
-  before_action :set_food, only: %i[create replace]
+  before_action :ordered_food, only: %i[create replace]
 
   def index
     # line_foodsはLineFood.where(active: true)から取得した配列であり、インスタンスである。
@@ -31,10 +31,10 @@ class Api::V1::LineFoodsController < ApplicationController
       }, status: :not_acceptable
       # HTTPステータスコード406はnot_acceptableで指定されたフォーマットで返せない場合
     end
-    # set_line_foodはprivate以下で定義。@ordered_foodはset_food関数の返り値。before_actionで実行している
-    set_line_food(@ordered_food)
+    # will_save_line_foodはprivate以下で定義。@ordered_foodはordered_food関数の返り値。before_actionで実行している
+    will_save_line_food(@ordered_food)
     begin
-      # @line_foodはset_line_food関数の返り値
+      # @line_foodはwill_save_line_food関数の返り値
       @line_food.save!
       render json: {
         line_food: @line_food
@@ -50,7 +50,7 @@ class Api::V1::LineFoodsController < ApplicationController
     LineFood.active.other_restaurant(@ordered_food.restaurant.id).each do |line_food|
       line_food.update(:active, false)
     end
-    set_line_food(@ordered_food)
+    will_save_line_food(@ordered_food)
     begin
       @line_food.save!
       render json: {
@@ -65,13 +65,13 @@ class Api::V1::LineFoodsController < ApplicationController
   # line_foodsコントローラー以外からは呼び出せない。
   private
 
-  def set_food
+  def ordered_food
     @ordered_food = Food.find(params[:food_id])
   end
 
   # 既に@ordered_foodに紐づくline_foodインスタンスが存在するかの有無を確認し条件分岐。
   # line_foodインスタンスの中のcountとactiveの値を書き換え。
-  def set_line_food(ordered_food)
+  def will_save_line_food(ordered_food)
     if LineFood.exists?(food_id: ordered_food, order_id: nil)
       (
             # 選択したfoodのid（@ordered_food）かつ、order_idがNULLのレコードを抽出
