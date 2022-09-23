@@ -28,6 +28,7 @@ gem 'rack-cors'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  gem 'overcommit'
   gem 'pry-rails'
   # rubocopはターミナル上で使用するため、require: falseにすることでアプリ側に不要な読み込むをさせないようにする（アプリ側で自動読み込みさせないようにする）
   gem 'rubocop', require: false
