@@ -33,4 +33,4 @@
 /vendor/*
 
 # rubocopの警告メッセージを一時退避させるファイル
-.rubocop_todo.yml
+/.rubocop_todo.yml
