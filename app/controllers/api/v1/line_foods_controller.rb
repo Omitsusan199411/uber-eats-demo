@@ -36,14 +36,11 @@ class Api::V1::LineFoodsController < ApplicationController
     begin
       # @line_foodはset_line_food関数の返り値
       @line_food.save!
-      binding.pry
       render json: {
         line_food: @line_food
       }, status: :created
     rescue StandardError => e
       puts e
-      puts e.class
-      puts e.class.superclass
       render json: { ErrorMessage: '仮注文に新規登録、更新できませんでした' }, status: :internal_server_error
     end
   end
@@ -61,8 +58,6 @@ class Api::V1::LineFoodsController < ApplicationController
       }, status: :created
     rescue StandardError => e
       puts e
-      puts e.class
-      puts e.class.superclass
       render json: { ErrorMessage: '既にactive状態の仮注文を入れ替えることができませんでした' }, status: :internal_server_error
     end
   end
@@ -85,7 +80,6 @@ class Api::V1::LineFoodsController < ApplicationController
               count: @line_food.count + params[:count],
               active: true
             }
-            binding.pry
             # 選択したfoodのid（@ordered_food）、つまりfood_idがline_foodsテーブルに存在しなかった場合（仮注文に登録されていないfood）
           )
     else
@@ -95,10 +89,7 @@ class Api::V1::LineFoodsController < ApplicationController
         active: true
       ))
     end
-    binding.pry
   rescue StandardError => e
     puts e
-    puts e.class
-    puts e.class.superclass
   end
 end

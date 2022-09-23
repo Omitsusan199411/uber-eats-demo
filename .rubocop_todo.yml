@@ -12,10 +12,10 @@
 #   Exclude:
 #     - 'app/controllers/api/v1/line_foods_controller.rb'
 
-# Offense count: 2
-# Configuration parameters: AllowedMethods, AllowedPatterns, IgnoredMethods, CountRepeatedAttributes.
-Metrics/AbcSize:
-  Max: 31
+# # Offense count: 2
+# # Configuration parameters: AllowedMethods, AllowedPatterns, IgnoredMethods, CountRepeatedAttributes.
+# Metrics/AbcSize:
+#   Max: 31
 
 # Offense count: 4
 # Configuration parameters: CountComments, CountAsOne, ExcludedMethods, AllowedMethods, AllowedPatterns, IgnoredMethods.

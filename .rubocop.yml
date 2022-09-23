@@ -8,8 +8,6 @@ require:
 AllCops:
   # AllCopsオプションで全てのCopsを対象にできる
   NewCops: enable
-  # Rubyバージョン指定
-  TargetRubyVersion: 2.7.5
   # 除外
   Exclude:
     - "config.ru"
@@ -28,20 +26,24 @@ Rails:
   Enabled: true
 
 # 日本語でのコメントを許可
-AsciiComments:
+Style/AsciiComments:
   Enabled: false
 
 # クラスのコメント必須を無視
-Documentation:
+Style/Documentation:
   Enabled: false
 
 # モジュール名::クラス名の定義を許可
-ClassAndModuleChildren:
+Style/ClassAndModuleChildren:
   Enabled: false
 
 # 文字リテラルのイミュータブル宣言を無視（freezeになるのはRuby3以降）
 Style/FrozenStringLiteralComment:
   Enabled: false
+
+# rubocopが用意している独自のスコア（Assignment、Branch、Condition）の上限値を25点にする
+Metrics/AbcSize:
+  Max: 25
 
 Layout/LineLength:
   Enabled: false
