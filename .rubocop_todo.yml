@@ -6,48 +6,27 @@
 # Note that changes in the inspected code, or installation of new
 # versions of RuboCop, may require this file to be generated again.
 
-# # Offense count: 3
-# # Configuration parameters: DebuggerReceivers, DebuggerMethods.
-# Lint/Debugger:
-#   Exclude:
-#     - 'app/controllers/api/v1/line_foods_controller.rb'
-
-# # Offense count: 2
-# # Configuration parameters: AllowedMethods, AllowedPatterns, IgnoredMethods, CountRepeatedAttributes.
-# Metrics/AbcSize:
-#   Max: 31
-
-# Offense count: 4
-# Configuration parameters: CountComments, CountAsOne, ExcludedMethods, AllowedMethods, AllowedPatterns, IgnoredMethods.
-# Metrics/MethodLength:
-#   Max: 21
-
 # # Offense count: 1
-# Naming/AccessorMethodName:
+# # Configuration parameters: Include.
+# # Include: app/models/**/*.rb
+# Rails/HasManyOrHasOneDependent:
+#   Exclude:
+#     - "app/models/order.rb"
+
+# # Offense count: 12
+# # This cop supports unsafe autocorrection (--autocorrect-all).
+# # Configuration parameters: Include.
+# # Include: app/**/*.rb, config/**/*.rb, db/**/*.rb, lib/**/*.rb
+# Rails/Output:
 #   Exclude:
 #     - "app/controllers/api/v1/line_foods_controller.rb"
+#     - "app/models/order.rb"
 
-# Offense count: 1
-# Configuration parameters: Include.
-# Include: app/models/**/*.rb
-Rails/HasManyOrHasOneDependent:
-  Exclude:
-    - "app/models/order.rb"
-
-# Offense count: 12
-# This cop supports unsafe autocorrection (--autocorrect-all).
-# Configuration parameters: Include.
-# Include: app/**/*.rb, config/**/*.rb, db/**/*.rb, lib/**/*.rb
-Rails/Output:
-  Exclude:
-    - "app/controllers/api/v1/line_foods_controller.rb"
-    - "app/models/order.rb"
-
-# Offense count: 3
-# This cop supports unsafe autocorrection (--autocorrect-all).
-# Configuration parameters: AllowMethodsWithArguments, AllowedMethods, AllowedPatterns, IgnoredMethods, AllowComments.
-# AllowedMethods: respond_to, define_method
-Style/SymbolProc:
-  Exclude:
-    - "app/controllers/api/v1/line_foods_controller.rb"
-    - "app/controllers/api/v1/orders_controller.rb"
+# # Offense count: 3
+# # This cop supports unsafe autocorrection (--autocorrect-all).
+# # Configuration parameters: AllowMethodsWithArguments, AllowedMethods, AllowedPatterns, IgnoredMethods, AllowComments.
+# # AllowedMethods: respond_to, define_method
+# Style/SymbolProc:
+#   Exclude:
+#     - "app/controllers/api/v1/line_foods_controller.rb"
+#     - "app/controllers/api/v1/orders_controller.rb"

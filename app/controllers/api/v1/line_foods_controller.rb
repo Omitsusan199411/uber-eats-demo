@@ -9,11 +9,12 @@ class Api::V1::LineFoodsController < ApplicationController
     # line_foods = LineFood.active
     if line_foods.exists?
       render json: {
-        # mapメソッドで特定のカラムを抽出し、配列で返す
-        line_food_ids: line_foods.map { |line_food| line_food.id },
+        # mapメソッドで特定のカラムを抽出し、配列で返す。
+        # 以下は、「line_food_ids: line_foods.map { |line_food| line_food.id }」「amount: line_foods.sum { |line_food| line_food.total_amount }」と言う意味。
+        line_food_ids: line_foods.map(&:id),
         restaurant: line_foods[0].restaurant,
         count: line_foods.sum { |line_food| line_food[:count] },
-        amount: line_foods.sum { |line_food| line_food.total_amount }
+        amount: line_foods.sum(&:total_amount)
       }, status: :ok
     else
       # HTTPレスポンスコード204は、「リクエストは成功したが、空データ」を指す
@@ -40,7 +41,7 @@ class Api::V1::LineFoodsController < ApplicationController
         line_food: @line_food
       }, status: :created
     rescue StandardError => e
-      puts e
+      logger.error e
       render json: { ErrorMessage: '仮注文に新規登録、更新できませんでした' }, status: :internal_server_error
     end
   end
@@ -57,7 +58,7 @@ class Api::V1::LineFoodsController < ApplicationController
         line_food: @line_food
       }, status: :created
     rescue StandardError => e
-      puts e
+      logger.error e
       render json: { ErrorMessage: '既にactive状態の仮注文を入れ替えることができませんでした' }, status: :internal_server_error
     end
   end
@@ -90,6 +91,6 @@ class Api::V1::LineFoodsController < ApplicationController
       ))
     end
   rescue StandardError => e
-    puts e
+    logger.error e
   end
 end

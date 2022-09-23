@@ -1,5 +1,5 @@
 class Order < ApplicationRecord
-  has_many :line_foods
+  has_many :line_foods, dependent: :destroy
 
   validates :total_price, numericality: { greater_than: 0 }
 
@@ -18,8 +18,6 @@ class Order < ApplicationRecord
     end
   # transactionがロールバックした場合の後に実行される。transactionメソッドにはロールバック後にraiseが実装されているため、そこから処理が飛んでくる
   rescue StandardError => e
-    puts e
-    puts e.class
-    puts e.class.superclass
+    logger.error e
   end
 end
