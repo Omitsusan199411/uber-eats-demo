@@ -47,10 +47,8 @@ class Api::V1::LineFoodsController < ApplicationController
   end
 
   def replace
-    # eachメソッドはmapメソッドと違い繰り返し処理を行うだけ。eachメソッドは配列で返さない
-    LineFood.active.other_restaurant(@ordered_food.restaurant.id).each do |line_food|
-      line_food.update(:active, false)
-    end
+    # eachメソッドはmapメソッドと違い、繰り返し処理を行うだけ。eachメソッドは配列で返さない
+    LineFood.active.other_restaurant(@ordered_food.restaurant.id).each(&:destroy)
     will_save_line_food(@ordered_food)
     begin
       @line_food.save!
