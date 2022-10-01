@@ -5,20 +5,23 @@ import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
+import WarningAmberIcon from "@mui/icons-material/WarningAmber";
 
 // コンポーネント import
-import { FoodLineSubmitButton } from "../../atoms/buttons/foods/FoodLineSubmitButton";
-import { CloseButton } from "../../atoms/buttons/foods/CloseButton";
+import { FoodLineReplaceButton } from "../../atoms/buttons/foods/FoodLineReplaceButton";
+import { NewFoodReplaceModalCancelButton } from "../../atoms/buttons/foods/NewFoodReplaceModalCancelButton";
 
 // createContext import
 import { FoodModalContext } from "../../pages/Foods";
 
 export const NewFoodReplaceModal: VFC = memo(() => {
   const { FoodModalState, setFoodModalState } = useContext(FoodModalContext);
+  const { isFoodReplaceModalOpen, existingRestaurant, newRestaurant } =
+    FoodModalState;
 
   return (
     <Dialog
-      open={FoodModalState.isFoodReplaceModalOpen}
+      open={isFoodReplaceModalOpen}
       onClose={() => {
         setFoodModalState({
           isFoodModalOpen: false,
@@ -30,16 +33,51 @@ export const NewFoodReplaceModal: VFC = memo(() => {
         });
       }}
     >
-      <CloseButton />
-      <DialogTitle>新規注文を開始しますか？</DialogTitle>
-      <DialogContent>
-        <p>
-          {`ご注文に${FoodModalState.existingRestaurant}の商品が含まれています。
-          新規の注文を開始して${FoodModalState.newRestaurant}の商品を追加してください。`}
-        </p>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          p: "10px",
+          backgroundColor: "error.main",
+        }}
+      >
+        <WarningAmberIcon
+          color="primary"
+          sx={{ display: "block", fontSize: { xs: "30px", sm: "45px" } }}
+        />
+        <DialogTitle
+          sx={{
+            color: "primary.main",
+            fontSize: { xs: "15px", sm: "22px" },
+            fontWeight: "bold",
+            p: { xs: "15px", sm: "20px" },
+          }}
+        >
+          新規注文を開始しますか？
+        </DialogTitle>
+      </Box>
+      <DialogContent
+        sx={{
+          fontSize: { xs: "16px", sm: "18px" },
+          p: "40px",
+        }}
+      >
+        <Box>{`・既にカートの中に${existingRestaurant}の商品が含まれています。`}</Box>
+        <Box
+          sx={{ mt: "10px" }}
+        >{`・${newRestaurant}の商品に置き換わります。`}</Box>
       </DialogContent>
-      <DialogActions sx={{ display: "flex", justifyContent: "center" }}>
-        <FoodLineSubmitButton>新規購入</FoodLineSubmitButton>
+      <DialogActions
+        sx={{
+          display: { xs: "block", sm: "flex" },
+          justifyContent: { xs: "none", sm: "center" },
+          textAlign: { xs: "center" },
+          p: "20px",
+        }}
+      >
+        <NewFoodReplaceModalCancelButton />
+        <FoodLineReplaceButton />
       </DialogActions>
     </Dialog>
   );

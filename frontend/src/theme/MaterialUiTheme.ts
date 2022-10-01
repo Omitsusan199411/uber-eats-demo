@@ -10,8 +10,13 @@ export const MaterialUiTheme = createTheme({
     secondary: {
       main: "#008000",
     },
+    error: {
+      main: "#FF0000",
+      sub: "#DC143C",
+    },
     basis: {
       main: "#333333",
+      sub: "#aaaaaa",
     },
   },
   breakpoints: {

@@ -5,7 +5,7 @@ import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
 
 // コンポーネント import
-import { CustomBasicButton } from "../BasicButton";
+import { BasicButton } from "../BasicButton";
 
 // 型 import
 import { OrderButtonProps } from "../../../../types/button/ButtonProps";
@@ -36,7 +36,7 @@ const ordersPostFlagFunction = (postStatus: string) => {
 export const OrderButton: VFC<OrderButtonProps> = memo((props) => {
   const { lineFoodIds, postStatus, ordersPost } = props;
   return (
-    <CustomBasicButton
+    <BasicButton
       variant="contained"
       color="basis"
       sx={{
@@ -53,6 +53,6 @@ export const OrderButton: VFC<OrderButtonProps> = memo((props) => {
       }}
     >
       {ordersPostFlagFunction(postStatus)}
-    </CustomBasicButton>
+    </BasicButton>
   );
 });

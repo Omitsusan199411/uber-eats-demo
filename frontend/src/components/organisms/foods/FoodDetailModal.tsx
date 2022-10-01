@@ -8,8 +8,8 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogActions from "@mui/material/DialogActions";
 
 // コンポーネント import
-import { CloseButton } from "../../atoms/buttons/foods/CloseButton";
-import { FoodLineSubmitButton } from "../../atoms/buttons/foods/FoodLineSubmitButton";
+import { FoodDetailModalCloseButton } from "../../atoms/buttons/foods/FoodDetailModalCloseButton";
+import { FoodLineRegistButton } from "../../atoms/buttons/foods/FoodLineRegistButton";
 import { CountForm } from "../../moleciles/form/CountForm";
 
 // 画像 import
@@ -20,10 +20,10 @@ import { FoodModalContext } from "../../pages/Foods";
 
 export const FoodDetailModal: VFC = memo(() => {
   const { FoodModalState, setFoodModalState } = useContext(FoodModalContext);
-
+  const { isFoodModalOpen, selectedFood } = FoodModalState;
   return (
     <Dialog
-      open={FoodModalState.isFoodModalOpen}
+      open={isFoodModalOpen}
       onClose={() => {
         setFoodModalState({
           isFoodModalOpen: false,
@@ -35,29 +35,19 @@ export const FoodDetailModal: VFC = memo(() => {
         });
       }}
     >
-      <CloseButton />
+      <FoodDetailModalCloseButton />
       <Box
         component="img"
         src={`${foodModalImage}`}
         alt="Food ModalImage"
       ></Box>
-      <DialogTitle>{FoodModalState.selectedFood?.name}</DialogTitle>
+      <DialogTitle>{selectedFood?.name}</DialogTitle>
       <DialogContent>
-        <DialogContentText>
-          {FoodModalState.selectedFood?.description}
-        </DialogContentText>
+        <DialogContentText>{selectedFood?.description}</DialogContentText>
       </DialogContent>
       <DialogActions sx={{ justifyContent: "space-between", pt: "25px" }}>
         <CountForm />
-        <FoodLineSubmitButton>
-          <Box
-            sx={{ display: { xs: "none", sm: "block" } }}
-          >{`${FoodModalState.selectedFoodCount}点を注文に追加`}</Box>
-          <Box>{`￥${(
-            FoodModalState.selectedFood?.price *
-            FoodModalState.selectedFoodCount
-          ).toLocaleString()} 円`}</Box>
-        </FoodLineSubmitButton>
+        <FoodLineRegistButton />
       </DialogActions>
     </Dialog>
   );
