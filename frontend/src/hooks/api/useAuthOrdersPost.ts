@@ -1,6 +1,5 @@
 // ライブラリ import
 import { useCallback, useReducer } from "react";
-import { useHistory } from "react-router-dom";
 import axios from "axios";
 
 // コンポーネント import
@@ -14,8 +13,6 @@ import { ordersReducer } from "../../reducers/orders";
 import { orders } from "../../urls/urlApi";
 
 export const useAuthOrdersPost = () => {
-  const history = useHistory();
-
   // OrdersPostFlagの初期値を作成
   const initialOrdersPostFlag = {
     postStatus: REQUEST_STATE.initial,
@@ -39,8 +36,8 @@ export const useAuthOrdersPost = () => {
           type: REDUCER_POSTING_ACTION.post_success,
         });
       })
-      .catch(() => {
-        history.push("/");
+      .catch((error) => {
+        throw new Error(error);
       });
     ordersDispatch({
       type: REDUCER_POSTING_ACTION.posting,

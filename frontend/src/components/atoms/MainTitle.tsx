@@ -7,9 +7,9 @@ export const MainTitle = () => {
       component="span"
       sx={{
         display: { xs: "none", sm: "inline" },
-        color: "#008000",
+        color: "secondary.main",
         fontFamily: "Roboto",
-        fontSize: { sm: "18px", md: "22px", lg: "24px" },
+        fontSize: { sm: "25px", md: "28px" },
       }}
     >
       Tech Eats

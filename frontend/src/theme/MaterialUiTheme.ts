@@ -8,7 +8,7 @@ export const MaterialUiTheme = createTheme({
       sub: "rgba(0, 0, 0, 0.5)",
     },
     secondary: {
-      main: "#008000",
+      main: "#2a6c50",
     },
     error: {
       main: "#FF0000",
@@ -16,6 +16,7 @@ export const MaterialUiTheme = createTheme({
     },
     basis: {
       main: "#333333",
+      light: "#F4F5F7",
       sub: "#aaaaaa",
     },
   },

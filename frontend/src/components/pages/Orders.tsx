@@ -13,7 +13,10 @@ import { BasicLink } from "../atoms/links/BasicLink";
 
 export const Orders: VFC = memo(() => {
   const { lineFoodsGet, lineFoodsGetData } = useAuthLineFoodsGet();
+  const { fetchStatus, lineFoodsList } = lineFoodsGetData;
+
   const { ordersPost, ordersPostFlag } = useAuthOrdersPost();
+  const { postStatus } = ordersPostFlag;
 
   const [OrderModalFlagState, setOrderModalFlagState] =
     useState<boolean>(false);
@@ -26,25 +29,24 @@ export const Orders: VFC = memo(() => {
     setOrderModalFlagState(!OrderModalFlagState);
   }, []);
 
-  console.log(lineFoodsGetData);
+  console.log(OrderModalFlagState);
 
   return (
     <>
-      {lineFoodsGetData.fetchStatus === "loading" && (
+      {fetchStatus === "loading" && (
         <Backdrop open={true}>
           <CircularProgress color="primary" thickness={5.0} />
         </Backdrop>
       )}
-      {lineFoodsGetData.fetchStatus === "ok" &&
-        ordersPostFlag.postStatus !== "ok" && (
-          <OrderDetailModal
-            lineFoodsList={lineFoodsGetData.lineFoodsList}
-            postStatus={ordersPostFlag.postStatus}
-            ordersPost={ordersPost}
-            orderModalFlagState={OrderModalFlagState}
-            setOrderModalFlagState={setOrderModalFlagState}
-          />
-        )}
+      {fetchStatus === "ok" && postStatus !== "ok" && (
+        <OrderDetailModal
+          lineFoodsList={lineFoodsList}
+          postStatus={postStatus}
+          ordersPost={ordersPost}
+          orderModalFlagState={OrderModalFlagState}
+          setOrderModalFlagState={setOrderModalFlagState}
+        />
+      )}
       {lineFoodsGetData.fetchStatus === "ok" &&
         ordersPostFlag.postStatus === "ok" && (
           <Backdrop

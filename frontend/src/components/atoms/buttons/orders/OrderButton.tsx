@@ -8,7 +8,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { BasicButton } from "../BasicButton";
 
 // 型 import
-import { OrderButtonProps } from "../../../../types/button/ButtonProps";
+import { OrderButtonProps } from "../../../../types/api/Order";
 
 // 定義 import
 import { REQUEST_STATE } from "../../../../constants/constants";
@@ -26,8 +26,8 @@ const ordersPostFlagFunction = (postStatus: string) => {
             justifyContent: "center",
           }}
         >
-          <SendIcon sx={{ mr: "20px", fontSize: { xs: "16px", sm: "20px" } }} />
-          <Box>注文を確定する</Box>
+          {/* <SendIcon sx={{ mr: "20px", fontSize: { xs: "16px", sm: "20px" } }} /> */}
+          <Box>注文を確定</Box>
         </Box>
       );
   }
@@ -39,13 +39,12 @@ export const OrderButton: VFC<OrderButtonProps> = memo((props) => {
     <BasicButton
       variant="contained"
       color="basis"
+      startIcon={<SendIcon sx={{ mr: "4px" }} />}
       sx={{
         color: "primary.main",
-        width: { xs: "90%", md: "100%" },
-        p: "8px",
-        pl: "15px",
-        pr: "20px",
-        mt: "20px",
+        width: "100%",
+        mt: "10px",
+        ml: { xs: "0px", sm: "15px" },
       }}
       // onClickは関数型でないといけない。void型ではいけない。関数()の場合実行結果が返ってくるので注意
       onClick={() => {

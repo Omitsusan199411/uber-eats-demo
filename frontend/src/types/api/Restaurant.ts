@@ -17,3 +17,8 @@ export type ReducerActionType = {
   payload: Restaurant[];
   type: string;
 };
+
+// Restaurantカードに渡すPropsの型定義
+export type RestaurantsCardProps = {
+  restaurant: Restaurant;
+};

@@ -20,6 +20,7 @@ import Skeleton from "@mui/material/Skeleton";
 // コンポーネントimport
 import { useAuthFoods } from "../../hooks/api/useAuthFoods";
 import { Header } from "../templates/Header";
+import { Footer } from "../templates/Footer";
 import { FoodsCard } from "../organisms/foods/FoodsCard";
 import { FoodDetailModal } from "../organisms/foods/FoodDetailModal";
 import { NewFoodReplaceModal } from "../organisms/foods/NewFoodReplaceModal";
@@ -71,8 +72,7 @@ export const Foods: VFC = memo(() => {
       <Box
         component="main"
         sx={{
-          backgroundColor: "#F4F5F7",
-          height: "100%",
+          backgroundColor: "basis.light",
         }}
       >
         <Box
@@ -89,7 +89,7 @@ export const Foods: VFC = memo(() => {
               mt: "150px",
               p: "20px",
               width: "18%",
-              backgroundColor: "#ffffff",
+              backgroundColor: "primary.main",
               borderRadius: "16px",
               display: { xs: "none", sm: "block" },
             }}
@@ -110,7 +110,7 @@ export const Foods: VFC = memo(() => {
             sx={{
               mt: "150px",
               width: { xs: "45%", sm: "60%", md: "70%" },
-              backgroundColor: "#F4F5F7",
+              backgroundColor: "basis.light",
               pl: { xs: "0px", sm: "30px", md: "50px" },
               pr: { xs: "0px", sm: "30px", md: "50px" },
             }}
@@ -161,6 +161,7 @@ export const Foods: VFC = memo(() => {
           {FoodModalState.isFoodReplaceModalOpen && <NewFoodReplaceModal />}
         </FoodModalContext.Provider>
       </Box>
+      <Footer />
     </>
   );
 });

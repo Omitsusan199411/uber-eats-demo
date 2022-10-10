@@ -8,7 +8,7 @@ import { BasicButton } from "../BasicButton";
 // createContext import
 import { FoodModalContext } from "../../../pages/Foods";
 
-export const NewFoodReplaceModalCancelButton: VFC = memo(() => {
+export const FoodReplaceModalCancelButton: VFC = memo(() => {
   const { setFoodModalState } = useContext(FoodModalContext);
   return (
     <BasicButton

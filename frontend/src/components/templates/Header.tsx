@@ -1,4 +1,5 @@
 // ライブラリ import
+import { VFC, memo } from "react";
 import { Link } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
@@ -8,10 +9,10 @@ import LocalMalllcon from "@mui/icons-material/LocalMall";
 // コンポーネント import
 import { MainTitle } from "../atoms/MainTitle";
 
-export const Header = () => {
+export const Header: VFC = memo(() => {
   return (
     <>
-      <AppBar position="fixed" color="primary">
+      <AppBar position="sticky" color="primary" sx={{ top: "0px" }}>
         <Toolbar>
           <Box
             sx={{
@@ -31,7 +32,7 @@ export const Header = () => {
                   color="secondary"
                   sx={{
                     display: { xs: "none", sm: "inline" },
-                    fontSize: { sm: "18px", md: "22px", lg: "24px" },
+                    fontSize: { sm: "25px", md: "28px" },
                   }}
                 />
               </Link>
@@ -41,4 +42,4 @@ export const Header = () => {
       </AppBar>
     </>
   );
-};
+});

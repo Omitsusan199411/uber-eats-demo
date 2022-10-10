@@ -6,5 +6,9 @@ import { SubTextType } from "../../../types/text/SubText";
 
 export const SubText = (props: SubTextType) => {
   const { children } = props;
-  return <Box sx={{ color: "info", fontSize: "14px" }}>{children}</Box>;
+  return (
+    <Box sx={{ color: "basis.sub", fontSize: "14px", display: "block" }}>
+      {children}
+    </Box>
+  );
 };

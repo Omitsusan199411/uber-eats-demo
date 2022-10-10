@@ -9,7 +9,7 @@ import WarningAmberIcon from "@mui/icons-material/WarningAmber";
 
 // コンポーネント import
 import { FoodLineReplaceButton } from "../../atoms/buttons/foods/FoodLineReplaceButton";
-import { NewFoodReplaceModalCancelButton } from "../../atoms/buttons/foods/NewFoodReplaceModalCancelButton";
+import { FoodReplaceModalCancelButton } from "../../atoms/buttons/foods/FoodReplaceModalCancelButton";
 
 // createContext import
 import { FoodModalContext } from "../../pages/Foods";
@@ -76,7 +76,7 @@ export const NewFoodReplaceModal: VFC = memo(() => {
           p: "20px",
         }}
       >
-        <NewFoodReplaceModalCancelButton />
+        <FoodReplaceModalCancelButton />
         <FoodLineReplaceButton />
       </DialogActions>
     </Dialog>
