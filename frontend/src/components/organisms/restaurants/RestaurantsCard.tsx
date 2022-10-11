@@ -14,12 +14,12 @@ import { RestaurantsCardProps } from "../../../types/api/Restaurant";
 export const RestaurantsCard: VFC<RestaurantsCardProps> = memo((props) => {
   const { restaurant } = props;
   return (
-    <Card sx={{ display: "flex" }}>
+    <Card elevation={1} sx={{ display: "flex" }}>
       <CardMedia
         component="img"
         src={RestaurantImage}
         alt="restaurantImage"
-        sx={{ width: "25%" }}
+        sx={{ width: "30%" }}
       />
       <CardContent sx={{ width: "100%" }}>
         <Typography>{restaurant.name}</Typography>

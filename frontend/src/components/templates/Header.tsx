@@ -12,7 +12,12 @@ import { MainTitle } from "../atoms/MainTitle";
 export const Header: VFC = memo(() => {
   return (
     <>
-      <AppBar position="sticky" color="primary" sx={{ top: "0px" }}>
+      <AppBar
+        position="sticky"
+        color="primary"
+        elevation={2}
+        sx={{ top: "0px" }}
+      >
         <Toolbar>
           <Box
             sx={{
@@ -20,7 +25,7 @@ export const Header: VFC = memo(() => {
               justifyContent: "space-between",
               alignItems: "center",
               width: "100vw",
-              padding: "4px 24px",
+              padding: "4px 12px",
             }}
           >
             <Link to={`/restaurants`} style={{ textDecoration: "none" }}>
@@ -31,8 +36,7 @@ export const Header: VFC = memo(() => {
                 <LocalMalllcon
                   color="secondary"
                   sx={{
-                    display: { xs: "none", sm: "inline" },
-                    fontSize: { sm: "25px", md: "28px" },
+                    fontSize: { xs: "20px", sm: "24px", md: "28px" },
                   }}
                 />
               </Link>

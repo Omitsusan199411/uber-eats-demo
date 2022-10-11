@@ -1,7 +1,7 @@
 // ライブラリ import
 import { VFC, memo, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import useMedia from "use-media";
+import { useMediaQuery } from "react-responsive";
 import styled from "styled-components";
 import Box from "@mui/material/Box";
 import List from "@mui/material/List";
@@ -19,8 +19,8 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { MaterialUiTheme } from "../../theme/MaterialUiTheme";
 
 export const Footer: VFC = memo(() => {
-  const isWide = useMedia({
-    minWidth: `${MaterialUiTheme.breakpoints.values.sm}`,
+  const isWide: boolean = useMediaQuery({
+    query: `(min-width: ${MaterialUiTheme.breakpoints.values.sm}px)`,
   });
   console.log(isWide);
   const history = useHistory();

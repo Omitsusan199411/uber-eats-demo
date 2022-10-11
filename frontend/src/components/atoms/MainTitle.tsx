@@ -6,10 +6,9 @@ export const MainTitle = () => {
     <Box
       component="span"
       sx={{
-        display: { xs: "none", sm: "inline" },
         color: "secondary.main",
         fontFamily: "Roboto",
-        fontSize: { sm: "25px", md: "28px" },
+        fontSize: { xs: "20px", sm: "24px", md: "28px" },
       }}
     >
       Tech Eats

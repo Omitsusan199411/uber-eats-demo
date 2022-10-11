@@ -17,10 +17,11 @@ export const FoodsCard: VFC<FoodsCardProps> = memo((props) => {
 
   return (
     <CardStyle
+      elevation={1}
       sx={{
         width: "100%",
         borderRadius: "6px",
-        display: { xs: "block", sm: "flex" },
+        display: "flex",
       }}
       onClick={onClickFood}
     >
@@ -28,7 +29,7 @@ export const FoodsCard: VFC<FoodsCardProps> = memo((props) => {
         component="img"
         image={foodImage}
         alt="foodImage"
-        sx={{ width: { xs: "100%", sm: "35%" } }}
+        sx={{ width: "30%" }}
       />
       <CardContent sx={{ width: "100%" }}>
         <Typography sx={{ fontSize: "16px" }}>{foodInfo.name}</Typography>

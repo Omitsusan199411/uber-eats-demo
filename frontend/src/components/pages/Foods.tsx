@@ -73,6 +73,7 @@ export const Foods: VFC = memo(() => {
         component="main"
         sx={{
           backgroundColor: "basis.light",
+          minHeight: "100vh",
         }}
       >
         <Box
@@ -80,17 +81,17 @@ export const Foods: VFC = memo(() => {
           sx={{
             display: "flex",
             alignItems: "start",
-            justifyContent: "space-around",
+            justifyContent: { xs: "center", sm: "space-between" },
+            pl: { xs: "10px", sm: "15px", md: "120px" },
+            pr: { xs: "10px", sm: "15px", md: "50px" },
           }}
         >
           <Box
             component="nav"
             sx={{
-              mt: "150px",
-              p: "20px",
-              width: "18%",
+              width: "30%",
+              p: "10px",
               backgroundColor: "primary.main",
-              borderRadius: "16px",
               display: { xs: "none", sm: "block" },
             }}
           >
@@ -108,11 +109,10 @@ export const Foods: VFC = memo(() => {
           </Box>
           <Box
             sx={{
-              mt: "150px",
-              width: { xs: "45%", sm: "60%", md: "70%" },
+              width: { xs: "80%", sm: "65%", md: "100%" },
               backgroundColor: "basis.light",
-              pl: { xs: "0px", sm: "30px", md: "50px" },
-              pr: { xs: "0px", sm: "30px", md: "50px" },
+              pl: { xs: "0px", sm: "20px", md: "50px" },
+              pr: { xs: "0px", sm: "20px", md: "0px" },
             }}
           >
             {foodsState.fetchStatus === REQUEST_STATE.loading ? (
