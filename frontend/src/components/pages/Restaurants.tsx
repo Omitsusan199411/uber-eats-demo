@@ -31,6 +31,7 @@ export const Restaurants: VFC = memo(() => {
   const { fetchRestaurants, restaurantsData } = useAuthRestaurants();
   const { fetchStatus, restaurantsList } = restaurantsData;
 
+  const test = [<Box>aaa</Box>, <Box>bbb</Box>];
   // restaurants情報をapiから取得
   useEffect(() => {
     fetchRestaurants();
@@ -104,6 +105,9 @@ export const Restaurants: VFC = memo(() => {
                 justifyContent="center"
                 sx={{ justifyContent: "left" }}
               >
+                {/* 取得したrestaurantsListの配列をmapメソッドで処理し、JSX構文を含む新たな配列の形で返し、一覧を表示する */}
+                {/* 「() => ()」の書き方でreturn文を省略している */}
+                {/* react-domでは、「<タグ>{配列}<タグ>」と記述することで要素を展開し、一覧を表示できる */}
                 {restaurantsList.map(
                   (restaurant: Restaurant, index: number) => (
                     <Grid item xs={12} sm={12} md={6} key={index}>
