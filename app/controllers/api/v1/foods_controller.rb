@@ -3,6 +3,6 @@ class Api::V1::FoodsController < ApplicationController
     restaurant = Restaurant.find(params[:restaurant_id])
     foods = restaurant.foods
 
-    render json: foods, status: :ok
+    render json: foods.to_json(include: [:restaurant])
   end
 end

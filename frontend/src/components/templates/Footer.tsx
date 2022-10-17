@@ -140,7 +140,6 @@ export const Footer: VFC = memo(() => {
           value={value}
           onChange={async (event, newValue) => {
             await setValue(newValue);
-            console.log(newValue);
             history.push(newValue);
           }}
           sx={{

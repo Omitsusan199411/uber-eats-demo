@@ -19,9 +19,8 @@ export const FoodsCard: VFC<FoodsCardProps> = memo((props) => {
     <CardStyle
       elevation={1}
       sx={{
-        width: "100%",
-        borderRadius: "6px",
         display: "flex",
+        minHeight: "120px",
       }}
       onClick={onClickFood}
     >
@@ -29,7 +28,7 @@ export const FoodsCard: VFC<FoodsCardProps> = memo((props) => {
         component="img"
         image={foodImage}
         alt="foodImage"
-        sx={{ width: "30%" }}
+        sx={{ maxWidth: "140px" }}
       />
       <CardContent sx={{ width: "100%" }}>
         <Typography sx={{ fontSize: "16px" }}>{foodInfo.name}</Typography>
@@ -40,7 +39,12 @@ export const FoodsCard: VFC<FoodsCardProps> = memo((props) => {
 });
 
 const CardStyle = styled(Card)`
+  box-shadow: none;
+  padding: 10px;
+  border-radius: 0px;
+  border-bottom: 1px solid #e5e7eb;
   &:hover {
     cursor: pointer;
+    opacity: 0.7;
   }
 `;

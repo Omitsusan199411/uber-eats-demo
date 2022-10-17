@@ -1,5 +1,6 @@
 // 型 import
 import { EmptyObject } from "../../types/object/EmptyObject";
+import { Restaurant } from "./Restaurant";
 
 // Food型定義
 export type Food = {
@@ -16,15 +17,18 @@ export type FoodsCardProps = {
   onClickFood: () => void;
 };
 
-// api(Getメソッド)通信で取得するfoodsStateの型定義
+// ある店舗のFoods一覧を取得する際に店舗情報も付与してReactに返す
+export type FoodIncludeRestaurant = Food & { restaurant: Restaurant };
+
+// api(Getメソッド)通信で取得するfoodsStateの型定義（店舗情報を含ませ配列で返す）
 export type FoodsStateType = {
   fetchStatus: string;
-  foodsList: Food[];
+  foodsList: FoodIncludeRestaurant[];
 };
 
 // api(Getメソッド)通信 foods ReducerAction型定義
 export type FoodsReducerActionType = {
-  payload: Food[];
+  payload: FoodIncludeRestaurant[];
   type: string;
 };
 

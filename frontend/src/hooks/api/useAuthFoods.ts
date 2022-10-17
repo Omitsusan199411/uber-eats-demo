@@ -7,7 +7,11 @@ import { foodsIndex } from "../../urls/urlApi";
 import { foodsReducer } from "../../reducers/foods";
 
 // 型import
-import { Food, FoodsStateType } from "../../types/api/Food";
+import {
+  Food,
+  FoodsStateType,
+  FoodIncludeRestaurant,
+} from "../../types/api/Food";
 
 // 定数import
 import {
@@ -25,9 +29,10 @@ export const useAuthFoods = () => {
   const fetchFoods = useCallback((restaurant_id: string): void => {
     dispatch({ type: REDUCER_FETCHING_ACTION.fetching, payload: [] });
     axios
-      .get<Food[]>(`${foodsIndex(restaurant_id)}`)
-      .then((res: AxiosResponse<Food[]>) => {
+      .get<FoodIncludeRestaurant[]>(`${foodsIndex(restaurant_id)}`)
+      .then((res: AxiosResponse<FoodIncludeRestaurant[]>) => {
         const { data } = res;
+        console.log(data);
         dispatch({
           type: REDUCER_FETCHING_ACTION.fetch_success,
           payload: data,
@@ -37,5 +42,6 @@ export const useAuthFoods = () => {
         throw new Error(error);
       });
   }, []);
+  console.log(foodsState);
   return { fetchFoods, foodsState };
 };

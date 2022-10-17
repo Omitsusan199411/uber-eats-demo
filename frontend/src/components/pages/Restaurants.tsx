@@ -31,7 +31,6 @@ export const Restaurants: VFC = memo(() => {
   const { fetchRestaurants, restaurantsData } = useAuthRestaurants();
   const { fetchStatus, restaurantsList } = restaurantsData;
 
-  const test = [<Box>aaa</Box>, <Box>bbb</Box>];
   // restaurants情報をapiから取得
   useEffect(() => {
     fetchRestaurants();
@@ -52,14 +51,14 @@ export const Restaurants: VFC = memo(() => {
           sx={{
             display: "flex",
             justifyContent: { xs: "center", sm: "space-between" },
-            pl: { xs: "10px", sm: "15px", md: "120px" },
-            pr: { xs: "10px", sm: "15px", md: "50px" },
+            pl: { sm: "10px", md: "120px" },
+            pr: { sm: "10px", md: "50px" },
           }}
         >
           <Box
             component="nav"
             sx={{
-              width: "30%",
+              width: { sm: "30%", md: "25%" },
               p: "10px",
               backgroundColor: "primary.main",
               display: { xs: "none", sm: "block" },
@@ -78,11 +77,12 @@ export const Restaurants: VFC = memo(() => {
             </List>
           </Box>
           <Box
+            component="section"
             sx={{
-              width: { xs: "80%", sm: "65%", md: "100%" },
+              width: { xs: "80%", sm: "70%", md: "100%" },
               backgroundColor: "basis.light",
-              pl: { xs: "0px", sm: "20px", md: "50px" },
-              pr: { xs: "0px", sm: "20px", md: "0px" },
+              pl: { sm: "20px", md: "50px" },
+              pr: { sm: "20px", md: "0px" },
             }}
           >
             {fetchStatus === REQUEST_STATE.loading ? (
