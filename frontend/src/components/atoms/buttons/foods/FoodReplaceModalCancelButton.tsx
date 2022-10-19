@@ -6,7 +6,7 @@ import SendIcon from "@mui/icons-material/Send";
 import { BasicButton } from "../BasicButton";
 
 // createContext import
-import { FoodModalContext } from "../../../pages/Foods";
+import { FoodModalContext } from "../../../pages/FoodsAsOneRestaurant";
 
 export const FoodReplaceModalCancelButton: VFC = memo(() => {
   const { setFoodModalState } = useContext(FoodModalContext);

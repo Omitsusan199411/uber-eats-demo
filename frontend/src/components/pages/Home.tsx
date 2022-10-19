@@ -3,8 +3,8 @@ import { VFC, memo } from "react";
 import Box from "@mui/material/Box";
 
 // コンポーネント import
-import { Header } from "../templates/Header";
-import { Footer } from "../templates/Footer";
+import { Header } from "../organisms/Header";
+import { Footer } from "../organisms/Footer";
 
 export const Home: VFC = memo(() => {
   return (

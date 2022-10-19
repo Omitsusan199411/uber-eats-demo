@@ -7,11 +7,7 @@ import { foodsIndex } from "../../urls/urlApi";
 import { foodsReducer } from "../../reducers/foods";
 
 // 型import
-import {
-  Food,
-  FoodsStateType,
-  FoodIncludeRestaurant,
-} from "../../types/api/Food";
+import { FoodsStateType, FoodIncludeRestaurant } from "../../types/api/Food";
 
 // 定数import
 import {

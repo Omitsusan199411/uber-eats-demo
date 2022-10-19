@@ -3,7 +3,7 @@ import { memo, VFC } from "react";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 
 // コンポーネント import
-import { CustomBasicIconButton } from "../BasicIconButton";
+import { BasicIconButton } from "../BasicIconButton";
 
 type CountUpProps = {
   CountUp: () => void;
@@ -12,8 +12,8 @@ type CountUpProps = {
 export const CountUpButton: VFC<CountUpProps> = memo((props) => {
   const { CountUp } = props;
   return (
-    <CustomBasicIconButton onClick={CountUp} sx={{ p: "15px" }}>
+    <BasicIconButton onClick={CountUp} sx={{ p: "15px" }}>
       <AddCircleIcon fontSize="large" sx={{ color: "#aaaaaa" }} />
-    </CustomBasicIconButton>
+    </BasicIconButton>
   );
 });

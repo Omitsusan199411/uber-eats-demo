@@ -4,7 +4,6 @@ import { Switch, Route } from "react-router-dom";
 
 // コンポーネント
 import { Home } from "../components/pages/Home";
-import { Foods } from "../components/pages/Foods";
 import { Orders } from "../components/pages/Orders";
 import { Page404 } from "../components/pages/Page404";
 import { restaurantsRouter } from "./RestaurantsRouter";
@@ -34,9 +33,6 @@ export const Router: VFC = memo(() => {
           </Switch>
         )}
       />
-      <Route path="/foods">
-        <Foods />
-      </Route>
       <Route path="/orders">
         <Orders />
       </Route>

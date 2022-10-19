@@ -1,6 +1,6 @@
 // ライブラリ import
 import { VFC, memo, useEffect, useState } from "react";
-
+import { Link } from "react-router-dom";
 import CircularProgress from "@mui/material/CircularProgress";
 import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
@@ -9,7 +9,6 @@ import Box from "@mui/material/Box";
 import { useAuthLineFoodsGet } from "../../hooks/api/useAuthLineFoodsGet";
 import { useAuthOrdersPost } from "../../hooks/api/useAuthOrdersPost";
 import { OrderDetailModal } from "../organisms/orders/OrderDetailModal";
-import { BasicLink } from "../atoms/links/BasicLink";
 
 export const Orders: VFC = memo(() => {
   const { lineFoodsGet, lineFoodsGetData } = useAuthLineFoodsGet();
@@ -28,8 +27,6 @@ export const Orders: VFC = memo(() => {
     lineFoodsGet();
     setOrderModalFlagState(!OrderModalFlagState);
   }, []);
-
-  console.log(OrderModalFlagState);
 
   return (
     <>
@@ -84,7 +81,7 @@ export const Orders: VFC = memo(() => {
                   fontSize: { xs: "16px", sm: "18px" },
                 }}
               >
-                <BasicLink to={"/"}>ホームページへ</BasicLink>
+                <Link to={"/"}>ホームページへ</Link>
               </Box>
             </Box>
           </Backdrop>

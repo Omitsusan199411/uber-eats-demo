@@ -7,7 +7,7 @@ import Box from "@mui/material/Box";
 import LocalMalllcon from "@mui/icons-material/LocalMall";
 
 // コンポーネント import
-import { MainTitle } from "../atoms/texts/MainTitle";
+import { MainTitle } from "../atoms/titles/MainTitle";
 
 export const Header: VFC = memo(() => {
   return (

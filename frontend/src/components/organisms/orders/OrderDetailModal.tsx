@@ -118,11 +118,7 @@ export const OrderDetailModal: VFC<OrderModalProps> = memo((props) => {
             orderModalFlagState={orderModalFlagState}
             setOrderModalFlagState={setOrderModalFlagState}
           />
-          <OrderButton
-            lineFoodIds={line_food_ids}
-            postStatus={postStatus}
-            ordersPost={ordersPost}
-          />
+          <OrderButton lineFoodIds={line_food_ids} ordersPost={ordersPost} />
         </DialogActions>
       </DialogContent>
     </Dialog>

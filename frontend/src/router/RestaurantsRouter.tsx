@@ -1,6 +1,6 @@
 // コンポーネント
 import { Restaurants } from "../components/pages/Restaurants";
-import { Foods } from "../components/pages/Foods";
+import { FoodsAsOneRestaurant } from "../components/pages/FoodsAsOneRestaurant";
 import { Page404 } from "../components/pages/Page404";
 
 export const restaurantsRouter = [
@@ -14,7 +14,7 @@ export const restaurantsRouter = [
     id: 2,
     path: "/:restaurant_id/foods",
     exact: false,
-    children: <Foods />,
+    children: <FoodsAsOneRestaurant />,
   },
   {
     id: 3,

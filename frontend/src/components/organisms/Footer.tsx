@@ -163,7 +163,7 @@ export const Footer: VFC = memo(() => {
           />
           <BottomNavigationAction
             label="フード一覧"
-            value="/foods"
+            value="/"
             icon={<FastfoodIcon />}
             sx={{ color: "primary.main" }}
           />

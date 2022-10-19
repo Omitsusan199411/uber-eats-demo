@@ -2,20 +2,13 @@
 import { VFC, memo, useEffect } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import {
-  Box,
-  Skeleton,
-  Grid,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemText,
-} from "@mui/material";
+import { Box, Backdrop, CircularProgress, Grid } from "@mui/material";
 
 // コンポーネントimport
-import { Header } from "../templates/Header";
-import { Footer } from "../templates/Footer";
-import { RestaurantsCard } from "../organisms/restaurants/RestaurantsCard";
+import { Header } from "../organisms/Header";
+import { SideMenu } from "../organisms/SideMenu";
+import { Footer } from "../organisms/Footer";
+import { RestaurantsCard } from "../molecules/restaurants/RestaurantsCard";
 
 // 型import
 import { Restaurant } from "../../types/api/Restaurant";
@@ -44,85 +37,85 @@ export const Restaurants: VFC = memo(() => {
         sx={{
           backgroundColor: "basis.light",
           minHeight: "100vh",
+          pt: "30px",
+          pl: { xs: "0px", sm: "0px", md: "10px" },
+          pr: { xs: "0px", sm: "0px", md: "10px" },
         }}
       >
         <Box
           component="article"
           sx={{
-            display: "flex",
-            justifyContent: { xs: "center", sm: "space-between" },
-            pl: { sm: "10px", md: "120px" },
-            pr: { sm: "10px", md: "50px" },
+            display: { xs: "block", md: "flex" },
+            justifyContent: { md: "center" },
           }}
         >
-          <Box
-            component="nav"
-            sx={{
-              width: { sm: "30%", md: "25%" },
-              p: "10px",
-              backgroundColor: "primary.main",
-              display: { xs: "none", sm: "block" },
-            }}
-          >
-            <List>
-              <ListItem disablePadding sx={{ display: "block" }}>
-                {[...Array.from(Array(12).keys())].map(
-                  (e: number, i: number) => (
-                    <ListItemButton key={i}>
-                      <ListItemText primary={`カテゴリー${e}`}></ListItemText>
-                    </ListItemButton>
-                  )
-                )}
-              </ListItem>
-            </List>
-          </Box>
-          <Box
-            component="section"
-            sx={{
-              width: { xs: "80%", sm: "70%", md: "100%" },
-              backgroundColor: "basis.light",
-              pl: { sm: "20px", md: "50px" },
-              pr: { sm: "20px", md: "0px" },
-            }}
-          >
-            {fetchStatus === REQUEST_STATE.loading ? (
-              <Grid container spacing={2} justifyContent="left">
-                {[...Array.from(Array(3).keys())].map((index: number) => (
-                  <Grid item xs={12} sm={12} md={6} key={index}>
-                    <Skeleton
-                      variant="rectangular"
-                      animation="wave"
-                      width="100%"
-                      height="10vh"
-                    />
-                  </Grid>
-                ))}
-              </Grid>
-            ) : (
-              <Grid
-                container
-                spacing={2}
-                justifyContent="center"
-                sx={{ justifyContent: "left" }}
+          {fetchStatus === REQUEST_STATE.loading && (
+            <>
+              <Backdrop open={true}>
+                <CircularProgress color="primary" thickness={5.0} />
+              </Backdrop>
+            </>
+          )}
+          {fetchStatus === REQUEST_STATE.ok && (
+            <>
+              <SideMenu />
+              <Box
+                component="section"
+                sx={{
+                  maxWidth: "1200px",
+                  backgroundColor: "basis.light",
+                  pb: { xs: "150px", sm: "300px" },
+                  pl: { xs: "0px", sm: "0px", md: "50px" },
+                  pr: { xs: "0px", sm: "0px", md: "15px" },
+                }}
               >
-                {/* 取得したrestaurantsListの配列をmapメソッドで処理し、JSX構文を含む新たな配列の形で返し、一覧を表示する */}
-                {/* 「() => ()」の書き方でreturn文を省略している */}
-                {/* react-domでは、「<タグ>{配列}<タグ>」と記述することで要素を展開し、一覧を表示できる */}
-                {restaurantsList.map(
-                  (restaurant: Restaurant, index: number) => (
-                    <Grid item xs={12} sm={12} md={6} key={index}>
-                      <RestaurantLink
-                        to={`/restaurants/${restaurant.id}/foods`}
+                <Box
+                  sx={{
+                    width: "100%",
+                    mb: "30px",
+                    p: "30px",
+                    color: "basis.main",
+                    fontWeight: "bold",
+                    textAlign: "center",
+                    backgroundColor: "primary.main",
+                    borderRadius: "4px",
+                  }}
+                >
+                  店舗一覧
+                </Box>
+                <Grid
+                  container
+                  spacing={{ xs: 0, sm: 1, md: 2 }}
+                  component="ul"
+                  sx={{ width: "100%", p: "0px" }}
+                >
+                  {/* 取得したrestaurantsListの配列をmapメソッドで処理し、JSX構文を含む新たな配列の形で返し、一覧を表示する */}
+                  {/* 「() => ()」の書き方でreturn文を省略している */}
+                  {/* react-domでは、「<タグ>{配列}<タグ>」と記述することで要素を展開し、一覧を表示できる */}
+                  {restaurantsList.map(
+                    (restaurant: Restaurant, index: number) => (
+                      <Grid
+                        item
+                        xs={12}
+                        sm={6}
+                        md={6}
+                        lg={6}
                         key={index}
+                        component="li"
+                        sx={{ listStyle: "none" }}
                       >
-                        <RestaurantsCard restaurant={restaurant} />
-                      </RestaurantLink>
-                    </Grid>
-                  )
-                )}
-              </Grid>
-            )}
-          </Box>
+                        <RestaurantLink
+                          to={`/restaurants/${restaurant.id}/foods`}
+                        >
+                          <RestaurantsCard restaurant={restaurant} />
+                        </RestaurantLink>
+                      </Grid>
+                    )
+                  )}
+                </Grid>
+              </Box>
+            </>
+          )}
         </Box>
       </Box>
       <Footer />
@@ -131,7 +124,6 @@ export const Restaurants: VFC = memo(() => {
 });
 
 const RestaurantLink = styled(Link)`
-  display: block;
   text-decoration: none;
   &:hover {
     cursor: pointer;

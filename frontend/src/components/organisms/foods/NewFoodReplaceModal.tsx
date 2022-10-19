@@ -12,7 +12,7 @@ import { FoodLineReplaceButton } from "../../atoms/buttons/foods/FoodLineReplace
 import { FoodReplaceModalCancelButton } from "../../atoms/buttons/foods/FoodReplaceModalCancelButton";
 
 // createContext import
-import { FoodModalContext } from "../../pages/Foods";
+import { FoodModalContext } from "../../pages/FoodsAsOneRestaurant";
 
 export const NewFoodReplaceModal: VFC = memo(() => {
   const { FoodModalState, setFoodModalState } = useContext(FoodModalContext);

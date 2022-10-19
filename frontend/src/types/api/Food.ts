@@ -1,3 +1,6 @@
+// ライブラリ import
+import { Dispatch, SetStateAction } from "react";
+
 // 型 import
 import { EmptyObject } from "../../types/object/EmptyObject";
 import { Restaurant } from "./Restaurant";
@@ -47,6 +50,11 @@ export type FoodModal = {
   newRestaurant: string | null;
 };
 
+// FoodListコンポーネントに渡すpropsの型
+export type FoodListProps = FoodsStateType & {
+  setFoodModalState: Dispatch<SetStateAction<FoodModal>>;
+};
+
 // api（Postメソッド）通信 foods axiosリクエスト型定義
 export type FoodPostRequest = {
   food_id: number;
@@ -57,4 +65,10 @@ export type FoodPostRequest = {
 export type NewFoodReplace = {
   isOpen: boolean;
   newReplaceSelectedFood: Food | EmptyObject;
+};
+
+// FoodCountFormに渡すpropsの型（商品数量を確定するフォーム）
+export type FoodCountFormProps = {
+  CountUp: () => void;
+  CountDown: () => void;
 };
