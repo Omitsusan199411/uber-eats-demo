@@ -51,7 +51,8 @@ export type FoodModal = {
 };
 
 // FoodListコンポーネントに渡すpropsの型
-export type FoodListProps = FoodsStateType & {
+export type FoodListProps = {
+  foodsList: FoodIncludeRestaurant[];
   setFoodModalState: Dispatch<SetStateAction<FoodModal>>;
 };
 

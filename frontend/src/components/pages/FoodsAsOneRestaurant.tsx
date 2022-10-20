@@ -15,7 +15,7 @@ import { useAuthFoods } from "../../hooks/api/useAuthFoods";
 import { FoodDetailModal } from "../organisms/foods/FoodDetailModal";
 import { NewFoodReplaceModal } from "../organisms/foods/NewFoodReplaceModal";
 import { FoodsAsOneRestaurantLayout } from "../templates/FoodsAsOneRestaurantLayout";
-import { BackdropCircular } from "../molecules/BackdropCircular";
+import { BackdropCircular } from "../organisms/BackdropCircular";
 
 // 型 import
 import { FoodModal } from "../../types/api/Food";
@@ -60,15 +60,12 @@ export const FoodsAsOneRestaurant: VFC = memo(() => {
     fetchFoods(restaurant_id);
   }, [restaurant_id]);
 
-  console.log(isFoodModalOpen);
-
   return (
     <>
       {fetchStatus === REQUEST_STATE.loading && <BackdropCircular />}
       {fetchStatus === REQUEST_STATE.ok && (
         <>
           <FoodsAsOneRestaurantLayout
-            fetchStatus={fetchStatus}
             foodsList={foodsList}
             setFoodModalState={setFoodModalState}
           />

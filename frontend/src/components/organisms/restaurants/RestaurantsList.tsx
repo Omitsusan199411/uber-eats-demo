@@ -1,16 +1,20 @@
 // import ライブラリ
 import { VFC, memo } from "react";
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
+import { Box, Grid } from "@mui/material";
 
 // import コンポーネント
-import { FoodsCard } from "../../molecules/foods/FoodsCard";
+import { RestaurantsCard } from "../../molecules/restaurants/RestaurantsCard";
 
-// import 型
-import { Food, FoodListProps } from "../../../types/api/Food";
+// 型import
+import {
+  Restaurant,
+  RestaurantsListProps,
+} from "../../../types/api/Restaurant";
 
-export const FoodsList: VFC<FoodListProps> = memo((props) => {
-  const { foodsList, setFoodModalState } = props;
+export const RestaurantsList: VFC<RestaurantsListProps> = memo((props) => {
+  const { restaurantsList } = props;
   return (
     <Box component="article">
       <Box
@@ -35,7 +39,7 @@ export const FoodsList: VFC<FoodListProps> = memo((props) => {
             borderRadius: "4px",
           }}
         >
-          {foodsList[0].restaurant.name}の商品一覧
+          店舗一覧
         </Box>
         <Grid
           container
@@ -43,7 +47,10 @@ export const FoodsList: VFC<FoodListProps> = memo((props) => {
           component="ul"
           sx={{ width: "100%", p: "0px" }}
         >
-          {foodsList.map((food: Food, index: number) => (
+          {/* 取得したrestaurantsListの配列をmapメソッドで処理し、JSX構文を含む新たな配列の形で返し、一覧を表示する */}
+          {/* 「() => ()」の書き方でreturn文を省略している */}
+          {/* react-domでは、「<タグ>{配列}<タグ>」と記述することで要素を展開し、一覧を表示できる */}
+          {restaurantsList.map((restaurant: Restaurant, index: number) => (
             <Grid
               item
               xs={12}
@@ -54,19 +61,9 @@ export const FoodsList: VFC<FoodListProps> = memo((props) => {
               component="li"
               sx={{ listStyle: "none" }}
             >
-              <FoodsCard
-                foodInfo={food}
-                onClickFood={() => {
-                  setFoodModalState({
-                    isFoodModalOpen: true,
-                    isFoodReplaceModalOpen: false,
-                    selectedFood: food,
-                    selectedFoodCount: 1,
-                    existingRestaurant: "",
-                    newRestaurant: "",
-                  });
-                }}
-              />
+              <RestaurantLink to={`/restaurants/${restaurant.id}/foods`}>
+                <RestaurantsCard restaurant={restaurant} />
+              </RestaurantLink>
             </Grid>
           ))}
         </Grid>
@@ -74,3 +71,11 @@ export const FoodsList: VFC<FoodListProps> = memo((props) => {
     </Box>
   );
 });
+
+const RestaurantLink = styled(Link)`
+  text-decoration: none;
+  &:hover {
+    cursor: pointer;
+    opacity: 0.5;
+  }
+`;

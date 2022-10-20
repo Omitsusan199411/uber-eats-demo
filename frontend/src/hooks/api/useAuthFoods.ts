@@ -1,6 +1,6 @@
 // ライブラリimport
 import { useReducer, useCallback } from "react";
-import axios, { AxiosResponse, AxiosError } from "axios";
+import axios, { AxiosResponse } from "axios";
 
 // コンポーネントimport
 import { foodsIndex } from "../../urls/urlApi";
@@ -28,7 +28,6 @@ export const useAuthFoods = () => {
       .get<FoodIncludeRestaurant[]>(`${foodsIndex(restaurant_id)}`)
       .then((res: AxiosResponse<FoodIncludeRestaurant[]>) => {
         const { data } = res;
-        console.log(data);
         dispatch({
           type: REDUCER_FETCHING_ACTION.fetch_success,
           payload: data,
@@ -38,6 +37,5 @@ export const useAuthFoods = () => {
         throw new Error(error);
       });
   }, []);
-  console.log(foodsState);
   return { fetchFoods, foodsState };
 };

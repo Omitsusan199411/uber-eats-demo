@@ -1,19 +1,19 @@
 // import ライブラリ
 import { VFC, memo } from "react";
 import styled from "styled-components";
-import Box from "@mui/material/Box";
+import { Box } from "@mui/material";
 
 // import コンポーネント
 import { Header } from "../organisms/Header";
 import { Footer } from "../organisms/Footer";
 import { SideMenu } from "../organisms/SideMenu";
-import { FoodsList } from "../organisms/foods/FoodsList";
+import { RestaurantsList } from "../organisms/restaurants/RestaurantsList";
 
 // import 型
-import { FoodListProps } from "../../types/api/Food";
+import { RestaurantsListProps } from "../../types/api/Restaurant";
 
-export const FoodsAsOneRestaurantLayout: VFC<FoodListProps> = memo((props) => {
-  const { foodsList, setFoodModalState } = props;
+export const RestaurantsLayout: VFC<RestaurantsListProps> = memo((props) => {
+  const { restaurantsList } = props;
   return (
     <>
       <Header />
@@ -23,15 +23,14 @@ export const FoodsAsOneRestaurantLayout: VFC<FoodListProps> = memo((props) => {
           display: { xs: "block", md: "flex" },
           justifyContent: { md: "center" },
           backgroundColor: "basis.light",
+          minHeight: "100vh",
+          pt: "30px",
           pl: { xs: "0px", sm: "0px", md: "10px" },
           pr: { xs: "0px", sm: "0px", md: "10px" },
         }}
       >
         <SideMenu />
-        <FoodsList
-          foodsList={foodsList}
-          setFoodModalState={setFoodModalState}
-        />
+        <RestaurantsList restaurantsList={restaurantsList} />
       </Main>
       <Footer />
     </>

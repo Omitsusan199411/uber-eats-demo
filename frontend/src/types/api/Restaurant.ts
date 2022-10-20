@@ -12,6 +12,11 @@ export type RestaurantsStateType = {
   restaurantsList: Restaurant[];
 };
 
+// RestaurantsLayoutとRestaurantsListへ渡すprops
+export type RestaurantsListProps = {
+  restaurantsList: Restaurant[];
+};
+
 // api lineFoods ReducerAction型定義
 export type ReducerActionType = {
   payload: Restaurant[];
