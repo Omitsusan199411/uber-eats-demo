@@ -1,6 +1,9 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  # エラーログ以上をcustomDevelopment.logに表示
+  config.log_level = :debug
+
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.
@@ -50,6 +53,6 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
-  # 1日ごとにログを記録
-  config.logger = Logger.new('log/development.log', 'daily')
+  # ログファイルが10MB以上になると違うログファイルを作成。そのファイル数が5個以上になると古いファイルから削除する
+  config.logger = Logger.new('log/development.log', 5, 10 * 1024 * 1024)
 end

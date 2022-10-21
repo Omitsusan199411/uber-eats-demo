@@ -29,6 +29,7 @@ export const useAuthOrdersPost = () => {
     const params = {
       line_food_ids: [...lineFoodsIds],
     };
+    // axiosの返り値はPromiseオブジェクト
     axios
       .post(`${orders}`, params)
       .then(() => {

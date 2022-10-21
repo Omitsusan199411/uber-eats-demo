@@ -24,6 +24,7 @@ export const useAuthFoods = () => {
 
   const fetchFoods = useCallback((restaurant_id: string): void => {
     dispatch({ type: REDUCER_FETCHING_ACTION.fetching, payload: [] });
+    // axiosの返り値はPromiseオブジェクト
     axios
       .get<FoodIncludeRestaurant[]>(`${foodsIndex(restaurant_id)}`)
       .then((res: AxiosResponse<FoodIncludeRestaurant[]>) => {
