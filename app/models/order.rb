@@ -1,15 +1,15 @@
 class Order < ApplicationRecord
   has_many :line_foods, dependent: :destroy
-
   validates :total_price, numericality: { greater_than: 0 }
 
-  # インスタンスメソッド
+  # Orderクラスのインスタンスメソッド
+  # メソッド全体が例外処理の対象になる場合はbegin/endを省略できる
   def save_with_update_line_foods!(line_foods)
     # Application::Base.transactionでトランザクション処理を実現できる。このメソッドには例外処理を含んでいる。例外処理が発生するとロールバックするようにデフォルトで準備されている。
     # transactionメソッドのブロック内の処理は、最終的にデフォルトで用意されているwithin_new_transactionメソッド内で処理が実行される。このメソッド内にはrescue文、raiseが既に用意されており、そこにはロールバックする処理が記述されている
     # => このため、transactionのブロック内でrescueを自分で書いてしまうとそちらが優先され、ロールバックできなくなるので注意。
     ActiveRecord::Base.transaction do
-      # transactionメソッドには、ブロック内の処理で例外が発生した場合にrescueして、ロールバックスするという処理がデフォルトで実装されている
+      # transactionメソッドには、ブロック内の処理で例外が発生した場合にrescueして、ロールバックするという処理がデフォルトで実装されている
       # クラスメソッド内で使用するselfはクラス（Orderクラス）を指し、インスタンスメソッド内でのselfはインスタンス（orderインスタンス）を指す。
       save!
       line_foods.each do |line_food|
@@ -18,6 +18,9 @@ class Order < ApplicationRecord
     end
   # transactionがロールバックした場合の後に実行される。transactionメソッドにはロールバック後にraiseが実装されているため、そこから処理が飛んでくる
   rescue StandardError => e
+    e.backtrace
     logger.error e
   end
+
+  attr_accessor :orders
 end

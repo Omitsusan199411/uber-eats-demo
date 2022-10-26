@@ -27,9 +27,10 @@ export const useAuthLineFoodsPost = () => {
       };
       axios
         .post<LineFood>(`${lineFoods}`, params)
-        .then(() => {
+        .then((res) => {
           history.push("/orders");
         })
+        // 業務設計上のエラーを想定（ユーザー責任）
         .catch((error) => {
           // replace用の処理 setNewFoodReplaceStateを実行しreplace用のモーダルを開く
           if (error.response?.status === HTTP_STATUS_CODE.not_acceptable) {
@@ -41,10 +42,10 @@ export const useAuthLineFoodsPost = () => {
               newRestaurant: error.response.data.new_restaurant,
             });
             throw new Error(error);
-          } else if (
-            error.response?.status === HTTP_STATUS_CODE.internal_server_error
-          ) {
+          } // システムエラーを想定（開発者責任）
+          else {
             console.log(error);
+            history.push("/page500");
             throw new Error(error);
           }
         });

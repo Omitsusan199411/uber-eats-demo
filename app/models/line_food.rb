@@ -15,6 +15,7 @@ class LineFood < ApplicationRecord
   # picked_restaurant_id以外のレコードを取得。picked_restaurant_idは引数を表す
   scope :other_restaurant, ->(picked_restaurant_id) { where.not(restaurant_id: picked_restaurant_id) }
 
+  # インスタンスメソッド（LineFoodのインスタンスをレシーバーとする）
   def total_amount
     food.price * count
   end

@@ -4,9 +4,10 @@ import { Switch, Route } from "react-router-dom";
 
 // コンポーネント
 import { Home } from "../components/pages/Home";
-import { Orders } from "../components/pages/Orders";
 import { Page404 } from "../components/pages/Page404";
+import { Page500 } from "../components/pages/Page500";
 import { restaurantsRouter } from "./RestaurantsRouter";
+import { ordersRouter } from "./OrdersRouter";
 
 export const Router: VFC = memo(() => {
   return (
@@ -33,11 +34,27 @@ export const Router: VFC = memo(() => {
           </Switch>
         )}
       />
-      <Route path="/orders">
-        <Orders />
-      </Route>
-      <Route path="*">
+      <Route
+        path="/orders"
+        render={({ match: { url } }) => (
+          <Switch>
+            {ordersRouter.map((route) => (
+              <Route
+                key={route.id}
+                path={`${url}${route.path}`}
+                exact={route.exact}
+              >
+                {route.children}
+              </Route>
+            ))}
+          </Switch>
+        )}
+      ></Route>
+      <Route path="/page404">
         <Page404 />
+      </Route>
+      <Route path="/page500">
+        <Page500 />
       </Route>
     </Switch>
   );

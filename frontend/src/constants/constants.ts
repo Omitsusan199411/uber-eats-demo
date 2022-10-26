@@ -7,9 +7,15 @@ export const REQUEST_STATE = {
 
 export const HTTP_STATUS_CODE: {
   not_acceptable: number;
+  ok: number;
+  no_content: number;
+  created: number;
   internal_server_error: number;
 } = {
   not_acceptable: 406,
+  ok: 200,
+  created: 201,
+  no_content: 204,
   internal_server_error: 500,
 };
 
