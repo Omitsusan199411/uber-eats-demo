@@ -50,11 +50,11 @@ export const Router: VFC = memo(() => {
           </Switch>
         )}
       ></Route>
-      <Route path="/page404">
-        <Page404 />
-      </Route>
       <Route path="/page500">
         <Page500 />
+      </Route>
+      <Route path="*">
+        <Page404 />
       </Route>
     </Switch>
   );

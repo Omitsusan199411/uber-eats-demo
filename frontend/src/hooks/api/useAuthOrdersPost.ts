@@ -1,5 +1,6 @@
 // ライブラリ import
 import { useCallback, useReducer } from "react";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 
 // コンポーネント import
@@ -23,6 +24,8 @@ export const useAuthOrdersPost = () => {
     initialOrdersPostFlag
   );
 
+  const history = useHistory();
+
   const ordersPost = useCallback((lineFoodsIds: number[]): void => {
     // paramsには、orders_controllerの中のposted_line_foodsに仮注文のactive状態のid群（line_foods_controllerのindexメソッドで返る値（lineFoodsGet()の値））を代入できるようにparamsの値を設定する。
     // Ruby側で見ると、キーはシンボル型、値は配列型のハッシュ形式で送られる
@@ -36,13 +39,16 @@ export const useAuthOrdersPost = () => {
         ordersDispatch({
           type: REDUCER_POSTING_ACTION.post_success,
         });
+        throw new Error("ordersDispatch処理に失敗しました");
       })
       .catch((error) => {
-        throw new Error(error);
+        console.log(error);
+        history.push("/page500");
       });
     ordersDispatch({
       type: REDUCER_POSTING_ACTION.posting,
     });
+    throw new Error("ordersDispatch処理に失敗しました");
   }, []);
   return { ordersPost, ordersPostFlag };
 };

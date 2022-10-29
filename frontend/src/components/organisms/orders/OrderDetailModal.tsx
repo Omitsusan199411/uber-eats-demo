@@ -1,5 +1,6 @@
 // ライブラリ import
 import { memo, VFC } from "react";
+import { useHistory } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
@@ -15,7 +16,10 @@ import { OrderCancelButton } from "../../atoms/buttons/orders/OrderCancelButton"
 import { MaterialUiTheme } from "../../../theme/MaterialUiTheme";
 
 // 型 import
-import { OrderModalProps } from "../../../types/api/Order";
+import {
+  OrderModalProps,
+  OrdersDialogContentArray,
+} from "../../../types/api/Order";
 
 // Orders.tsxからpropsをもらう。propsの中身はModalのon,offのbooleanとlineFoodsDataの中身をstateとしてもらう
 export const OrderDetailModal: VFC<OrderModalProps> = memo((props) => {
@@ -26,13 +30,40 @@ export const OrderDetailModal: VFC<OrderModalProps> = memo((props) => {
     orderModalFlagState,
     setOrderModalFlagState,
   } = props;
+
+  const history = useHistory();
+
   const { line_food_ids, restaurant, count, amount } = lineFoodsList;
+
+  const ordersDialogContent: OrdersDialogContentArray[] = [
+    {
+      id: 1,
+      title: "店舗名",
+      content: restaurant.name,
+    },
+    {
+      id: 2,
+      title: "商品数",
+      content: `${count.toLocaleString()}個`,
+    },
+    {
+      id: 3,
+      title: "商品価格",
+      content: `¥${amount.toLocaleString()}円`,
+    },
+    {
+      id: 4,
+      title: "配送料",
+      content: `¥${restaurant.fee.toLocaleString()}円`,
+    },
+  ];
 
   return (
     <Dialog
       open={orderModalFlagState}
-      onClose={() => {
-        setOrderModalFlagState(!orderModalFlagState);
+      onClose={async () => {
+        await setOrderModalFlagState(!orderModalFlagState);
+        history.push("/");
       }}
       sx={{ overflowWrap: "break-word" }}
     >
@@ -70,22 +101,12 @@ export const OrderDetailModal: VFC<OrderModalProps> = memo((props) => {
         >
           以下の注文を確定してよろしいですか？
         </Box>
-        <OrderDialogBox>
-          <OrderDialogContentText>店舗名</OrderDialogContentText>
-          <OrderDialogContentText>{restaurant.name}</OrderDialogContentText>
-        </OrderDialogBox>
-        <OrderDialogBox>
-          <OrderDialogContentText>商品数</OrderDialogContentText>
-          <OrderDialogContentText>{`${count.toLocaleString()}個`}</OrderDialogContentText>
-        </OrderDialogBox>
-        <OrderDialogBox>
-          <OrderDialogContentText>商品価格</OrderDialogContentText>
-          <OrderDialogContentText>{`¥${amount.toLocaleString()}円`}</OrderDialogContentText>
-        </OrderDialogBox>
-        <OrderDialogBox>
-          <OrderDialogContentText>配送料</OrderDialogContentText>
-          <OrderDialogContentText>{`¥${restaurant.fee.toLocaleString()}円`}</OrderDialogContentText>
-        </OrderDialogBox>
+        {ordersDialogContent.map((text: OrdersDialogContentArray) => (
+          <OrderDialogBox key={text.id}>
+            <OrderDialogContentText>{text.title}</OrderDialogContentText>
+            <OrderDialogContentText>{text.content}</OrderDialogContentText>
+          </OrderDialogBox>
+        ))}
         <OrderDialogBox>
           <OrderDialogContentText sx={{ fontWeight: "bold" }}>
             合計

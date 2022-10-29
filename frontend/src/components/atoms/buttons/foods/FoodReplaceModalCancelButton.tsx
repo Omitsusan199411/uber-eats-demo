@@ -16,8 +16,9 @@ export const FoodReplaceModalCancelButton: VFC = memo(() => {
       variant="contained"
       startIcon={<SendIcon />}
       sx={{
-        width: "60%",
+        width: "90%",
         m: "15px",
+        mb: "5px",
         ml: { xs: "8px" },
         p: "8px",
         pl: "15px",

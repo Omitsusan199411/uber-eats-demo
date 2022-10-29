@@ -1,9 +1,19 @@
-import React, { memo, VFC } from "react";
+import { memo, VFC, useState } from "react";
+
+import { Page500Layout } from "../templates/Page500Layout";
 
 export const Page500: VFC = memo(() => {
+  const [dialogOpen, setDialogOpen] = useState<boolean>(true);
+  const [snackBarOpen, setSnackBarOpen] = useState<boolean>(true);
+  const [alertOpen, setAlertOpen] = useState<boolean>(true);
   return (
     <>
-      <h1>Page505</h1>
+      <Page500Layout
+        dialogOpen={dialogOpen}
+        setDialogOpen={setDialogOpen}
+        snackBarOpen={snackBarOpen}
+        setSnackBarOpen={setSnackBarOpen}
+      />
     </>
   );
 });

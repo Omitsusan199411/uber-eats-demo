@@ -18,11 +18,13 @@ export const useAuthLineFoodsPut = () => {
     };
     axios
       .put(lineFoodsReplace, params)
+      // HTTPレスポンスが200番台（正常）の場合は、then()の処理へ
       .then(() => {
         history.push("/orders");
       })
       .catch((error) => {
-        throw new Error(error);
+        console.log(error);
+        history.push("/page500");
       });
   }, []);
   return { lineFoodsPut };

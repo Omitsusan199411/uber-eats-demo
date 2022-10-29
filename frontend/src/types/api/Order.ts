@@ -18,6 +18,13 @@ export type OrderModalProps = {
   setOrderModalFlagState: Dispatch<SetStateAction<boolean>>;
 };
 
+// DialogContentText内に展開する配列
+export type OrdersDialogContentArray = {
+  id: number;
+  title: string;
+  content: string;
+};
+
 // 商品注文確定ボタンの型定義
 export type OrderButtonProps = {
   lineFoodIds: number[];

@@ -19,7 +19,7 @@ export const OrderButton: VFC<OrderButtonProps> = memo((props) => {
       sx={{
         color: "primary.main",
         width: "100%",
-        mt: "10px",
+        mt: "23px",
         ml: { xs: "0px", sm: "15px" },
       }}
       // onClickは関数型でないといけない。void型ではいけない。関数()の場合実行結果が返ってくるので注意

@@ -21,7 +21,7 @@ export const OrderCancelButton: VFC<OrderCancelButtonProps> = memo((props) => {
         color: "basis.main",
         border: "1px solid",
         width: "100%",
-        mt: "10px",
+        mt: "23px",
         ml: "8px",
       }}
       onClick={async () => {

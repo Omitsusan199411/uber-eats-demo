@@ -1,6 +1,7 @@
 // ライブラリimport
 import axios, { AxiosResponse, AxiosError } from "axios";
 import { useCallback, useReducer } from "react";
+import { useHistory } from "react-router-dom";
 
 // コンポーネントimport
 import { restaurants } from "../../urls/urlApi";
@@ -25,6 +26,8 @@ export const useAuthRestaurants = () => {
     restaurantsInitialState
   );
 
+  const history = useHistory();
+
   // awaitで結果を待ってから後続の処理を実行する
   const fetchRestaurants = useCallback((): void => {
     dispatch({
@@ -40,9 +43,11 @@ export const useAuthRestaurants = () => {
           type: REDUCER_FETCHING_ACTION.fetch_success,
           payload: data,
         });
+        throw new Error("dispatchに失敗しました");
       })
       .catch((error) => {
-        throw new Error(error);
+        console.log(error);
+        history.push("/page500");
       });
   }, []);
   return { fetchRestaurants, restaurantsData };

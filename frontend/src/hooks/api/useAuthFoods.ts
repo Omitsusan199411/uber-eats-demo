@@ -33,9 +33,10 @@ export const useAuthFoods = () => {
           type: REDUCER_FETCHING_ACTION.fetch_success,
           payload: data,
         });
+        throw new Error("dispatch処理に失敗しました");
       })
       .catch((error) => {
-        throw new Error(error);
+        console.log(error);
       });
   }, []);
   return { fetchFoods, foodsState };

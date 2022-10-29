@@ -10,7 +10,7 @@ export const ordersRouter = [
   },
   {
     id: 2,
-    path: "/204status",
+    path: "/page204",
     exact: false,
     children: <OrdersPage204 />,
   },

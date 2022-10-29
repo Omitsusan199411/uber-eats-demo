@@ -32,48 +32,56 @@ export const NewFoodReplaceModal: VFC = memo(() => {
           newRestaurant: "",
         });
       }}
+      sx={{
+        maxWidth: { xs: "420px", sm: "500px", md: "550px" },
+        m: "0 auto",
+      }}
     >
       <Box
         sx={{
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          p: "10px",
           backgroundColor: "error.main",
         }}
       >
         <WarningAmberIcon
           color="primary"
-          sx={{ display: "block", fontSize: { xs: "30px", sm: "45px" } }}
+          sx={{
+            display: "block",
+            fontSize: { xs: "27px", sm: "35px" },
+          }}
         />
         <DialogTitle
           sx={{
             color: "primary.main",
-            fontSize: { xs: "15px", sm: "22px" },
             fontWeight: "bold",
-            p: { xs: "15px", sm: "20px" },
+            fontSize: { xs: "15px", sm: "18px" },
+            p: "20px",
           }}
         >
-          新規注文を開始しますか？
+          注文予定を変更しますか？
         </DialogTitle>
       </Box>
       <DialogContent
         sx={{
-          fontSize: { xs: "16px", sm: "18px" },
-          p: "40px",
+          fontSize: { xs: "15px", sm: "18px" },
+          pt: "40px",
+          pl: { xs: "40px", sm: "65px" },
+          pr: { xs: "40px", sm: "65px" },
         }}
       >
-        <Box>{`・既にカートの中に${existingRestaurant}の商品が含まれています。`}</Box>
-        <Box
-          sx={{ mt: "10px" }}
-        >{`・${newRestaurant}の商品に置き換わります。`}</Box>
+        <Box>{`既にカートの中に${existingRestaurant}の商品が含まれています。\n新規注文を押すと${newRestaurant}の商品に置き換わりますがよろしいですか？`}</Box>
       </DialogContent>
       <DialogActions
         sx={{
           display: { xs: "block", sm: "flex" },
           justifyContent: { xs: "none", sm: "center" },
           textAlign: { xs: "center" },
-          p: "20px",
+          pl: "40px",
+          pr: "40px",
+          pb: "30px",
+          pt: "10px",
         }}
       >
         <FoodReplaceModalCancelButton />

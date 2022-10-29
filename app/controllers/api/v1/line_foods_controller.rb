@@ -92,6 +92,6 @@ class Api::V1::LineFoodsController < ApplicationController
     logger.error error.class
     logger.error error.message
     logger.error error.backtrace.join("\n")
-    render json: { ErrorMessage: 'saveに失敗しました' }, status: :internal_server_error
+    render json: { ErrorMessage: "#{error.message}が発生しました" }, status: :internal_server_error
   end
 end

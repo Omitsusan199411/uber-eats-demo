@@ -12,7 +12,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { MaterialUiTheme } from "../../theme/MaterialUiTheme";
 import { FooterTextNavigation } from "../molecules/footer/FooterTextNavigation";
 import { FooterSnsIconsNavigation } from "../molecules/footer/FooterSnsIconsNavigation";
-import { CopyRightText } from "../atoms/CopyRightText";
+import { CopyRightText } from "../atoms/texts/CopyRightText";
 
 type BottomNavigationItemData = {
   id: number;

@@ -23,6 +23,7 @@ export const FoodsAsOneRestaurantLayout: VFC<FoodListProps> = memo((props) => {
           display: { xs: "block", md: "flex" },
           justifyContent: { md: "center" },
           backgroundColor: "basis.light",
+          pt: "30px",
           pl: { xs: "0px", sm: "0px", md: "10px" },
           pr: { xs: "0px", sm: "0px", md: "10px" },
         }}

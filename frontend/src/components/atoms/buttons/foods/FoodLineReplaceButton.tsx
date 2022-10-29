@@ -18,10 +18,11 @@ export const FoodLineReplaceButton: VFC = memo(() => {
       variant="contained"
       startIcon={<SendIcon sx={{ mr: "4px" }} />}
       sx={{
-        width: "60%",
+        width: "90%",
         // 親コンポーネントのDialogActionsコンポーネントにデフォルトで２番目の子要素から「margin-left: 8px」が付与されるため、それを打ち消すスタイルを定義
         ml: "-8px",
         m: "15px",
+        mb: "5px",
         p: "8px",
         pl: "5px",
         pr: "20px",
