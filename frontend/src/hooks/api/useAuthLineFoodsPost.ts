@@ -42,7 +42,6 @@ export const useAuthLineFoodsPost = () => {
               existingRestaurant: error.response.data.existing_restaurant,
               newRestaurant: error.response.data.new_restaurant,
             });
-            throw new Error("Stateの更新に失敗しました");
           } // システムエラーを想定（開発者責任）
           else {
             console.log(error);

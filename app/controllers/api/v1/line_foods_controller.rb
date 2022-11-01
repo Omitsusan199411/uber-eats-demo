@@ -1,7 +1,5 @@
 class Api::V1::LineFoodsController < ApplicationController
   before_action :set_ordered_food, only: %i[create replace]
-  # StandardErrorはNoMethodErrorやArgumentErrorの親クラス
-  rescue_from StandardError, with: :rescue500
 
   def index
     # line_foodsはLineFood.where(active: true)から取得した配列であり、インスタンスである。
@@ -83,15 +81,5 @@ class Api::V1::LineFoodsController < ApplicationController
         active: true
       ))
     end
-  end
-
-  # 例外処理のメソッド
-  # statusを設定しないとHTTPステータスコード200がフロントエンド側に返り、フロント側では通信が正常と見なされてしまうので、必ず設定すること。（）
-  # createとreplaceアクションに対する例外処理
-  def rescue500(error)
-    logger.error error.class
-    logger.error error.message
-    logger.error error.backtrace.join("\n")
-    render json: { ErrorMessage: "#{error.message}が発生しました" }, status: :internal_server_error
   end
 end

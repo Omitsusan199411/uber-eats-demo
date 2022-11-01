@@ -32,3 +32,6 @@ export const REDUCER_POSTING_ACTION = {
   posting: "posting",
   post_success: "post_success",
 };
+
+// Drawerの幅を定数で定義
+export const DRAWER_WIDTH = "260px";

@@ -1,5 +1,5 @@
 // import ライブラリ
-import { VFC, memo } from "react";
+import { VFC, memo, useContext } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { Box, Grid } from "@mui/material";
@@ -13,18 +13,28 @@ import {
   RestaurantsListProps,
 } from "../../../types/api/Restaurant";
 
+// 定数 import
+import { DRAWER_WIDTH } from "../../../constants/constants";
+
 export const RestaurantsList: VFC<RestaurantsListProps> = memo((props) => {
   const { restaurantsList } = props;
+
   return (
-    <Box component="article">
+    <Box
+      component="article"
+      sx={{
+        minHeight: "100vh",
+        p: { xs: "10px", md: "30px" },
+        pt: { xs: "30px" },
+        ml: { xs: "0px", md: `${DRAWER_WIDTH}` },
+      }}
+    >
       <Box
         component="section"
         sx={{
-          maxWidth: "1200px",
           backgroundColor: "basis.light",
-          pb: { xs: "150px", sm: "300px" },
-          pl: { xs: "0px", sm: "0px", md: "50px" },
-          pr: { xs: "0px", sm: "0px", md: "15px" },
+          maxWidth: "1300px",
+          m: "0 auto",
         }}
       >
         <Box

@@ -45,7 +45,6 @@ export const useAuthLineFoodsGet = () => {
             type: REDUCER_FETCHING_ACTION.fetch_success,
             payload: data,
           });
-          throw new Error("lineFoodsDispacth処理に失敗しました");
         } else {
           history.push("/orders/page204");
         }

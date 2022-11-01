@@ -1,46 +1,39 @@
 // import ライブラリ
 import { VFC, memo } from "react";
 import styled from "styled-components";
-import Box from "@mui/material/Box";
+import { Box } from "@mui/material";
 
 // import コンポーネント
 import { Header } from "../organisms/Header";
 import { Footer } from "../organisms/Footer";
-import { SideMenu } from "../organisms/SideMenu";
 import { FoodsList } from "../organisms/foods/FoodsList";
+import { DrawerSideMenu } from "../organisms/DrawerSideMenu";
 
 // import 型
 import { FoodListProps } from "../../types/api/Food";
+import { DrawerProps } from "../../types/drawer/DrawerProps";
 
-export const FoodsAsOneRestaurantLayout: VFC<FoodListProps> = memo((props) => {
-  const { foodsList, setFoodModalState } = props;
-  return (
-    <>
-      <Header />
-      <Main
-        component="main"
-        sx={{
-          display: { xs: "block", md: "flex" },
-          justifyContent: { md: "center" },
-          backgroundColor: "basis.light",
-          pt: "30px",
-          pl: { xs: "0px", sm: "0px", md: "10px" },
-          pr: { xs: "0px", sm: "0px", md: "10px" },
-        }}
-      >
-        <SideMenu />
-        <FoodsList
-          foodsList={foodsList}
-          setFoodModalState={setFoodModalState}
-        />
-      </Main>
-      <Footer />
-    </>
-  );
-});
-
-const Main = styled(Box)`
-  minheight: 100vh;
-  m: 0 auto;
-  pt: 30px;
-`;
+export const FoodsAsOneRestaurantLayout: VFC<FoodListProps & DrawerProps> =
+  memo((props) => {
+    const { foodsList, setFoodModalState, drawerOpen, setDrawerOpen } = props;
+    return (
+      <>
+        <Header drawerOpen={drawerOpen} setDrawerOpen={setDrawerOpen} />
+        <DrawerSideMenu drawerOpen={drawerOpen} setDrawerOpen={setDrawerOpen} />
+        <Box
+          component="main"
+          sx={{
+            minHeight: "100vh",
+            display: "block",
+            backgroundColor: "basis.light",
+          }}
+        >
+          <FoodsList
+            foodsList={foodsList}
+            setFoodModalState={setFoodModalState}
+          />
+        </Box>
+        <Footer />
+      </>
+    );
+  });

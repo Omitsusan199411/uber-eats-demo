@@ -9,18 +9,27 @@ import { FoodsCard } from "../../molecules/foods/FoodsCard";
 // import 型
 import { Food, FoodListProps } from "../../../types/api/Food";
 
+// 定数 import
+import { DRAWER_WIDTH } from "../../../constants/constants";
+
 export const FoodsList: VFC<FoodListProps> = memo((props) => {
   const { foodsList, setFoodModalState } = props;
   return (
-    <Box component="article">
+    <Box
+      component="article"
+      sx={{
+        minHeight: "100vh",
+        p: { xs: "10px", md: "30px" },
+        pt: { xs: "30px" },
+        ml: { xs: "0px", md: `${DRAWER_WIDTH}` },
+      }}
+    >
       <Box
         component="section"
         sx={{
-          maxWidth: "1200px",
           backgroundColor: "basis.light",
-          pb: { xs: "150px", sm: "300px" },
-          pl: { xs: "0px", sm: "0px", md: "50px" },
-          pr: { xs: "0px", sm: "0px", md: "15px" },
+          maxWidth: "1300px",
+          m: "0 auto",
         }}
       >
         <Box

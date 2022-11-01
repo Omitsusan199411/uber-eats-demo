@@ -43,7 +43,6 @@ export const useAuthRestaurants = () => {
           type: REDUCER_FETCHING_ACTION.fetch_success,
           payload: data,
         });
-        throw new Error("dispatchに失敗しました");
       })
       .catch((error) => {
         console.log(error);

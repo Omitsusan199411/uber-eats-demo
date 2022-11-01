@@ -83,6 +83,7 @@ export const Page404Layout: VFC<Page404LayoutProps> = memo((props) => {
       <Snackbar
         open={snackBarOpen}
         anchorOrigin={{ horizontal: "center", vertical: "bottom" }}
+        sx={{ width: "80%", m: "0 auto" }}
       >
         <Alert
           severity="error"

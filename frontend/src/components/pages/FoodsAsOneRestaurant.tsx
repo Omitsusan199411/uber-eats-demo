@@ -55,7 +55,10 @@ export const FoodsAsOneRestaurant: VFC = memo(() => {
   );
   const { isFoodModalOpen, isFoodReplaceModalOpen } = FoodModalState;
 
-  // food一覧を表示
+  // Drawerの開閉ステータス
+  const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
+
+  // カスタムフック（food一覧を表示）
   useEffect(() => {
     fetchFoods(restaurant_id);
   }, [restaurant_id]);
@@ -68,6 +71,8 @@ export const FoodsAsOneRestaurant: VFC = memo(() => {
           <FoodsAsOneRestaurantLayout
             foodsList={foodsList}
             setFoodModalState={setFoodModalState}
+            drawerOpen={drawerOpen}
+            setDrawerOpen={setDrawerOpen}
           />
           <FoodModalContext.Provider
             value={{ FoodModalState, setFoodModalState }}

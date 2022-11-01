@@ -14,6 +14,9 @@ import { FooterTextNavigation } from "../molecules/footer/FooterTextNavigation";
 import { FooterSnsIconsNavigation } from "../molecules/footer/FooterSnsIconsNavigation";
 import { CopyRightText } from "../atoms/texts/CopyRightText";
 
+// 定数 import
+import { DRAWER_WIDTH } from "../../constants/constants";
+
 type BottomNavigationItemData = {
   id: number;
   label: string;
@@ -78,6 +81,8 @@ export const Footer: VFC = memo(() => {
             backgroundColor: "basis.main",
             p: "100px",
             pb: "60px",
+            minWidth: { xs: "100%", md: `calc(100% - ${DRAWER_WIDTH})` },
+            ml: { xs: "0px", md: `${DRAWER_WIDTH}` },
           }}
         >
           <Box component="nav" sx={{ maxWidth: "960px", m: "0 auto" }}>

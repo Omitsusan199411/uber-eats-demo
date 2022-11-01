@@ -39,7 +39,6 @@ export const useAuthOrdersPost = () => {
         ordersDispatch({
           type: REDUCER_POSTING_ACTION.post_success,
         });
-        throw new Error("ordersDispatch処理に失敗しました");
       })
       .catch((error) => {
         console.log(error);
@@ -48,7 +47,6 @@ export const useAuthOrdersPost = () => {
     ordersDispatch({
       type: REDUCER_POSTING_ACTION.posting,
     });
-    throw new Error("ordersDispatch処理に失敗しました");
   }, []);
   return { ordersPost, ordersPostFlag };
 };

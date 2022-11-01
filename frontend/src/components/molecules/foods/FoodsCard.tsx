@@ -28,7 +28,7 @@ export const FoodsCard: VFC<FoodsCardProps> = memo((props) => {
         component="img"
         image={foodImage}
         alt="foodImage"
-        sx={{ maxWidth: "140px" }}
+        sx={{ maxWidth: { xs: "120px", sm: "140px" } }}
       />
       <CardContent sx={{ width: "100%" }}>
         <Typography sx={{ fontSize: "16px" }}>{foodInfo.name}</Typography>

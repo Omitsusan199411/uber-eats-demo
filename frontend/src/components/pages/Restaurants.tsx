@@ -1,5 +1,5 @@
 // ライブラリimport
-import { VFC, memo, useEffect } from "react";
+import { VFC, memo, useEffect, useState } from "react";
 
 // コンポーネントimport
 import { RestaurantsLayout } from "../templates/RestaurantsLayout";
@@ -15,8 +15,10 @@ import { REQUEST_STATE } from "../../constants/constants";
 export const Restaurants: VFC = memo(() => {
   const { fetchRestaurants, restaurantsData } = useAuthRestaurants();
   const { fetchStatus, restaurantsList } = restaurantsData;
+  // Drawerの開閉ステータス
+  const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
 
-  // restaurants情報をapiから取得
+  // カスタムフック(restaurants一覧情報をapiから取得)
   useEffect(() => {
     fetchRestaurants();
   }, []);
@@ -25,7 +27,7 @@ export const Restaurants: VFC = memo(() => {
     <>
       {fetchStatus === REQUEST_STATE.loading && <BackdropCircular />}
       {fetchStatus === REQUEST_STATE.ok && (
-        <RestaurantsLayout restaurantsList={restaurantsList} />
+        <RestaurantsLayout restaurantsList={restaurantsList} drawerOpen={drawerOpen} setDrawerOpen={setDrawerOpen} />
       )}
     </>
   );
