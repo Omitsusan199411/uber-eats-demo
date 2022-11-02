@@ -30,81 +30,52 @@ export const DrawerSideMenu: VFC<DrawerSideMenuProps> = memo((props) => {
   const isWide = useContext(ResponsiveWide);
 
   return (
-    <>
-      {isWide ? (
-        <Drawer
-          anchor={"left"}
-          open={drawerOpen}
-          variant={"temporary"}
-          onClose={() => {
-            setDrawerOpen(!drawerOpen);
-          }}
-          PaperProps={{
-            style: {
-              width: `${DRAWER_WIDTH}`,
-              borderRight: "1px solid #F4F5F7",
-              paddingLeft: "10px",
-              paddingRight: "10px",
-            },
+    <Drawer
+      anchor={"left"}
+      open={isWide ? drawerOpen : true}
+      variant={isWide ? "temporary" : "persistent"}
+      onClose={() => {
+        setDrawerOpen(!drawerOpen);
+      }}
+      PaperProps={{
+        style: {
+          width: `${DRAWER_WIDTH}`,
+          borderRight: "1px solid #F4F5F7",
+          paddingLeft: "10px",
+          paddingRight: "10px",
+        },
+      }}
+    >
+      {isWide && (
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "right",
+            mt: "20px",
+            pb: "10px",
           }}
         >
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "right",
-              mt: "20px",
-              pb: "10px",
+          <BasicIconButton
+            onClick={() => {
+              setDrawerOpen(!drawerOpen);
             }}
+            sx={{ mr: "5px" }}
           >
-            <BasicIconButton
-              onClick={() => {
-                setDrawerOpen(!drawerOpen);
-              }}
-              sx={{ mr: "5px" }}
-            >
-              <ArrowBackIosNewIcon />
-            </BasicIconButton>
-          </Box>
-          <Divider variant="middle" />
-          <List sx={{ mt: "20px", mb: "20px" }}>
-            <ListItem disablePadding sx={{ display: "block" }}>
-              {[...Array.from(Array(12).keys())].map((e: number, i: number) => (
-                <ListItemButton key={i}>
-                  <ListItemText primary={`カテゴリー${e}`}></ListItemText>
-                </ListItemButton>
-              ))}
-            </ListItem>
-          </List>
-          <Divider variant="middle" />
-        </Drawer>
-      ) : (
-        <Drawer
-          anchor={"left"}
-          open={true}
-          variant={"persistent"}
-          PaperProps={{
-            style: {
-              width: `${DRAWER_WIDTH}`,
-              borderRight: "1px solid #F4F5F7",
-              paddingTop: "70px",
-              paddingLeft: "10px",
-              paddingRight: "10px",
-            },
-          }}
-        >
-          <Divider variant="middle" />
-          <List sx={{ mt: "20px", mb: "20px" }}>
-            <ListItem disablePadding sx={{ display: "block" }}>
-              {[...Array.from(Array(40).keys())].map((e: number, i: number) => (
-                <ListItemButton key={i}>
-                  <ListItemText primary={`カテゴリー${e}`}></ListItemText>
-                </ListItemButton>
-              ))}
-            </ListItem>
-          </List>
-          <Divider variant="middle" />
-        </Drawer>
+            <ArrowBackIosNewIcon />
+          </BasicIconButton>
+        </Box>
       )}
-    </>
+      <Divider variant="middle" />
+      <List sx={{ mt: "20px", mb: "20px" }}>
+        <ListItem disablePadding sx={{ display: "block" }}>
+          {[...Array.from(Array(40).keys())].map((e: number, i: number) => (
+            <ListItemButton key={i}>
+              <ListItemText primary={`カテゴリー${e}`}></ListItemText>
+            </ListItemButton>
+          ))}
+        </ListItem>
+      </List>
+      <Divider variant="middle" />
+    </Drawer>
   );
 });

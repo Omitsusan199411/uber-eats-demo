@@ -13,15 +13,14 @@ export const Home: VFC = memo(() => {
   return (
     <>
       <Header drawerOpen={drawerOpen} setDrawerOpen={setDrawerOpen} />
+      <DrawerSideMenu drawerOpen={drawerOpen} setDrawerOpen={setDrawerOpen} />
       <Box
         component="main"
         sx={{
           backgroundColor: "basis.light",
           minHeight: "100vh",
         }}
-      >
-        <DrawerSideMenu drawerOpen={drawerOpen} setDrawerOpen={setDrawerOpen} />
-      </Box>
+      ></Box>
       <Footer />
     </>
   );

@@ -11,7 +11,7 @@ import "./App.css";
 import "./GoogleFonts.css";
 import { MaterialUiTheme } from "./theme/MaterialUiTheme";
 
-export const ResponsiveWide = createContext(true);
+export const ResponsiveWide = createContext<boolean>(true);
 
 export const App: VFC = () => {
   const isWide: boolean = useMediaQuery({
