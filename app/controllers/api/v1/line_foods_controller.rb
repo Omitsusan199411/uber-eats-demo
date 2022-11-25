@@ -11,7 +11,7 @@ class Api::V1::LineFoodsController < ApplicationController
       render json: {
         # mapメソッドで特定のカラムを抽出し、配列で返す。
         # 以下は、「line_food_ids: line_foods.map { |line_food| line_food.id }」「amount: line_foods.sum { |line_food| line_food.total_amount }」と言う意味。
-        line_food_ids: line_foods.map(&:id),
+        lineFoodIds: line_foods.map(&:id),
         restaurant: line_foods[0].restaurant,
         count: line_foods.sum { |line_food| line_food[:count] },
         amount: line_foods.sum(&:total_amount)
@@ -27,8 +27,8 @@ class Api::V1::LineFoodsController < ApplicationController
     # LineFoodテーブルにactive: trueであり、かつordered_food以外のレストランIDが存在した場合で分岐させる
     if LineFood.active.other_restaurant(@ordered_food.restaurant.id).exists?
       return render json: {
-        existing_restaurant: LineFood.active.other_restaurant(@ordered_food.restaurant.id).first.restaurant.name,
-        new_restaurant: Food.find(params[:food_id]).restaurant.name
+        existingRestaurant: LineFood.active.other_restaurant(@ordered_food.restaurant.id).first.restaurant.name,
+        newRestaurant: Food.find(params[:food_id]).restaurant.name
       }, status: :not_acceptable
       # HTTPステータスコード406はnot_acceptableで指定されたフォーマットで返せない場合
     end
