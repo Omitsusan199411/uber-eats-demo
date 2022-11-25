@@ -20,7 +20,7 @@ PreCommit:
     enabled: true
     command: ["bundle", "exec", "rubocop", "-c", "./.rubocop.yml"]
     on_warn: fail # Treat all warnings as failures
-  ESLint:
+  EsLint:
     enabled: true
     required_executable: "npm"
     command: ["npm", "run", "lint"]
@@ -29,6 +29,8 @@ PostCheckout:
     enabled: true
   NpmInstall:
     enabled: true
+    required_executable: "npm"
+    command: ["npm", "install"]
 #
 #  TrailingWhitespace:
 #    enabled: true
