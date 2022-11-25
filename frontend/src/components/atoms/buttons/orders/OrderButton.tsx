@@ -1,13 +1,13 @@
 // ライブラリ import
-import { VFC, memo } from "react";
-import SendIcon from "@mui/icons-material/Send";
-import Box from "@mui/material/Box";
+import { VFC, memo } from 'react';
+import SendIcon from '@mui/icons-material/Send';
+import Box from '@mui/material/Box';
 
 // コンポーネント import
-import { BasicButton } from "../BasicButton";
+import { BasicButton } from '../BasicButton';
 
 // 型 import
-import { OrderButtonProps } from "../../../../types/api/Order";
+import { OrderButtonProps } from '../../../../types/api/Order';
 
 export const OrderButton: VFC<OrderButtonProps> = memo((props) => {
   const { lineFoodIds, ordersPost } = props;
@@ -15,12 +15,12 @@ export const OrderButton: VFC<OrderButtonProps> = memo((props) => {
     <BasicButton
       variant="contained"
       color="basis"
-      startIcon={<SendIcon sx={{ mr: "4px" }} />}
+      startIcon={<SendIcon sx={{ mr: '4px' }} />}
       sx={{
-        color: "primary.main",
-        width: "100%",
-        mt: "23px",
-        ml: { xs: "0px", sm: "15px" },
+        color: 'primary.main',
+        width: '100%',
+        mt: '23px',
+        ml: { xs: '0px', sm: '15px' }
       }}
       // onClickは関数型でないといけない。void型ではいけない。関数()の場合実行結果が返ってくるので注意
       onClick={() => {
@@ -29,9 +29,9 @@ export const OrderButton: VFC<OrderButtonProps> = memo((props) => {
     >
       <Box
         sx={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center'
         }}
       >
         <Box>注文を確定</Box>

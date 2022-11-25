@@ -1,5 +1,5 @@
 // ライブラリ import
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction } from 'react';
 
 export type DrawerProps = {
   drawerOpen: boolean;

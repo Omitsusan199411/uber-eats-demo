@@ -1,12 +1,12 @@
 // ライブラリ import
-import { VFC, memo, useContext } from "react";
-import SendIcon from "@mui/icons-material/Send";
+import { VFC, memo, useContext } from 'react';
+import SendIcon from '@mui/icons-material/Send';
 
 // コンポーネント imort
-import { BasicButton } from "../BasicButton";
+import { BasicButton } from '../BasicButton';
 
 // createContext import
-import { FoodModalContext } from "../../../pages/FoodsAsOneRestaurant";
+import { FoodModalContext } from '../../../../contexts/foods/foodModalContext';
 
 export const FoodReplaceModalCancelButton: VFC = memo(() => {
   const { setFoodModalState } = useContext(FoodModalContext);
@@ -16,16 +16,16 @@ export const FoodReplaceModalCancelButton: VFC = memo(() => {
       variant="contained"
       startIcon={<SendIcon />}
       sx={{
-        width: "90%",
-        m: "15px",
-        mb: "5px",
-        ml: { xs: "8px" },
-        p: "8px",
-        pl: "15px",
-        pr: "20px",
-        color: "basis.main",
-        border: "2px solid",
-        borderColor: "basis.main",
+        width: '90%',
+        m: '15px',
+        mb: '5px',
+        ml: { xs: '8px' },
+        p: '8px',
+        pl: '15px',
+        pr: '20px',
+        color: 'basis.main',
+        border: '2px solid',
+        borderColor: 'basis.main'
       }}
       onClick={() => {
         setFoodModalState({
@@ -33,8 +33,8 @@ export const FoodReplaceModalCancelButton: VFC = memo(() => {
           isFoodReplaceModalOpen: false,
           selectedFood: {},
           selectedFoodCount: 1,
-          existingRestaurant: "",
-          newRestaurant: "",
+          existingRestaurant: '',
+          newRestaurant: ''
         });
       }}
     >

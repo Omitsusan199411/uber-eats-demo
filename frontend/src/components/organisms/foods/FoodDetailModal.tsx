@@ -1,22 +1,22 @@
 // ライブラリ import
-import { memo, VFC, useContext, useCallback } from "react";
-import Box from "@mui/material/Box";
-import Dialog from "@mui/material/Dialog";
-import DialogTitle from "@mui/material/DialogTitle";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogActions from "@mui/material/DialogActions";
+import { memo, VFC, useContext, useCallback } from 'react';
+import Box from '@mui/material/Box';
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogActions from '@mui/material/DialogActions';
 
 // コンポーネント import
-import { FoodDetailModalCloseButton } from "../../atoms/buttons/foods/FoodDetailModalCloseButton";
-import { FoodLineRegistButton } from "../../atoms/buttons/foods/FoodLineRegistButton";
-import { FoodCountForm } from "../../molecules/form/FoodCountForm";
+import { FoodDetailModalCloseButton } from '../../atoms/buttons/foods/FoodDetailModalCloseButton';
+import { FoodLineRegistButton } from '../../atoms/buttons/foods/FoodLineRegistButton';
+import { FoodCountForm } from '../../molecules/form/FoodCountForm';
 
 // 画像 import
-import foodModalImage from "../../../images/foods/food-image.jpg";
+import foodModalImage from '../../../images/foods/food-image.jpg';
 
 // createContext import
-import { FoodModalContext } from "../../pages/FoodsAsOneRestaurant";
+import { FoodModalContext } from '../../../contexts/foods/foodModalContext';
 
 export const FoodDetailModal: VFC = memo(() => {
   const { FoodModalState, setFoodModalState } = useContext(FoodModalContext);
@@ -29,15 +29,15 @@ export const FoodDetailModal: VFC = memo(() => {
   const CountUp = useCallback((): void => {
     setFoodModalState({
       ...FoodModalState,
-      selectedFoodCount: FoodModalState.selectedFoodCount + 1,
+      selectedFoodCount: FoodModalState.selectedFoodCount + 1
     });
-  }, [FoodModalState]);
+  }, [setFoodModalState, FoodModalState]);
   const CountDown = useCallback((): void => {
     setFoodModalState({
       ...FoodModalState,
-      selectedFoodCount: FoodModalState.selectedFoodCount - 1,
+      selectedFoodCount: FoodModalState.selectedFoodCount - 1
     });
-  }, [FoodModalState]);
+  }, [setFoodModalState, FoodModalState]);
 
   return (
     <Dialog
@@ -48,22 +48,18 @@ export const FoodDetailModal: VFC = memo(() => {
           isFoodReplaceModalOpen: false,
           selectedFood: {},
           selectedFoodCount: 1,
-          existingRestaurant: "",
-          newRestaurant: "",
+          existingRestaurant: '',
+          newRestaurant: ''
         });
       }}
     >
       <FoodDetailModalCloseButton />
-      <Box
-        component="img"
-        src={`${foodModalImage}`}
-        alt="Food ModalImage"
-      ></Box>
+      <Box component="img" src={`${foodModalImage}`} alt="Food ModalImage" />
       <DialogTitle>{selectedFood?.name}</DialogTitle>
       <DialogContent>
         <DialogContentText>{selectedFood?.description}</DialogContentText>
       </DialogContent>
-      <DialogActions sx={{ justifyContent: "space-between", pt: "25px" }}>
+      <DialogActions sx={{ justifyContent: 'space-between', pt: '25px' }}>
         <FoodCountForm CountUp={CountUp} CountDown={CountDown} />
         <FoodLineRegistButton />
       </DialogActions>

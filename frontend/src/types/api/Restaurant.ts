@@ -3,7 +3,7 @@ export type Restaurant = {
   id: number;
   name: string;
   fee: number;
-  time_required: number;
+  timeRequired: number;
 };
 
 // api通信 lineFoods型定義

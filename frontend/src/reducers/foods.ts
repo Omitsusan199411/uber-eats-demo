@@ -1,26 +1,23 @@
 // 型import
-import { FoodsReducerActionType, FoodsStateType } from "../types/api/Food";
+import { FoodsReducerActionType, FoodsStateType } from '../types/api/Food';
 
 // 定数import
-import { REQUEST_STATE, REDUCER_FETCHING_ACTION } from "../constants/constants";
+import { REQUEST_STATE, REDUCER_FETCHING_ACTION } from '../constants/constants';
 
-export const foodsReducer = (
-  foodsData: FoodsStateType,
-  action: FoodsReducerActionType
-) => {
+export const foodsReducer = (foodsData: FoodsStateType, action: FoodsReducerActionType) => {
   switch (action.type) {
-    case REDUCER_FETCHING_ACTION.fetching:
+    case REDUCER_FETCHING_ACTION.FETCHING:
       return {
         ...foodsData,
-        fetchStatus: REQUEST_STATE.loading,
+        fetchStatus: REQUEST_STATE.LOADING
       };
-    case REDUCER_FETCHING_ACTION.fetch_success:
+    case REDUCER_FETCHING_ACTION.FETCH_SUCCESS:
       return {
         ...foodsData,
-        fetchStatus: REQUEST_STATE.ok,
-        foodsList: action.payload,
+        fetchStatus: REQUEST_STATE.OK,
+        foodsList: action.payload
       };
     default:
-      throw new Error("フード情報を取得できませんでした");
+      throw new Error('フード情報を取得できませんでした');
   }
 };

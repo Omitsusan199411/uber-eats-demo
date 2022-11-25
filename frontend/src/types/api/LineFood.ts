@@ -1,5 +1,5 @@
 // 型 import
-import { Restaurant } from "./Restaurant";
+import { Restaurant } from './Restaurant';
 
 export type LineFood = {
   food_id: number;
@@ -11,7 +11,7 @@ export type LineFood = {
 
 // api通信 lineFoodListの型
 export type LineFoodsList = {
-  line_food_ids: number[];
+  lineFoodIds: number[];
   restaurant: Restaurant;
   count: number;
   amount: number;

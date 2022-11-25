@@ -1,11 +1,11 @@
 // ライブラリ import
-import { VFC, memo, useState } from "react";
-import Box from "@mui/material/Box";
+import { VFC, memo, useState } from 'react';
+import Box from '@mui/material/Box';
 
 // コンポーネント import
-import { Header } from "../organisms/Header";
-import { Footer } from "../organisms/Footer";
-import { DrawerSideMenu } from "../organisms/DrawerSideMenu";
+import { Header } from '../organisms/Header';
+import { Footer } from '../organisms/Footer';
+import { DrawerSideMenu } from '../organisms/DrawerSideMenu';
 
 export const Home: VFC = memo(() => {
   // Drawerの開閉ステータス
@@ -17,10 +17,10 @@ export const Home: VFC = memo(() => {
       <Box
         component="main"
         sx={{
-          backgroundColor: "basis.light",
-          minHeight: "100vh",
+          backgroundColor: 'basis.light',
+          minHeight: '100vh'
         }}
-      ></Box>
+      />
       <Footer />
     </>
   );

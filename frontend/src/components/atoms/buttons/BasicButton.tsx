@@ -1,23 +1,8 @@
 // ライブラリ import
-import { memo, VFC } from "react";
+import { memo, VFC } from 'react';
 // ButtonTypeMapはMaterial-uiがデフォルトで用意しているButtonタグの型定義（node_modules/@mui/material/Button/Button.d.ts）
-import Button, { ButtonProps } from "@mui/material/Button";
-import styled from "styled-components";
-
-export const BasicButton: VFC<ButtonProps> = memo((props) => {
-  const { color, variant, startIcon, sx, onClick, children } = props;
-  return (
-    <CustomBasicButton
-      color={color}
-      variant={variant}
-      startIcon={startIcon}
-      sx={sx}
-      onClick={onClick}
-    >
-      {children}
-    </CustomBasicButton>
-  );
-});
+import Button, { ButtonProps } from '@mui/material/Button';
+import styled from 'styled-components';
 
 const CustomBasicButton = styled(Button)`
   &:hover {
@@ -25,3 +10,12 @@ const CustomBasicButton = styled(Button)`
     cursor: pointer;
   }
 `;
+
+export const BasicButton: VFC<ButtonProps> = memo((props) => {
+  const { color, variant, startIcon, sx, onClick, children } = props;
+  return (
+    <CustomBasicButton color={color} variant={variant} startIcon={startIcon} sx={sx} onClick={onClick}>
+      {children}
+    </CustomBasicButton>
+  );
+});

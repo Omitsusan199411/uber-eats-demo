@@ -1,5 +1,5 @@
 // ライブラリimport
-import { ReactNode } from "react";
+import { ReactNode } from 'react';
 
 export type MainTextType = {
   children: ReactNode;

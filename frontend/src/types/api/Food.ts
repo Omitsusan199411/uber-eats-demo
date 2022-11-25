@@ -1,9 +1,9 @@
 // ライブラリ import
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction } from 'react';
 
 // 型 import
-import { EmptyObject } from "../../types/object/EmptyObject";
-import { Restaurant } from "./Restaurant";
+import { EmptyObject } from '../object/EmptyObject';
+import { Restaurant } from './Restaurant';
 
 // Food型定義
 export type Food = {
@@ -46,8 +46,8 @@ export type FoodModal = {
   isFoodReplaceModalOpen: boolean;
   selectedFood: Food | EmptyObject;
   selectedFoodCount: number;
-  existingRestaurant: string | null;
-  newRestaurant: string | null;
+  existingRestaurant: string;
+  newRestaurant: string;
 };
 
 // FoodListコンポーネントに渡すpropsの型

@@ -1,10 +1,10 @@
-import { Orders } from "../components/pages/Orders";
+import { Orders } from '../components/pages/Orders';
 
 export const ordersRouter = [
   {
     id: 1,
-    path: "/",
+    path: '/',
     exact: true,
-    children: <Orders />,
-  },
+    children: <Orders />
+  }
 ];

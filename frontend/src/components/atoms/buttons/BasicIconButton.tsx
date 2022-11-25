@@ -1,7 +1,14 @@
 // ライブラリ import
-import { VFC, memo } from "react";
-import IconButton, { IconButtonProps } from "@mui/material/IconButton";
-import styled from "styled-components";
+import { VFC, memo } from 'react';
+import IconButton, { IconButtonProps } from '@mui/material/IconButton';
+import styled from 'styled-components';
+
+const CustomBasicIconButton = styled(IconButton)`
+  &:hover {
+    opacity: 0.7;
+    cursor: pointer;
+  }
+`;
 
 export const BasicIconButton: VFC<IconButtonProps> = memo((props) => {
   const { onClick, sx, disabled, children } = props;
@@ -11,10 +18,3 @@ export const BasicIconButton: VFC<IconButtonProps> = memo((props) => {
     </CustomBasicIconButton>
   );
 });
-
-const CustomBasicIconButton = styled(IconButton)`
-  &:hover {
-    opacity: 0.7;
-    cursor: pointer;
-  }
-`;

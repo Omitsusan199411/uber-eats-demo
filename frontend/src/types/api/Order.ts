@@ -1,8 +1,8 @@
 // ライブラリ import
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction } from 'react';
 
 // 型 import
-import { LineFoodsList } from "./LineFood";
+import { LineFoodsList } from './LineFood';
 
 // api restaurants ReducerAction型定義
 export type OrderReducerActionType = {
@@ -12,7 +12,6 @@ export type OrderReducerActionType = {
 // 注文確定画面のモーダルに渡すPropsを定義
 export type OrderModalProps = {
   lineFoodsList: LineFoodsList;
-  postStatus: string;
   ordersPost: (ids: number[]) => void;
   orderModalFlagState: boolean;
   setOrderModalFlagState: Dispatch<SetStateAction<boolean>>;
