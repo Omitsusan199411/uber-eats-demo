@@ -13,7 +13,7 @@ type CountDownProps = {
 
 export const CountDownButton: VFC<CountDownProps> = memo((props) => {
   const { CountDown, isDisabled } = props;
-  console.log('aaa');
+  console.log(a);
   return (
     <BasicIconButton onClick={CountDown} disabled={isDisabled} sx={{ p: '15px' }}>
       <RemoveCircleIcon fontSize="large" sx={{ color: '#aaaaaa' }} />
