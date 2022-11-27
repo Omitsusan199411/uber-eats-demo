@@ -68,6 +68,11 @@
     "not ie <= 11",
     "not op_mini all"
   ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
   "lint-staged": {
     "src/**/*.{js,ts,jsx,tsx}": "eslint --ext 'src/**/*.{js,jsx,ts,tsx}'"
   }
