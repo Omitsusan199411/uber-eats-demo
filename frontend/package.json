@@ -69,6 +69,6 @@
     "not op_mini all"
   ],
   "lint-staged": {
-    "*.{js,ts,jsx,tsx}": "eslint --ext"
+    "src/**/*.{js,ts,jsx,tsx}": "eslint --ext"
   }
 }
