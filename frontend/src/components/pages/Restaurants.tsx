@@ -1,105 +1,34 @@
 // ライブラリimport
-import { VFC, memo, useEffect } from "react";
-import styled from "styled-components";
-import { Link } from "react-router-dom";
-import { Box, Skeleton } from "@mui/material";
+import { VFC, memo, useEffect, useState } from 'react';
 
 // コンポーネントimport
-import { MainText } from "../atoms/texts/MainText";
-import { SubText } from "../atoms/texts/SubText";
-import { Header } from "../templates/Header";
-
-// 型import
-import { Restaurant } from "../../types/api/Restaurant";
+import { RestaurantsLayout } from '../templates/RestaurantsLayout';
+import { BackdropCircular } from '../organisms/BackdropCircular';
 
 // カスタムフックimport
 // restaurantsのapi
-import { useAuthRestaurants } from "../../hooks/api/useAuthRestaurants";
-
-// 画像import
-import MainCoverRestaurantImage from "../../images/restaurants/brooke-lark-M4E7X3z80PQ-unsplash.jpg";
-import RestaurantImage from "../../images/restaurants/restaurant-image.jpg";
+import { useAuthRestaurants } from '../../hooks/api/useAuthRestaurants';
 
 // 定数 import
-import { REQUEST_STATE } from "../../constants/constants";
+import { REQUEST_STATE } from '../../constants/constants';
 
 export const Restaurants: VFC = memo(() => {
   const { fetchRestaurants, restaurantsData } = useAuthRestaurants();
+  const { fetchStatus, restaurantsList } = restaurantsData;
+  // Drawerの開閉ステータス
+  const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
 
-  // restaurants情報をapiから取得
+  // カスタムフック(restaurants一覧情報をapiから取得)
   useEffect(() => {
     fetchRestaurants();
   }, []);
 
   return (
     <>
-      <Header />
-      <Box
-        component="img"
-        src={MainCoverRestaurantImage}
-        alt="main cover"
-        sx={{
-          display: { xs: "none", sm: "none", md: "block" },
-          width: "100vw",
-          aspectRatio: "3/2",
-          pt: "60px",
-        }}
-      />
-      <RestaurantsContentList>
-        {restaurantsData.fetchStatus === REQUEST_STATE.loading ? (
-          <>
-            <Skeleton
-              variant="rectangular"
-              animation="wave"
-              width={450}
-              height={300}
-            />
-            <Skeleton
-              variant="rectangular"
-              animation="wave"
-              width={450}
-              height={300}
-            />
-            <Skeleton
-              variant="rectangular"
-              animation="wave"
-              width={450}
-              height={300}
-            />
-          </>
-        ) : (
-          restaurantsData.restaurantsList.map(
-            (restaurant: Restaurant, index: number) => (
-              <Link
-                to={`/restaurants/${restaurant.id}/foods`}
-                key={index}
-                style={{ textDecoration: "none" }}
-              >
-                <RestaurantsContentWrapper>
-                  <RestaurantsImageNode src={RestaurantImage} />
-                  <MainText>{restaurant.name}</MainText>
-                  <SubText>{`配送料:${restaurant.fee}円 ${restaurant.time_required}分`}</SubText>
-                </RestaurantsContentWrapper>
-              </Link>
-            )
-          )
-        )}
-      </RestaurantsContentList>
+      {fetchStatus === REQUEST_STATE.LOADING && <BackdropCircular />}
+      {fetchStatus === REQUEST_STATE.OK && (
+        <RestaurantsLayout restaurantsList={restaurantsList} drawerOpen={drawerOpen} setDrawerOpen={setDrawerOpen} />
+      )}
     </>
   );
 });
-
-const RestaurantsContentList = styled.div`
-  display: flex;
-  justify-content: space-around;
-`;
-
-const RestaurantsContentWrapper = styled.div`
-  width: 450px;
-  height: 300px;
-  padding: 48px;
-`;
-
-const RestaurantsImageNode = styled.img`
-  width: 100%;
-`;

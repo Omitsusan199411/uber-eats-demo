@@ -1,5 +1,9 @@
+// ライブラリ import
+import { Dispatch, SetStateAction } from 'react';
+
 // 型 import
-import { EmptyObject } from "../../types/object/EmptyObject";
+import { EmptyObject } from '../object/EmptyObject';
+import { Restaurant } from './Restaurant';
 
 // Food型定義
 export type Food = {
@@ -16,15 +20,18 @@ export type FoodsCardProps = {
   onClickFood: () => void;
 };
 
-// api(Getメソッド)通信で取得するfoodsStateの型定義
+// ある店舗のFoods一覧を取得する際に店舗情報も付与してReactに返す
+export type FoodIncludeRestaurant = Food & { restaurant: Restaurant };
+
+// api(Getメソッド)通信で取得するfoodsStateの型定義（店舗情報を含ませ配列で返す）
 export type FoodsStateType = {
   fetchStatus: string;
-  foodsList: Food[];
+  foodsList: FoodIncludeRestaurant[];
 };
 
 // api(Getメソッド)通信 foods ReducerAction型定義
 export type FoodsReducerActionType = {
-  payload: Food[];
+  payload: FoodIncludeRestaurant[];
   type: string;
 };
 
@@ -39,8 +46,14 @@ export type FoodModal = {
   isFoodReplaceModalOpen: boolean;
   selectedFood: Food | EmptyObject;
   selectedFoodCount: number;
-  existingRestaurant: string | null;
-  newRestaurant: string | null;
+  existingRestaurant: string;
+  newRestaurant: string;
+};
+
+// FoodListコンポーネントに渡すpropsの型
+export type FoodListProps = {
+  foodsList: FoodIncludeRestaurant[];
+  setFoodModalState: Dispatch<SetStateAction<FoodModal>>;
 };
 
 // api（Postメソッド）通信 foods axiosリクエスト型定義
@@ -53,4 +66,10 @@ export type FoodPostRequest = {
 export type NewFoodReplace = {
   isOpen: boolean;
   newReplaceSelectedFood: Food | EmptyObject;
+};
+
+// FoodCountFormに渡すpropsの型（商品数量を確定するフォーム）
+export type FoodCountFormProps = {
+  CountUp: () => void;
+  CountDown: () => void;
 };

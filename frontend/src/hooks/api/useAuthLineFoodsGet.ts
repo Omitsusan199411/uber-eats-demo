@@ -1,48 +1,50 @@
 // ライブラリ import
-import { useCallback, useReducer } from "react";
-import axios, { AxiosResponse } from "axios";
+import { useCallback, useReducer } from 'react';
+import { useHistory } from 'react-router-dom';
+import axios, { AxiosResponse } from 'axios';
 
 // コンポーネント import
-import { lineFoodsReducer } from "../../reducers/lineFoods";
+import { lineFoodsReducer } from '../../reducers/lineFoods';
 
 // 型 import
-import { LineFoodsStateType, LineFoodsList } from "../../types/api/LineFood";
+import { LineFoodsStateType, LineFoodsList } from '../../types/api/LineFood';
 
 // URL import
-import { lineFoods } from "../../urls/urlApi";
+import { lineFoods } from '../../urls/urlApi';
 
 // 定数 import
-import {
-  REQUEST_STATE,
-  REDUCER_FETCHING_ACTION,
-} from "../../constants/constants";
+import { REQUEST_STATE, REDUCER_FETCHING_ACTION, HTTP_STATUS_CODE } from '../../constants/constants';
 
 export const useAuthLineFoodsGet = () => {
   const initialLineFoodsGetState: LineFoodsStateType = {
-    fetchStatus: REQUEST_STATE.initial,
-    lineFoodsList: {} as LineFoodsList,
+    fetchStatus: REQUEST_STATE.INITIAL,
+    lineFoodsList: {} as LineFoodsList
   };
-  const [lineFoodsGetData, lineFoodsDispatch] = useReducer(
-    lineFoodsReducer,
-    initialLineFoodsGetState
-  );
+  const [lineFoodsGetData, lineFoodsDispatch] = useReducer(lineFoodsReducer, initialLineFoodsGetState);
+
+  const history = useHistory();
 
   const lineFoodsGet = useCallback((): void => {
     lineFoodsDispatch({
-      type: REDUCER_FETCHING_ACTION.fetching,
-      payload: {} as LineFoodsList,
+      type: REDUCER_FETCHING_ACTION.FETCHING,
+      payload: {} as LineFoodsList
     });
     axios
       .get<LineFoodsList>(`${lineFoods}`)
       .then((res: AxiosResponse<LineFoodsList>) => {
         const { data } = res;
-        lineFoodsDispatch({
-          type: REDUCER_FETCHING_ACTION.fetch_success,
-          payload: data,
-        });
+        if (res.status === HTTP_STATUS_CODE.OK) {
+          lineFoodsDispatch({
+            type: REDUCER_FETCHING_ACTION.FETCH_SUCCESS,
+            payload: data
+          });
+        } else {
+          history.push('/orders/page204');
+        }
       })
       .catch((error) => {
-        throw new Error(error);
+        console.log(error); // eslint-disable-line no-console
+        history.push('/page500');
       });
   }, []);
   return { lineFoodsGet, lineFoodsGetData };
