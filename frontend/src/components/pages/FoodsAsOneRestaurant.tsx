@@ -52,7 +52,7 @@ export const FoodsAsOneRestaurant: VFC = memo(() => {
   // カスタムフック（food一覧を表示）
   useEffect(() => {
     fetchFoods(restaurantId);
-  }, [restaurantId]);
+  }, []);
 
   return (
     <>

@@ -38,7 +38,7 @@
   "ignorePatterns": ["build"], // 追加 .eslintignoreに対象外にしているが無いとコンパイルに時間がかかる
   // rulesは個別の解析ルールを設定する（ルールのレベル off,warn,error）
   "rules": {
-    "react-hooks/exhaustive-deps": "error", // react-hooksでの依存配列チェック機能をoff
+    "react-hooks/exhaustive-deps": "off", // react-hooksでの依存配列チェック機能をoff
     "@typescript-eslint/no-unsafe-assignment": "off", // any型の割り当てを許可
     "@typescript-eslint/no-unsafe-member-access": "off", // any型へのアクセスを許可
     "@typescript-eslint/no-use-before-define": "error", // typescript側のno-use-before-defineを使うようにする

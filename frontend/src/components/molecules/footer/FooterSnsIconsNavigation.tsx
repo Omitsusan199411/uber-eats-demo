@@ -43,7 +43,6 @@ const footerSnsIcons: FooterSnsIconsData[] = [
   }
 ];
 
-
 const ListItemCustom = styled(ListItem)`
   width: '100%';
   justify-content: center;
@@ -69,4 +68,3 @@ export const FooterSnsIconsNavigation: VFC = memo(() => (
     ))}
   </List>
 ));
-
