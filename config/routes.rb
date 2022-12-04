@@ -11,6 +11,12 @@ Rails.application.routes.draw do
       resources :line_foods, only: [:index, :create]
       put 'line_foods/replace', to: 'line_foods#replace'
       resources :orders, only: [:create]
+
+      # sign_up、sign_in用のルーティング
+      post '/sign_up', to: 'registrations#sign_up'
+      post '/sign_in', to: 'sessions#sign_in'
+      delete '/sign_out', to: 'sessions#sign_out'
+      get '/logged_in', to: 'sessions#logged_in?' # フロントエンド側でログインの追跡を行う
     end
   end
 end

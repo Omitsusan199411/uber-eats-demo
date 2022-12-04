@@ -3,6 +3,7 @@ class LineFood < ApplicationRecord
   belongs_to :food
   belongs_to :restaurant
   belongs_to :order, optional: true
+  belogs_to :user
 
   validates :count, numericality: { greater_than: 0 }
   # 一意な複合キーのバリデーション（アプリケーション側でチェック。DB側のチェックはmigrationで記述している）

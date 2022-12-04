@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_04_165015) do
+ActiveRecord::Schema.define(version: 2022_12_04_143035) do
 
   create_table "foods", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "restaurant_id", null: false
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 2022_02_04_165015) do
     t.bigint "food_id", null: false
     t.bigint "restaurant_id", null: false
     t.bigint "order_id"
+    t.bigint "user_id", null: false
     t.integer "count", default: 0, null: false
     t.boolean "active", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
@@ -34,6 +35,7 @@ ActiveRecord::Schema.define(version: 2022_02_04_165015) do
     t.index ["food_id"], name: "index_line_foods_on_food_id"
     t.index ["order_id"], name: "index_line_foods_on_order_id"
     t.index ["restaurant_id"], name: "index_line_foods_on_restaurant_id"
+    t.index ["user_id"], name: "index_line_foods_on_user_id"
   end
 
   create_table "orders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
@@ -46,6 +48,14 @@ ActiveRecord::Schema.define(version: 2022_02_04_165015) do
     t.string "name", null: false
     t.integer "fee", null: false
     t.integer "time_required", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.string "email", null: false
+    t.string "name", limit: 12, null: false
+    t.string "password_digest", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
