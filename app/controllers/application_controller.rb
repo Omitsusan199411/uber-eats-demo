@@ -1,5 +1,7 @@
 class ApplicationController < ActionController::API
   before_action :fake_load
+  # Railsがトークン認証しないようにするため
+  skip_before_action :verify_authenticity_token
   # StandardErrorはNoMethodErrorやArgumentErrorの親クラス
   rescue_from StandardError, with: :rescue500
 

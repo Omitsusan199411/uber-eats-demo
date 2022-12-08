@@ -6,7 +6,7 @@ class Api::V1::RegistrationsController < ApplicationController
       login!
       render json: { user: @user, status: :created }
     else
-      render json: { error: "ユーザー登録に失敗しました", status: :internal_server_error }
+      render json: { error: "ユーザー登録に失敗しました" }, status: :internal_server_error
     end
   end
 
