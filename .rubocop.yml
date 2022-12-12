@@ -51,3 +51,6 @@ Metrics/MethodLength:
 
 Layout/LineLength:
   Enabled: false
+
+Naming/VariableNumber:
+  Enabled: false

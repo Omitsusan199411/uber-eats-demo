@@ -1,8 +1,9 @@
 class Api::V1::SessionsController < ApplicationController
   def sign_in
     @user = User.find_by(email: session_params[:email])
-    if @user && @user.authenticate(session_params[:password])
-      @user.login!
+    if @user&.authenticate(session_params[:password])
+      # login!rのレシーバはApi::V1::SessionsControllerのインスタンス(sessions_helper.rbのSessionsHelperモジュールからinclude)
+      login!
       render json: { logged_in: true, user: @user }, status: :created
     else
       render json: { errors: ['認証に失敗しました', '正しいメールアドレス・パスワードを入力し直すか、新規登録を行ってください。'] }, status: :unauthorized
@@ -15,7 +16,8 @@ class Api::V1::SessionsController < ApplicationController
   end
 
   def logged_in?
-    if @user.current_user
+    # current_userのレシーバはApi::V1::SessionsControllerのインスタンス(sessions_helper.rbのSessionsHelperモジュールからinclude)
+    if current_user
       render json: { logged_in: true, user: @current_user }
     else
       render json: { logged_in: false, message: 'ユーザーが存在しません' }
@@ -25,6 +27,6 @@ class Api::V1::SessionsController < ApplicationController
   private
 
   def session_params
-    params.permit(:email, :password )
+    params.permit(:email, :password)
   end
 end
