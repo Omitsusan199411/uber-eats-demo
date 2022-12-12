@@ -16,3 +16,12 @@ export const lineFoodsReplace = `${DEFALUT_API_URL}/line_foods/replace`;
 
 // api/v1/orders
 export const orders = `${DEFALUT_API_URL}/orders`;
+
+// api/v1/registrations/#sign_uo
+export const usersSignUpUrl = `${DEFALUT_API_URL}/sign_up`;
+
+// api/v1/sessions/#sign_in
+export const usersSignInUrl = `${DEFALUT_API_URL}/sign_in`;
+
+// api/v1/sessions/sign_out
+export const usersSignOutUrl = `${DEFALUT_API_URL}/sign_out`;
