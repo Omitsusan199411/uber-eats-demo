@@ -38,6 +38,7 @@
   "ignorePatterns": ["build"], // 追加 .eslintignoreに対象外にしているが無いとコンパイルに時間がかかる
   // rulesは個別の解析ルールを設定する（ルールのレベル off,warn,error）
   "rules": {
+    "react/jsx-props-no-spreading": "off", // propsをスプレッド構文で展開し、子コンポーネントに渡す
     "no-console": "off",
     "react-hooks/exhaustive-deps": "off", // react-hooksでの依存配列チェック機能をoff
     "@typescript-eslint/no-unsafe-assignment": "off", // any型の割り当てを許可

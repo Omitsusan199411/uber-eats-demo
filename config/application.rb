@@ -35,6 +35,7 @@ module UberEatsDemo
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
 
+    # CSRF対策のチェックを行うかを指定する。5.2以降のデフォルト設定を読み込むとtrueになる
     config.action_controller.default_protect_from_forgery = true
   end
 end
