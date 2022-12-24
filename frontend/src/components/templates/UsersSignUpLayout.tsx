@@ -6,9 +6,6 @@ import { Stack, TextField, Button } from '@mui/material';
 // type import
 import { UserSignUpPageParams } from '../../types/api/User';
 
-// バリデーションルール import
-import { validationRules } from '../../validates/users/usersSignUpValidationRules';
-
 export const UsersSignUpLayout: VFC<UserSignUpPageParams> = memo((props) => {
   const { control, handleSubmit, onSubmitSuccess, onSubmitError } = props;
 
@@ -16,14 +13,14 @@ export const UsersSignUpLayout: VFC<UserSignUpPageParams> = memo((props) => {
     <Stack
       component="form"
       onSubmit={() => {
-        handleSubmit(onSubmitSuccess, onSubmitError);
+        // eslint-disable-next-line @typescript-eslint/no-floating-promises
+        handleSubmit(onSubmitSuccess, onSubmitError)();
       }}
       spacing={3}
     >
       <Controller
         name="name"
         control={control}
-        rules={validationRules.name}
         render={({ field, fieldState }) => (
           <TextField
             {...field}
@@ -38,7 +35,6 @@ export const UsersSignUpLayout: VFC<UserSignUpPageParams> = memo((props) => {
       <Controller
         name="email"
         control={control}
-        rules={validationRules.email}
         render={({ field, fieldState }) => (
           <TextField
             {...field}
@@ -53,7 +49,6 @@ export const UsersSignUpLayout: VFC<UserSignUpPageParams> = memo((props) => {
       <Controller
         name="password"
         control={control}
-        rules={validationRules.password}
         render={({ field, fieldState }) => (
           <TextField
             {...field}
@@ -69,7 +64,6 @@ export const UsersSignUpLayout: VFC<UserSignUpPageParams> = memo((props) => {
       <Controller
         name="password_confirmation"
         control={control}
-        rules={validationRules.password_confirmation}
         render={({ field, fieldState }) => (
           <TextField
             {...field}

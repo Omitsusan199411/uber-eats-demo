@@ -11,12 +11,12 @@ import { usersSignUpUrl } from '../../urls/urlApi';
 
 export const useAuthUsersSignUp = () => {
   const history = useHistory();
-  const usersSignUp = useCallback((): void => {
+  const usersSignUp = useCallback((data: UserSignUpRequest): void => {
     const params: UserSignUpRequest = {
-      name: 'test',
-      email: 'test',
-      password: 'test',
-      password_confirmation: 'test'
+      name: data.name,
+      email: data.email,
+      password: data.password,
+      password_confirmation: data.password_confirmation
     };
     axios
       .post<UserSignUpResponse>(`${usersSignUpUrl}`, params)
