@@ -12,10 +12,12 @@ export const UsersSignUpLayout: VFC<UserSignUpPageParams> = memo((props) => {
   return (
     <Stack
       component="form"
-      onSubmit={() => {
+      onSubmit={(event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
         // eslint-disable-next-line @typescript-eslint/no-floating-promises
         handleSubmit(onSubmitSuccess, onSubmitError)();
       }}
+      method="post"
       spacing={3}
     >
       <Controller
@@ -24,10 +26,11 @@ export const UsersSignUpLayout: VFC<UserSignUpPageParams> = memo((props) => {
         render={({ field, fieldState }) => (
           <TextField
             {...field}
+            autoFocus={true}
             label="ニックネーム"
             color="secondary"
             variant="outlined"
-            error={!!fieldState.error}
+            error={Boolean(fieldState.error)}
             helperText={fieldState.error?.message}
           />
         )}
@@ -41,7 +44,7 @@ export const UsersSignUpLayout: VFC<UserSignUpPageParams> = memo((props) => {
             label="メールアドレス"
             color="secondary"
             variant="outlined"
-            error={!!fieldState.error}
+            error={Boolean(fieldState.error)}
             helperText={fieldState.error?.message}
           />
         )}
@@ -56,7 +59,7 @@ export const UsersSignUpLayout: VFC<UserSignUpPageParams> = memo((props) => {
             label="パスワード"
             color="secondary"
             variant="outlined"
-            error={!!fieldState.error}
+            error={Boolean(fieldState.error)}
             helperText={fieldState.error?.message}
           />
         )}
@@ -71,7 +74,7 @@ export const UsersSignUpLayout: VFC<UserSignUpPageParams> = memo((props) => {
             label="パスワード確認用"
             color="secondary"
             variant="outlined"
-            error={!!fieldState.error?.message}
+            error={Boolean(fieldState.error)}
             helperText={fieldState.error?.message}
           />
         )}

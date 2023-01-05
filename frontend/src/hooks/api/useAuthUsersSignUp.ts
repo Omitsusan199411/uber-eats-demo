@@ -26,6 +26,7 @@ export const useAuthUsersSignUp = () => {
       })
       .catch((error) => {
         console.log(error);
+        history.push('/page500');
       });
   }, []);
   return { usersSignUp };

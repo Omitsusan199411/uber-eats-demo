@@ -1,8 +1,11 @@
 module ErrorHandle
   # ActiveSupport::Concernモジュールに定義されたメソッドをErrorHandleモジュールのクラスメソッドとして使用可能（絶対に必要）
   extend ActiveSupport::Concern
-  # StandardErrorはNoMethodErrorやArgumentErrorの親クラス
-  rescue_from StandardError, with: :render_500
+  # モジュールがincludeされた後にrescue_fromメソッドが動作できるようにする（NoMethodErrorの防止）
+  included do
+    # StandardErrorはNoMethodErrorやArgumentErrorの親クラス
+    rescue_from StandardError, with: :render_500
+  end
 
   private
   # 例外処理のメソッド
