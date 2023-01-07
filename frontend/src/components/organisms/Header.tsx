@@ -1,13 +1,12 @@
 // ライブラリ import
 import { VFC, memo, useContext } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
-import { AppBar, Toolbar, Box, Link, IconButton, Stack, Divider } from '@mui/material';
+import { AppBar, Toolbar, Box, IconButton, Stack, Divider } from '@mui/material';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import LoginIcon from '@mui/icons-material/Login';
 
 // コンポーネント import
-import { HeaderMainTitle } from '../atoms/titles/HeaderMainTitle';
+import { TopPageTitleLink } from '../molecules/heater/TopPageTitleLink';
+import { UsersSignUpLink } from '../molecules/heater/UsersSignUpLink';
+import { UsersSignInLink } from '../molecules/heater/UsersSignInLink';
 
 // 型 import
 import { DrawerProps } from '../../types/drawer/DrawerProps';
@@ -53,43 +52,11 @@ export const Header: VFC<DrawerProps> = memo((props) => {
           }}
         >
           <Stack component="div" direction="row">
-            <Link component={RouterLink} to="/restaurants" sx={{ textDecoration: 'none' }}>
-              <HeaderMainTitle />
-            </Link>
+            <TopPageTitleLink />
           </Stack>
           <Stack component="div" direction="row" spacing={2} divider={<Divider orientation="vertical" flexItem />}>
-            <Link
-              component={RouterLink}
-              to="/usersAuth/signUp"
-              color="basis.main"
-              sx={{
-                fontSize: { xs: '10px', sm: '14px' },
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                textDecoration: 'none',
-                '&:hover': { fontWeight: 'bold' }
-              }}
-            >
-              <AccountCircleIcon sx={{ fontSize: { xs: '22px', sm: '32px' } }} />
-              <Box>新規登録</Box>
-            </Link>
-            <Link
-              component={RouterLink}
-              to="/usersAuth/signIn"
-              color="basis.main"
-              sx={{
-                fontSize: { xs: '10px', sm: '14px' },
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                textDecoration: 'none',
-                '&:hover': { fontWeight: 'bold' }
-              }}
-            >
-              <LoginIcon sx={{ fontSize: { xs: '22px', sm: '32px' } }} />
-              <Box>ログイン</Box>
-            </Link>
+            <UsersSignUpLink />
+            <UsersSignInLink />
           </Stack>
         </Box>
       </Toolbar>
