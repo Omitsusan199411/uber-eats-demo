@@ -1,19 +1,18 @@
 // ライブラリ import
 import { VFC, memo, useContext } from 'react';
-import { Link } from 'react-router-dom';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import Box from '@mui/material/Box';
-import IconButton from '@mui/material/IconButton';
-import LocalMalllcon from '@mui/icons-material/LocalMall';
+import { Link as RouterLink } from 'react-router-dom';
+import { AppBar, Toolbar, Box, Link, IconButton, Stack, Divider } from '@mui/material';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import LoginIcon from '@mui/icons-material/Login';
 
 // コンポーネント import
-import { MainTitle } from '../atoms/titles/MainTitle';
+import { HeaderMainTitle } from '../atoms/titles/HeaderMainTitle';
 
 // 型 import
 import { DrawerProps } from '../../types/drawer/DrawerProps';
 
+// 定数 import
 import { DRAWER_WIDTH } from '../../constants/constants';
 
 // createContext import
@@ -36,6 +35,7 @@ export const Header: VFC<DrawerProps> = memo((props) => {
       <Toolbar>
         {isWide && (
           <IconButton
+            sx={{ p: '0px' }}
             onClick={() => {
               setDrawerOpen(!drawerOpen);
             }}
@@ -49,22 +49,48 @@ export const Header: VFC<DrawerProps> = memo((props) => {
             justifyContent: 'space-between',
             alignItems: 'center',
             width: '100vw',
-            padding: '4px 12px'
+            pl: '10px'
           }}
         >
-          <Link to="/restaurants" style={{ textDecoration: 'none' }}>
-            <MainTitle />
-          </Link>
-          <Box>
-            <Link to="/orders">
-              <LocalMalllcon
-                color="secondary"
-                sx={{
-                  fontSize: { xs: '20px', sm: '24px', md: '28px' }
-                }}
-              />
+          <Stack component="div" direction="row">
+            <Link component={RouterLink} to="/restaurants" sx={{ textDecoration: 'none' }}>
+              <HeaderMainTitle />
             </Link>
-          </Box>
+          </Stack>
+          <Stack component="div" direction="row" spacing={2} divider={<Divider orientation="vertical" flexItem />}>
+            <Link
+              component={RouterLink}
+              to="/usersAuth/signUp"
+              color="basis.main"
+              sx={{
+                fontSize: { xs: '10px', sm: '14px' },
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                textDecoration: 'none',
+                '&:hover': { fontWeight: 'bold' }
+              }}
+            >
+              <AccountCircleIcon sx={{ fontSize: { xs: '22px', sm: '32px' } }} />
+              <Box>新規登録</Box>
+            </Link>
+            <Link
+              component={RouterLink}
+              to="/usersAuth/signIn"
+              color="basis.main"
+              sx={{
+                fontSize: { xs: '10px', sm: '14px' },
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                textDecoration: 'none',
+                '&:hover': { fontWeight: 'bold' }
+              }}
+            >
+              <LoginIcon sx={{ fontSize: { xs: '22px', sm: '32px' } }} />
+              <Box>ログイン</Box>
+            </Link>
+          </Stack>
         </Box>
       </Toolbar>
     </AppBar>

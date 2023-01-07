@@ -1,3 +1,4 @@
+// ライブラリ import
 import { SubmitHandler, Control, UseFormHandleSubmit, SubmitErrorHandler } from 'react-hook-form';
 
 export type UserSignUpPageParams = {
@@ -36,4 +37,11 @@ export type UserSignInRequest = {
 export type UserSignInResponse = {
   email: string;
   password: string;
+};
+
+export type UserSignUpTextFieldInputs = {
+  id: number;
+  name: 'name' | 'email' | 'password' | 'password_confirmation';
+  label: string;
+  type: string;
 };

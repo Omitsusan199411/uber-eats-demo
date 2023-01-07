@@ -1,3 +1,7 @@
-/* Googleフォントimport用のCSS */
-/* Robotフォント */
-@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,900&display=swap");
+/* Googleフォントimport用のCSS (このファイルをApp.tsxでimportする)*/
+
+/* Robotフォント（Thin100, Light300, Regular400, Bold 700, Bold 700 Italic, Black 900 Italic ） */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,700;1,700;1,900&display=swap');
+
+/* Cabin Sketchフォント（Regular 400, Bold 700）*/
+@import url('https://fonts.googleapis.com/css2?family=Cabin+Sketch:wght@400;700&display=swap');
