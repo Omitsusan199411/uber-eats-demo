@@ -31,11 +31,11 @@ export const RestaurantsCard: VFC<RestaurantsCardProps> = memo((props) => {
         component="img"
         src={RestaurantImage}
         alt="restaurantImage"
-        sx={{ maxWidth: { xs: '120px', sm: '140px' } }}
+        sx={{ maxWidth: { xs: '105px', sm: '120px', md: '140px' } }}
       />
       <CardContent sx={{ width: '100%' }}>
-        <Typography sx={{ fontSize: '16px' }}>{restaurant.name}</Typography>
-        <Typography sx={{ fontSize: '14px' }}>配送料¥{restaurant.fee}</Typography>
+        <Typography sx={{ fontSize: { xs: '12px', sm: '14px', md: '16px' } }}>{restaurant.name}</Typography>
+        <Typography sx={{ fontSize: { xs: '10px', sm: '12px', md: '14px' } }}>配送料¥{restaurant.fee}</Typography>
       </CardContent>
     </CardStyle>
   );

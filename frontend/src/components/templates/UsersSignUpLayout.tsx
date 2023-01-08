@@ -5,19 +5,14 @@ import { Controller } from 'react-hook-form';
 import { Box, Stack, TextField, Link } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-import styled from 'styled-components';
 
 // コンポーネント imoport
 import { SignUpButton } from '../atoms/buttons/users/SignUpButton';
 import { SignUpText } from '../atoms/texts/SignUpText';
-import { HeaderMainTitle } from '../atoms/titles/HeaderMainTitle';
+import { TopPageMoveLink } from '../molecules/users/TopPageMoveLink';
 
 // type import
 import { UserSignUpPageParams, UserSignUpTextFieldInputs } from '../../types/api/User';
-
-const CustomTextField = styled(TextField)`
-  margin-top: 24px;
-`;
 
 const TextFieldInputs: UserSignUpTextFieldInputs[] = [
   {
@@ -58,12 +53,11 @@ export const UsersSignUpLayout: VFC<UserSignUpPageParams> = memo((props) => {
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
-          alignItems: 'center'
+          alignItems: 'center',
+          p: '40px'
         }}
       >
-        <Link component={RouterLink} to="/" sx={{ mt: '30px', textDecoration: 'none' }}>
-          <HeaderMainTitle />
-        </Link>
+        <TopPageMoveLink />
         <Box
           component="main"
           sx={{
@@ -97,7 +91,7 @@ export const UsersSignUpLayout: VFC<UserSignUpPageParams> = memo((props) => {
                 name={input.name}
                 control={control}
                 render={({ field, fieldState }) => (
-                  <CustomTextField
+                  <TextField
                     {...field}
                     label={input.label}
                     color="secondary"
@@ -105,6 +99,7 @@ export const UsersSignUpLayout: VFC<UserSignUpPageParams> = memo((props) => {
                     error={Boolean(fieldState.error)}
                     helperText={fieldState.error?.message}
                     fullWidth={true}
+                    sx={{ mt: '24px' }}
                   />
                 )}
               />

@@ -4,7 +4,7 @@ import { AppBar, Toolbar, Box, IconButton, Stack, Divider } from '@mui/material'
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 
 // コンポーネント import
-import { TopPageTitleLink } from '../molecules/heater/TopPageTitleLink';
+import { TopPageMoveLink } from '../molecules/heater/TopPageMoveLink';
 import { UsersSignUpLink } from '../molecules/heater/UsersSignUpLink';
 import { UsersSignInLink } from '../molecules/heater/UsersSignInLink';
 
@@ -48,11 +48,11 @@ export const Header: VFC<DrawerProps> = memo((props) => {
             justifyContent: 'space-between',
             alignItems: 'center',
             width: '100vw',
-            pl: '10px'
+            pl: '12px'
           }}
         >
           <Stack component="div" direction="row">
-            <TopPageTitleLink />
+            <TopPageMoveLink />
           </Stack>
           <Stack component="div" direction="row" spacing={2} divider={<Divider orientation="vertical" flexItem />}>
             <UsersSignUpLink />

@@ -4,10 +4,16 @@ import { Link as RouterLink } from 'react-router-dom';
 import { Link } from '@mui/material';
 
 // コンポーネント import
-import { HeaderMainTitle } from '../../atoms/titles/HeaderMainTitle';
+import { MainTitle } from '../../atoms/titles/MainTitle';
 
-export const TopPageTitleLink: VFC = memo(() => (
+export const TopPageMoveLink: VFC = memo(() => (
   <Link component={RouterLink} to="/restaurants" sx={{ textDecoration: 'none' }}>
-    <HeaderMainTitle />
+    <MainTitle
+      family="Roboto, sans-serif"
+      weight={900}
+      type="italic"
+      size={{ xs: '16px', sm: '24px', md: '28px' }}
+      bgColor="transparent"
+    />
   </Link>
 ));

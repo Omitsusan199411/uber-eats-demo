@@ -38,6 +38,7 @@
   "ignorePatterns": ["build"], // 追加 .eslintignoreに対象外にしているが無いとコンパイルに時間がかかる
   // rulesは個別の解析ルールを設定する（ルールのレベル off,warn,error）
   "rules": {
+    "object-shorthand": "off", // オブジェクトのキー名が短くても違反としない
     "react/jsx-boolean-value": "off", // true,false表記で値の受け渡しを許可にする。これをonにするとautoFocus={true}などの表記ができなくなる
     "react/jsx-props-no-spreading": "off", // propsをスプレッド構文で展開し、子コンポーネントに渡す
     "no-console": "off",

@@ -1,7 +1,7 @@
 // ライブラリ import
-import { VFC, memo, useState, ReactNode } from 'react';
+import { VFC, memo, useState, ReactNode, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useMediaQuery } from 'react-responsive';
+// import { useMediaQuery } from 'react-responsive';
 import { Box, BottomNavigation, BottomNavigationAction } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
@@ -9,13 +9,16 @@ import FastfoodIcon from '@mui/icons-material/Fastfood';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 // コンポーネント import
-import { MaterialUiTheme } from '../../theme/MaterialUiTheme';
+// import { MaterialUiTheme } from '../../theme/MaterialUiTheme';
 import { FooterTextNavigation } from '../molecules/footer/FooterTextNavigation';
 import { FooterSnsIconsNavigation } from '../molecules/footer/FooterSnsIconsNavigation';
 import { CopyRightText } from '../atoms/texts/CopyRightText';
 
 // 定数 import
 import { DRAWER_WIDTH } from '../../constants/constants';
+
+// createContext import
+import { ResponsiveWide } from '../../contexts/responsiveWide';
 
 type BottomNavigationItemData = {
   id: number;
@@ -24,6 +27,12 @@ type BottomNavigationItemData = {
   icon: ReactNode;
   sx: {
     color: string;
+    '&:hover': {
+      opacity: number;
+    };
+    span: {
+      fontSize: { xs: string; sm: string };
+    };
   };
 };
 
@@ -32,69 +41,74 @@ const bottomNavigationItem: BottomNavigationItemData[] = [
     id: 1,
     label: 'ホーム',
     value: '/',
-    icon: <HomeIcon />,
+    icon: <HomeIcon sx={{ fontSize: { xs: '22px', sm: '28px' } }} />,
     sx: {
-      color: 'primary.main'
+      color: 'primary.main',
+      '&:hover': {
+        opacity: 0.7
+      },
+      span: {
+        fontSize: { xs: '10px', sm: '12px' }
+      }
     }
   },
   {
     id: 2,
     label: '店舗一覧',
     value: '/restaurants',
-    icon: <RestaurantIcon />,
+    icon: <RestaurantIcon sx={{ fontSize: { xs: '22px', sm: '28px' } }} />,
     sx: {
-      color: 'primary.main'
+      color: 'primary.main',
+      '&:hover': {
+        opacity: 0.5
+      },
+      span: {
+        fontSize: { xs: '10px', sm: '12px' }
+      }
     }
   },
   {
     id: 3,
-    label: 'フード一覧',
-    value: '/',
-    icon: <FastfoodIcon />,
+    label: '商品一覧',
+    value: '#',
+    icon: <FastfoodIcon sx={{ fontSize: { xs: '22px', sm: '28px' } }} />,
     sx: {
-      color: 'primary.main'
+      color: 'primary.main',
+      '&:hover': {
+        opacity: 0.5
+      },
+      span: {
+        fontSize: { xs: '10px', sm: '12px' }
+      }
     }
   },
   {
     id: 4,
     label: 'カート',
-    value: '/',
-    icon: <ShoppingCartIcon />,
+    value: '#',
+    icon: <ShoppingCartIcon sx={{ fontSize: { xs: '22px', sm: '28px' } }} />,
     sx: {
-      color: 'primary.main'
+      color: 'primary.main',
+      '&:hover': {
+        opacity: 0.5
+      },
+      span: {
+        fontSize: { xs: '10px', sm: '12px' }
+      }
     }
   }
 ];
 
 export const Footer: VFC = memo(() => {
-  const isWide: boolean = useMediaQuery({
-    query: `(min-width: ${MaterialUiTheme.breakpoints.values.sm}px)`
-  });
+  const isWide = useContext(ResponsiveWide);
   const history = useHistory();
-  const [value, setValue] = useState<string>('/');
+  const [value, setValue] = useState<string>('');
   return (
     <>
       {isWide ? (
-        <Box
-          component="footer"
-          sx={{
-            backgroundColor: 'basis.main',
-            p: '100px',
-            pb: '60px',
-            minWidth: { xs: '100%', md: `calc(100% - ${DRAWER_WIDTH})` },
-            ml: { xs: '0px', md: `${DRAWER_WIDTH}` }
-          }}
-        >
-          <Box component="nav" sx={{ maxWidth: '960px', m: '0 auto' }}>
-            <FooterTextNavigation />
-            <FooterSnsIconsNavigation />
-            <CopyRightText />
-          </Box>
-        </Box>
-      ) : (
         <BottomNavigation
-          component="footer"
           showLabels
+          component="footer"
           value={value}
           onChange={(event, newValue: string) => {
             setValue(newValue);
@@ -117,6 +131,23 @@ export const Footer: VFC = memo(() => {
             />
           ))}
         </BottomNavigation>
+      ) : (
+        <Box
+          component="footer"
+          sx={{
+            backgroundColor: 'basis.main',
+            p: '100px',
+            pb: '60px',
+            minWidth: { xs: '100%', md: `calc(100% - ${DRAWER_WIDTH})` },
+            ml: { xs: '0px', md: `${DRAWER_WIDTH}` }
+          }}
+        >
+          <Box component="nav" sx={{ maxWidth: '960px', m: '0 auto' }}>
+            <FooterTextNavigation />
+            <FooterSnsIconsNavigation />
+            <CopyRightText />
+          </Box>
+        </Box>
       )}
     </>
   );
