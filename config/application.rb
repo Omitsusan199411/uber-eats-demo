@@ -37,5 +37,12 @@ module UberEatsDemo
 
     # CSRF対策のチェックを行うかを指定する。5.2以降のデフォルト設定を読み込むとtrueになる
     config.action_controller.default_protect_from_forgery = true
+
+    # gem「rails-i18n」による日本語化対応（デフォルトのlocaleを:en以外に変更する）
+    config.i18n.default_locale = :ja
+
+    # config/locales/以下に設定した翻訳ファイルが全て読み込まれるように、以下のコードを設定する必要がある。
+    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]
+
   end
 end

@@ -1,13 +1,8 @@
 // ライブラリ import
-import { SubmitHandler, Control, UseFormHandleSubmit, SubmitErrorHandler } from 'react-hook-form';
+import { Dispatch, SetStateAction } from 'react';
+import { SubmitHandler, Control, UseFormHandleSubmit, SubmitErrorHandler, UseFormWatch } from 'react-hook-form';
 
-export type UserSignUpPageParams = {
-  control: Control<UserSignUpForm>;
-  handleSubmit: UseFormHandleSubmit<UserSignUpForm>;
-  onSubmitSuccess: SubmitHandler<UserSignUpForm>;
-  onSubmitError: SubmitErrorHandler<UserSignUpForm>;
-};
-
+// Sign Up
 export type UserSignUpRequest = {
   name: string;
   email: string;
@@ -22,6 +17,12 @@ export type UserSignUpResponse = {
   password_confirmation: string;
 };
 
+export type UserSignUpErrorResponse = {
+  name: string | null;
+  email: string | null;
+  password: string | null;
+};
+
 export type UserSignUpForm = {
   name: string;
   email: string;
@@ -29,6 +30,25 @@ export type UserSignUpForm = {
   password_confirmation: string;
 };
 
+export type UserSignUpPageParams = {
+  control: Control<UserSignUpForm>;
+  handleSubmit: UseFormHandleSubmit<UserSignUpForm>;
+  onSubmitSuccess: SubmitHandler<UserSignUpForm>;
+  onSubmitError: SubmitErrorHandler<UserSignUpForm>;
+  singUpErrorMessages: UserSignUpErrorResponse;
+  setSignUpErrorMessages?: Dispatch<SetStateAction<UserSignUpErrorResponse>>;
+  watch?: UseFormWatch<UserSignUpForm>;
+};
+
+export type UserSignUpTextFieldInputs = {
+  id: number;
+  name: 'name' | 'email' | 'password' | 'password_confirmation';
+  label: string;
+  type: string;
+  railsErrorMessage?: string | null;
+};
+
+// Sign In
 export type UserSignInRequest = {
   email: string;
   password: string;
@@ -37,11 +57,4 @@ export type UserSignInRequest = {
 export type UserSignInResponse = {
   email: string;
   password: string;
-};
-
-export type UserSignUpTextFieldInputs = {
-  id: number;
-  name: 'name' | 'email' | 'password' | 'password_confirmation';
-  label: string;
-  type: string;
 };

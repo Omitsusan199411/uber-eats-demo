@@ -2,12 +2,13 @@ class Api::V1::RegistrationsController < ApplicationController
 
   def sign_up
     @user = User.new(registrations_params)
-    if @user.save!
+    if @user.valid?
+      @user.save!
       # login!のレシーバはApi::V1::RegistrationsControllerのインスタンス(sessions_helper.rbのSessionsHelperモジュールからinclude)
       login!
       render json: { user: @user, status: :created }
     else
-      render json: { error: "ユーザー登録に失敗しました" }, status: :internal_server_error
+      render json: { name: @user.errors.full_messages_for(:name).first, email: @user.errors.full_messages_for(:email).first, password: @user.errors.full_messages_for(:password_digest).first }, status: :internal_server_error
     end
   end
 

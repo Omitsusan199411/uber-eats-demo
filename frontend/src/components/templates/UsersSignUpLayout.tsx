@@ -14,35 +14,37 @@ import { TopPageMoveLink } from '../molecules/users/TopPageMoveLink';
 // type import
 import { UserSignUpPageParams, UserSignUpTextFieldInputs } from '../../types/api/User';
 
-const TextFieldInputs: UserSignUpTextFieldInputs[] = [
-  {
-    id: 1,
-    name: 'name',
-    label: 'ニックネーム',
-    type: 'text'
-  },
-  {
-    id: 2,
-    name: 'email',
-    label: 'メールアドレス',
-    type: 'email'
-  },
-  {
-    id: 3,
-    name: 'password',
-    label: 'パスワード',
-    type: 'password'
-  },
-  {
-    id: 4,
-    name: 'password_confirmation',
-    label: 'パスワード確認用',
-    type: 'password'
-  }
-];
-
 export const UsersSignUpLayout: VFC<UserSignUpPageParams> = memo((props) => {
-  const { control, handleSubmit, onSubmitSuccess, onSubmitError } = props;
+  const { control, handleSubmit, onSubmitSuccess, onSubmitError, singUpErrorMessages } = props;
+  const TextFieldInputs: UserSignUpTextFieldInputs[] = [
+    {
+      id: 1,
+      name: 'name',
+      label: 'ニックネーム',
+      type: 'text',
+      railsErrorMessage: singUpErrorMessages.name
+    },
+    {
+      id: 2,
+      name: 'email',
+      label: 'メールアドレス',
+      type: 'email',
+      railsErrorMessage: singUpErrorMessages.email
+    },
+    {
+      id: 3,
+      name: 'password',
+      label: 'パスワード',
+      type: 'password',
+      railsErrorMessage: singUpErrorMessages.password
+    },
+    {
+      id: 4,
+      name: 'password_confirmation',
+      label: 'パスワード確認用',
+      type: 'password'
+    }
+  ];
 
   return (
     <>
@@ -91,16 +93,18 @@ export const UsersSignUpLayout: VFC<UserSignUpPageParams> = memo((props) => {
                 name={input.name}
                 control={control}
                 render={({ field, fieldState }) => (
-                  <TextField
-                    {...field}
-                    label={input.label}
-                    color="secondary"
-                    variant="standard"
-                    error={Boolean(fieldState.error)}
-                    helperText={fieldState.error?.message}
-                    fullWidth={true}
-                    sx={{ mt: '24px' }}
-                  />
+                  <>
+                    <TextField
+                      {...field}
+                      label={input.label}
+                      color="secondary"
+                      variant="standard"
+                      error={Boolean(fieldState.error) || Boolean(input.railsErrorMessage)}
+                      helperText={fieldState.error?.message || input.railsErrorMessage}
+                      fullWidth={true}
+                      sx={{ mt: '24px' }}
+                    />
+                  </>
                 )}
               />
             ))}

@@ -49,3 +49,6 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 # 環境変数管理
 gem 'dotenv-rails'
+
+# 日本語化
+gem 'rails-i18n'

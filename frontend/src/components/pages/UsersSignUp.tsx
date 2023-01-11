@@ -14,9 +14,9 @@ import { UserSignUpForm } from '../../types/api/User';
 import { schema } from '../../validates/users/usersSignUpValidationRules';
 
 export const UsersSignUp: VFC = memo(() => {
-  const { usersSignUp } = useAuthUsersSignUp();
+  const { usersSignUp, singUpErrorMessages, setSignUpErrorMessages } = useAuthUsersSignUp();
 
-  const { control, handleSubmit } = useForm<UserSignUpForm>({
+  const { control, handleSubmit, watch } = useForm<UserSignUpForm>({
     mode: 'onSubmit',
     reValidateMode: 'onBlur',
     defaultValues: { name: '', email: '', password: '', password_confirmation: '' },
@@ -24,14 +24,11 @@ export const UsersSignUp: VFC = memo(() => {
   });
 
   const onSubmitSuccess: SubmitHandler<UserSignUpForm> = useCallback((data) => {
-    console.log(data);
-    console.log('Success');
     usersSignUp(data);
   }, []);
 
   const onSubmitError: SubmitErrorHandler<UserSignUpForm> = useCallback((errors) => {
     console.log(errors);
-    console.log('Error');
   }, []);
 
   return (
@@ -41,6 +38,9 @@ export const UsersSignUp: VFC = memo(() => {
         control={control}
         onSubmitSuccess={onSubmitSuccess}
         onSubmitError={onSubmitError}
+        singUpErrorMessages={singUpErrorMessages}
+        setSignUpErrorMessages={setSignUpErrorMessages}
+        watch={watch}
       />
     </>
   );

@@ -14,7 +14,7 @@ module ErrorHandle
   def render_500(e)
     logger.error e.class
     logger.error e.message
-    logger.error e.traceback.join("\n")
-    render json: { ErrorMessage: "#{e.message}が発生しました" }, status: :internal_server_error
+    logger.error e.backtrace.join("\n")
+    render json: { ErrorMessage: "#{e.message}" }, status: :internal_server_error
   end
 end
