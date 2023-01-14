@@ -18,7 +18,7 @@ export const UsersSignUp: VFC = memo(() => {
 
   const { control, handleSubmit, watch } = useForm<UserSignUpForm>({
     mode: 'onSubmit',
-    reValidateMode: 'onBlur',
+    reValidateMode: 'onChange',
     defaultValues: { name: '', email: '', password: '', password_confirmation: '' },
     resolver: yupResolver(schema)
   });
