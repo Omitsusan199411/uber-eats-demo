@@ -1,7 +1,7 @@
 module SessionsHelper
   # ログインしたユーザーのIDをセッション情報に保存する
-  def login!
-    session[:user_id] = @user.id
+  def login!(user)
+    session[:user_id] = user.id
   end
 
   # 現在ログインしているユーザー情報を取得
@@ -12,7 +12,7 @@ module SessionsHelper
   end
 
   # ユーザーがサインインしているかどうか
-  def user_sign_in?
-    @current_user != nil
+  def user_sign_in?(current_user)
+    current_user != nil
   end
 end
