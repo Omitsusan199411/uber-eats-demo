@@ -38,7 +38,7 @@ export const useAuthUsersSignUp = () => {
           ...errorMessage,
           name: errorMessage.name,
           email: errorMessage.email,
-          password: errorMessage.password.a
+          password: errorMessage.password
         });
         console.log(singUpErrorMessages);
         history.push('/usersAuth/signUp');

@@ -79,7 +79,7 @@
     }
   },
   "lint-staged": {
-    "frontend/src/**/*.{js,ts,jsx,tsx}": "eslint --max-warnings=0 --ext .jsx,.js,.tsx,.ts src/"
+    "src/**/*.{js,ts,jsx,tsx}": "eslint --max-warnings=0 --ext .jsx,.js,.tsx,.ts src/"
   },
   "resolutions": {
     "nth-check": "^2.0.1"
