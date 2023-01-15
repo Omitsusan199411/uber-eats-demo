@@ -23,11 +23,11 @@ AllCops:
 
 # Rails向けのRails copsを実行。"rubocop -R"と同じ
 Rails:
-  Enabled: false
+  Enabled: true
 
 # 日本語でのコメントを許可
 Style/AsciiComments:
-  Enabled: true
+  Enabled: false
 
 # クラスのコメント必須を無視
 Style/Documentation:
