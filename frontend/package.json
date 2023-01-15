@@ -79,7 +79,8 @@
     }
   },
   "lint-staged": {
-    "src/**/*.{js,ts,jsx,tsx}": "eslint --max-warnings=0 --ext .jsx,.js,.tsx,.ts src/"
+    "src/**/*.{js,ts,jsx,tsx}": "eslint --max-warnings=0 --ext .jsx,.js,.tsx,.ts src/",
+    "app/**/*.{rb}": "cd .. && bundle exec rubocop -c ./.rubocop.yml"
   },
   "resolutions": {
     "nth-check": "^2.0.1"
