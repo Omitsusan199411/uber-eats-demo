@@ -27,7 +27,7 @@ Rails:
 
 # 日本語でのコメントを許可
 Style/AsciiComments:
-  Enabled: false
+  Enabled: true
 
 # クラスのコメント必須を無視
 Style/Documentation:
