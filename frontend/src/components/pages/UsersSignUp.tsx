@@ -1,6 +1,6 @@
 // ライブラリ import
 import { VFC, memo, useCallback } from 'react';
-import { useForm, SubmitHandler, SubmitErrorHandler } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 // コンポーネント import
@@ -14,34 +14,22 @@ import { UserSignUpForm } from '../../types/api/User';
 import { schema } from '../../validates/users/usersSignUpValidationRules';
 
 export const UsersSignUp: VFC = memo(() => {
-  const { usersSignUp, singUpErrorMessages, setSignUpErrorMessages } = useAuthUsersSignUp();
+  const { usersSignUp } = useAuthUsersSignUp();
 
-  const { control, handleSubmit, watch } = useForm<UserSignUpForm>({
+  const { control, handleSubmit, setError } = useForm<UserSignUpForm>({
     mode: 'onSubmit',
     reValidateMode: 'onChange',
     defaultValues: { name: '', email: '', password: '', password_confirmation: '' },
     resolver: yupResolver(schema)
   });
 
-  const onSubmitSuccess: SubmitHandler<UserSignUpForm> = useCallback((data) => {
-    usersSignUp(data);
-  }, []);
-
-  const onSubmitError: SubmitErrorHandler<UserSignUpForm> = useCallback((errors) => {
-    console.log(errors);
+  const onSubmitData = useCallback((data: UserSignUpForm): void => {
+    usersSignUp(data, setError);
   }, []);
 
   return (
     <>
-      <UsersSignUpLayout
-        handleSubmit={handleSubmit}
-        control={control}
-        onSubmitSuccess={onSubmitSuccess}
-        onSubmitError={onSubmitError}
-        singUpErrorMessages={singUpErrorMessages}
-        setSignUpErrorMessages={setSignUpErrorMessages}
-        watch={watch}
-      />
+      <UsersSignUpLayout handleSubmit={handleSubmit} control={control} onSubmitData={onSubmitData} />
     </>
   );
 });

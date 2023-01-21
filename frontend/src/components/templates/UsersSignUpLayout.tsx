@@ -15,28 +15,25 @@ import { TopPageMoveLink } from '../molecules/users/TopPageMoveLink';
 import { UserSignUpPageParams, UserSignUpTextFieldInputs } from '../../types/api/User';
 
 export const UsersSignUpLayout: VFC<UserSignUpPageParams> = memo((props) => {
-  const { control, handleSubmit, onSubmitSuccess, onSubmitError, singUpErrorMessages } = props;
+  const { control, handleSubmit, onSubmitData } = props;
   const TextFieldInputs: UserSignUpTextFieldInputs[] = [
     {
       id: 1,
       name: 'name',
       label: 'ニックネーム',
-      type: 'text',
-      railsErrorMessage: singUpErrorMessages.name
+      type: 'text'
     },
     {
       id: 2,
       name: 'email',
       label: 'メールアドレス',
-      type: 'email',
-      railsErrorMessage: singUpErrorMessages.email
+      type: 'email'
     },
     {
       id: 3,
       name: 'password',
       label: 'パスワード',
-      type: 'password',
-      railsErrorMessage: singUpErrorMessages.password
+      type: 'password'
     },
     {
       id: 4,
@@ -80,9 +77,8 @@ export const UsersSignUpLayout: VFC<UserSignUpPageParams> = memo((props) => {
             component="form"
             onSubmit={(event: React.FormEvent<HTMLFormElement>) => {
               event.preventDefault();
-              // handleSubmit()を実行すると、関数を返す
-              // eslint-disable-next-line @typescript-eslint/no-floating-promises
-              handleSubmit(onSubmitSuccess, onSubmitError)();
+              // handleSubmit()を実行すると、関数を返す。handleSubmit()はformのdataをオブジェクト型で関数（onSubmitData）に渡す。
+              void handleSubmit(onSubmitData)();
             }}
             method="post"
             sx={{ alignItems: 'center' }}
@@ -94,13 +90,14 @@ export const UsersSignUpLayout: VFC<UserSignUpPageParams> = memo((props) => {
                 control={control}
                 render={({ field, fieldState }) => (
                   <>
+                    {console.log(fieldState.error)}
                     <TextField
                       {...field}
                       label={input.label}
                       color="secondary"
                       variant="standard"
-                      error={Boolean(fieldState.error) || Boolean(input.railsErrorMessage)}
-                      helperText={fieldState.error?.message || input.railsErrorMessage}
+                      error={Boolean(fieldState.error)}
+                      helperText={fieldState.error?.message}
                       fullWidth={true}
                       sx={{ mt: '24px' }}
                     />

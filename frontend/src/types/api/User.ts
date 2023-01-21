@@ -1,6 +1,5 @@
 // ライブラリ import
-import { Dispatch, SetStateAction } from 'react';
-import { SubmitHandler, Control, UseFormHandleSubmit, SubmitErrorHandler, UseFormWatch } from 'react-hook-form';
+import { SubmitHandler, Control, UseFormHandleSubmit } from 'react-hook-form';
 
 // Sign Up
 export type UserSignUpRequest = {
@@ -33,11 +32,7 @@ export type UserSignUpForm = {
 export type UserSignUpPageParams = {
   control: Control<UserSignUpForm>;
   handleSubmit: UseFormHandleSubmit<UserSignUpForm>;
-  onSubmitSuccess: SubmitHandler<UserSignUpForm>;
-  onSubmitError: SubmitErrorHandler<UserSignUpForm>;
-  singUpErrorMessages: UserSignUpErrorResponse;
-  setSignUpErrorMessages?: Dispatch<SetStateAction<UserSignUpErrorResponse>>;
-  watch?: UseFormWatch<UserSignUpForm>;
+  onSubmitData: SubmitHandler<UserSignUpForm>;
 };
 
 export type UserSignUpTextFieldInputs = {
