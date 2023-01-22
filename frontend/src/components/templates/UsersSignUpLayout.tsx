@@ -90,7 +90,6 @@ export const UsersSignUpLayout: VFC<UserSignUpPageParams> = memo((props) => {
                 control={control}
                 render={({ field, fieldState }) => (
                   <>
-                    {console.log(fieldState.error)}
                     <TextField
                       {...field}
                       label={input.label}

@@ -27,6 +27,7 @@ export const useAuthUsersSignUp = () => {
       })
       .catch((error) => {
         const validationData = error.response.data;
+        console.log(validationData);
         // setErrorで入力フォームごとにエラーとそのエラーに対するメッセージをセットできる。
         // セットしたエラーは、Controllerコンポーネントのrenderプロップスの中のfieldState.errorにオブジェクト形式（message: 'その名前は既に入力されています', type: 'custom', ref: {…}）で格納される
         if (validationData.name !== null) {
