@@ -81,8 +81,8 @@
     }
   },
   "lint-staged": {
-    "gitDir": "../../",
-    "src/**/*.{js,ts,jsx,tsx}": "eslint --max-warnings=0 --ext .jsx,.js,.tsx,.ts src/",
+    "gitDir": "../",
+    "frontend/src/**/*.{js,ts,jsx,tsx}": "eslint --max-warnings=0 --ext .jsx,.js,.tsx,.ts frontend/src/",
     "backend/app/**/*.rb": "bundle exec rubocop -c ./backend/.rubocop.yml"
   },
   "resolutions": {
