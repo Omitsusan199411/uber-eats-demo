@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-# package.jsonの直下のディレクトリでnpx lint-stagedをしてあげること
+# # package.jsonの直下のディレクトリでnpx lint-stagedをしてあげること
 cd frontend
 npx lint-staged
