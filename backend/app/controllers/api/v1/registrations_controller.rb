@@ -1,6 +1,6 @@
 class Api::V1::RegistrationsController < ApplicationController
   # テスト
-  # テスト3
+  # テスト4
   def sign_up
     @user = User.new(registrations_params)
     if @user.valid?

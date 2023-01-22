@@ -82,8 +82,8 @@
   },
   "lint-staged": {
     "src/**/*.{js,ts,jsx,tsx}": "eslint --max-warnings=0 --ext .jsx,.js,.tsx,.ts src/",
-    "cd ../backend && app/**/*.rb": [
-      "cd ../backend && bundle exec rubocop"
+    "backend/app/**/*.rb": [
+      "bundle exec rubocop"
     ]
   },
   "resolutions": {
