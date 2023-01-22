@@ -81,7 +81,7 @@
     }
   },
   "lint-staged": {
-    "*.{js,ts,jsx,tsx}": "eslint --max-warnings=0 --ext .jsx,.js,.tsx,.ts src/",
+    "src/**/*.{js,ts,jsx,tsx}": "eslint --max-warnings=0 --ext .jsx,.js,.tsx,.ts src/",
     "backend/app/**/*.rb": "bundle exec rubocop -c backend/.rubocpo.yml"
   },
   "resolutions": {
