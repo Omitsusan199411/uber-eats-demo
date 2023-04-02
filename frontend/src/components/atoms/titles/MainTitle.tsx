@@ -29,7 +29,7 @@ export const MainTitle: VFC<MainTitleProps> = memo((props) => {
         backgroundColor: bgColor
       }}
     >
-      Tech Eats
+      Yummy
     </Box>
   );
 });

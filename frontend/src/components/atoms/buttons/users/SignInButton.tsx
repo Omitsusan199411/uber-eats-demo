@@ -22,10 +22,10 @@ const CustomSignUpButton = styled(Button)`
   }
 `;
 
-export const SignUpButton = () => {
+export const SignInButton = () => {
   return (
     <CustomSignUpButton type="submit" variant="contained" color="secondary">
-      サインアップ
+      サインイン
     </CustomSignUpButton>
   );
 };

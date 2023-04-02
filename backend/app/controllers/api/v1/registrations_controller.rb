@@ -18,6 +18,6 @@ class Api::V1::RegistrationsController < ApplicationController
 
   def registrations_params
     # db上ではbcryptにより、「password_digest」で登録されているので注意
-    params.permit(:email, :name, :password, :password_confirmation)ss
+    params.permit(:email, :name, :password, :password_confirmation)
   end
 end

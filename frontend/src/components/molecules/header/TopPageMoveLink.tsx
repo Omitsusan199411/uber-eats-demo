@@ -12,7 +12,7 @@ export const TopPageMoveLink: VFC = memo(() => (
       family="Roboto, sans-serif"
       weight={900}
       type="italic"
-      size={{ xs: '16px', sm: '24px', md: '28px' }}
+      size={{ xs: '20px', sm: '24px', md: '28px' }}
       bgColor="transparent"
     />
   </Link>

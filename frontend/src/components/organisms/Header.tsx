@@ -4,9 +4,9 @@ import { AppBar, Toolbar, Box, IconButton, Stack, Divider } from '@mui/material'
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 
 // コンポーネント import
-import { TopPageMoveLink } from '../molecules/heater/TopPageMoveLink';
-import { UsersSignUpLink } from '../molecules/heater/UsersSignUpLink';
-import { UsersSignInLink } from '../molecules/heater/UsersSignInLink';
+import { TopPageMoveLink } from '../molecules/header/TopPageMoveLink';
+import { UsersSignUpLink } from '../molecules/header/UsersSignUpLink';
+import { UsersSignInLink } from '../molecules/header/UsersSignInLink';
 
 // 型 import
 import { DrawerProps } from '../../types/drawer/DrawerProps';

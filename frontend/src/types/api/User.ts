@@ -1,4 +1,5 @@
 // ライブラリ import
+import { ReactNode } from 'react';
 import { SubmitHandler, Control, UseFormHandleSubmit } from 'react-hook-form';
 
 // Sign Up
@@ -40,10 +41,15 @@ export type UserSignUpTextFieldInputs = {
   name: 'name' | 'email' | 'password' | 'password_confirmation';
   label: string;
   type: string;
-  railsErrorMessage?: string | null;
 };
 
 // Sign In
+
+export type UserSignInForm = {
+  email: string;
+  password: string;
+};
+
 export type UserSignInRequest = {
   email: string;
   password: string;
@@ -52,4 +58,20 @@ export type UserSignInRequest = {
 export type UserSignInResponse = {
   email: string;
   password: string;
+};
+
+export type UserSignInTextFieldInputs = {
+  id: number;
+  name: 'email' | 'password';
+  label: string;
+  type: string;
+};
+
+export type UserSignInPageParams = {
+  control: Control<UserSignInForm>;
+};
+
+export type SignInNavLinkProps = {
+  id: number;
+  children: ReactNode;
 };

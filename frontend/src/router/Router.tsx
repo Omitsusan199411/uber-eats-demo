@@ -1,5 +1,5 @@
 // ライブラリ
-import React, { VFC, memo } from 'react';
+import { VFC, memo } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 // コンポーネント

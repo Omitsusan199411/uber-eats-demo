@@ -12,6 +12,6 @@ export const CopyRightText: VFC = memo(() => (
       mt: '20px'
     }}
   >
-    © 2022 フードデリバリー・TechEats
+    © 2022 フードデリバリー・Fummy
   </Box>
 ));

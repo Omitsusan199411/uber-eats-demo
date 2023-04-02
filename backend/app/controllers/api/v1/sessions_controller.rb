@@ -2,7 +2,7 @@ class Api::V1::SessionsController < ApplicationController
   def sign_in
     @user = User.find_by(email: session_params[:email])
     if @user&.authenticate(session_params[:password])
-      # login!rのレシーバはApi::V1::SessionsControllerのインスタンス(sessions_helper.rbのSessionsHelperモジュールからinclude)
+      # login!のレシーバはApi::V1::SessionsControllerのインスタンス(sessions_helper.rbのSessionsHelperモジュールからinclude)
       login!
       render json: { logged_in: true, user: @user }, status: :created
     else
