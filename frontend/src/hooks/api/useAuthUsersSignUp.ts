@@ -20,16 +20,16 @@ export const useAuthUsersSignUp = () => {
       password_confirmation: data.password_confirmation
     };
     axios
-      .post<UserSignUpResponse>(`${usersSignUpUrl}`, params)
+      .post<UserSignUpResponse>(`${usersSignUpUrl}`, params, { withCredentials: true }) // withCredentials: trueでCookie
       .then((res) => {
         console.log(res);
         history.push('/');
       })
       .catch((error) => {
+        console.log(error);
         const validationData = error.response.data;
-        console.log(validationData);
         // setErrorで入力フォームごとにエラーとそのエラーに対するメッセージをセットできる。
-        // セットしたエラーは、Controllerコンポーネントのrenderプロップスの中のfieldState.errorにオブジェクト形式（message: 'その名前は既に入力されています', type: 'custom', ref: {…}）で格納される
+        // セットしたエラーは、Controllerコンポーネントのrender propsの中のfieldState.errorにオブジェクト形式（message: 'その名前は既に入力されています', type: 'custom', ref: {…}）で格納される
         if (validationData.name !== null) {
           setError('name', { type: 'custom', message: error.response.data.name });
         }

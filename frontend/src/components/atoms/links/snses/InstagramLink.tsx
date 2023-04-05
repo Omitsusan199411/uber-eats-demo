@@ -12,7 +12,7 @@ import instagramIcon from '../../../../images/icons/instagram/instagram-icon.png
 
 const SnsIconImage = styled.img`
   display: block;
-  width: 22px;
+  width: 21px;
   height: auto;
   @media (max-width: ${MaterialUiTheme.breakpoints.values.sm}px) {
     margin-left: 10px;

@@ -11,37 +11,14 @@ import { SignUpButton } from '../atoms/buttons/users/SignUpButton';
 import { SignUpText } from '../atoms/texts/SignUpText';
 import { TopPageMoveLink } from '../molecules/users/TopPageMoveLink';
 
+// array item import
+import { TextFieldInputs } from '../../items/users/UsersSignUpItems';
+
 // type import
 import { UserSignUpPageParams, UserSignUpTextFieldInputs } from '../../types/api/User';
 
 export const UsersSignUpLayout: VFC<UserSignUpPageParams> = memo((props) => {
   const { control, handleSubmit, onSubmitData } = props;
-  const TextFieldInputs: UserSignUpTextFieldInputs[] = [
-    {
-      id: 1,
-      name: 'name',
-      label: 'ニックネーム',
-      type: 'text'
-    },
-    {
-      id: 2,
-      name: 'email',
-      label: 'メールアドレス',
-      type: 'email'
-    },
-    {
-      id: 3,
-      name: 'password',
-      label: 'パスワード',
-      type: 'password'
-    },
-    {
-      id: 4,
-      name: 'password_confirmation',
-      label: 'パスワード確認用',
-      type: 'password'
-    }
-  ];
 
   return (
     <Box
@@ -68,15 +45,18 @@ export const UsersSignUpLayout: VFC<UserSignUpPageParams> = memo((props) => {
           pb: { xs: '30px', sm: '50px' }
         }}
       >
+        {/* サイアップアイコン・タイトル */}
         <Stack component="div" spacing={1} alignItems="center">
           <AccountCircleIcon sx={{ fontSize: { xs: '60px', sm: '80px' } }} />
           <SignUpText />
         </Stack>
+
+        {/* 入力フォーム */}
         <Stack
           component="form"
           onSubmit={(event: React.FormEvent<HTMLFormElement>) => {
             event.preventDefault();
-            // handleSubmit()を実行すると、関数を返す。handleSubmit()はformのdataをオブジェクト型で関数（onSubmitData）に渡す。
+            // handleSubmit()を実行すると、関数を返す。handleSubmit()はformのdataをオブジェクト型で関数（onSubmitData）に渡す。フォームの入力データをonSubmitData関数に渡す役割
             void handleSubmit(onSubmitData)();
           }}
           method="post"
@@ -103,6 +83,8 @@ export const UsersSignUpLayout: VFC<UserSignUpPageParams> = memo((props) => {
               )}
             />
           ))}
+
+          {/* アカウントをお持ちではない方向けの案内 */}
           <Link
             component={RouterLink}
             to="/"

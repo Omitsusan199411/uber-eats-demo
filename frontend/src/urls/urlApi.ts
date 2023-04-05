@@ -1,6 +1,6 @@
 // APIへのリスエスと先を定義
 
-const DEFALUT_API_URL = 'http://localhost:3000/api/v1';
+const DEFALUT_API_URL = 'http://localhost:3001/api/v1';
 
 //  api/v1/restaurants
 export const restaurants = `${DEFALUT_API_URL}/restaurants`;
