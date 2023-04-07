@@ -46,10 +46,13 @@ module UberEatsDemo
     # config/locales/以下に設定した翻訳ファイルが全て読み込まれるように、以下のコードを設定する必要がある。
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]
 
-    # 以下２つは、クロスオリジン間でCookie使用するための設定
+    # 以下2つは、RailsのAPIモードでCookie使用するための設定
     # # リクエストにcookieを設定する
     config.middleware.use ActionDispatch::Cookies
     # # セッションをcookieに保存する役割を担う
-    config.middleware.use ActionDispatch::Session::CookieStore
+    config.middleware.use ActionDispatch::Session::CookieStore, key: '_auth_api_session'
+
+    # 異なるオリジン間でCookieの送受信ができるようにするための設定（SameSite設定をnoneへ）
+    config.action_dispatch.cookies_same_site_protection = :none
   end
 end

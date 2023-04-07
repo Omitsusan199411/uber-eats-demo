@@ -34,6 +34,3 @@
 
 # rubocopの警告メッセージを一時退避させるファイル
 /.rubocop_todo.yml
-
-# sessionの初期設定
-/config/initializers/session_store.rb

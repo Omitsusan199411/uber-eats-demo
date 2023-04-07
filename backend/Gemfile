@@ -51,3 +51,6 @@ gem 'dotenv-rails'
 
 # 日本語化
 gem 'rails-i18n'
+
+# cookieのSameSite属性をnone、Secure属性をtrueにする
+gem "rails_same_site_cookie"
