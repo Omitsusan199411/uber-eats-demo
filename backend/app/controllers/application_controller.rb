@@ -8,7 +8,7 @@ class ApplicationController < ActionController::API
   # login!やcurrent_userヘルパメソッドをinclude
   include SessionsHelper
 
-  # Todo: フロントエンドのレンダリングの動きを見るために試験的に導入
+  # TODO: フロントエンドのレンダリングの動きを見るために試験的に導入
   def fake
     sleep(3)
   end
