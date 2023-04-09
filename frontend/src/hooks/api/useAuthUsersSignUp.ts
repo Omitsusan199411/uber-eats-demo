@@ -20,7 +20,7 @@ export const useAuthUsersSignUp = () => {
       password_confirmation: data.password_confirmation
     };
     axios
-      .post<UserSignUpResponse>(`${usersSignUpUrl}`, params, { withCredentials: true }) // withCredentials: trueでCookie
+      .post<UserSignUpResponse>(`${usersSignUpUrl}`, params, { withCredentials: true }) // withCredentials: trueで異なるオリジン間のリクエストでCookieを付与できる
       .then((res) => {
         console.log(res);
         history.push('/');

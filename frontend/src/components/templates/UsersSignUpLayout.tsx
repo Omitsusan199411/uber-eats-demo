@@ -15,9 +15,9 @@ import { TopPageMoveLink } from '../molecules/users/TopPageMoveLink';
 import { TextFieldInputs } from '../../items/users/UsersSignUpItems';
 
 // type import
-import { UserSignUpPageParams, UserSignUpTextFieldInputs } from '../../types/api/User';
+import { UserSignUpParams, UserSignUpTextFieldInputs } from '../../types/api/User';
 
-export const UsersSignUpLayout: VFC<UserSignUpPageParams> = memo((props) => {
+export const UsersSignUpLayout: VFC<UserSignUpParams> = memo((props) => {
   const { control, handleSubmit, onSubmitData } = props;
 
   return (
@@ -55,8 +55,10 @@ export const UsersSignUpLayout: VFC<UserSignUpPageParams> = memo((props) => {
         <Stack
           component="form"
           onSubmit={(event: React.FormEvent<HTMLFormElement>) => {
+            // handleSubmit関数を実行するためにsubmitイベントをキャンセル
             event.preventDefault();
-            // handleSubmit()を実行すると、関数を返す。handleSubmit()はformのdataをオブジェクト型で関数（onSubmitData）に渡す。フォームの入力データをonSubmitData関数に渡す役割
+            // handleSubmit()を実行すると、onSubmitData関数に引数としてApiからのレスポンスデータ（オブジェクト型）を渡す。フォームの入力データをonSubmitData関数に渡す役割
+            // void演算子でhandleSubmitの返り値の型（Promise型）を無視。Promise型のすべての式は.then()関数と.catch()関数で終わらなければならない。
             void handleSubmit(onSubmitData)();
           }}
           method="post"

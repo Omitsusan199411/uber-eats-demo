@@ -16,7 +16,7 @@ import { LineLink } from '../atoms/links/snses/LineLink';
 import { TwitterLink } from '../atoms/links/snses/TwitterLink';
 
 // type import
-import { UserSignInPageParams } from '../../types/api/User';
+import { UserSignInParams } from '../../types/api/User';
 
 // createContext import
 import { ResponsiveWide } from '../../contexts/responsiveWide';
@@ -24,8 +24,8 @@ import { ResponsiveWide } from '../../contexts/responsiveWide';
 // item import
 import { TextFieldInputs, SignInNavLink } from '../../items/users/UsersSignInItems';
 
-export const UsersSignInLayout: VFC<UserSignInPageParams> = memo((props) => {
-  const { control } = props;
+export const UsersSignInLayout: VFC<UserSignInParams> = memo((props) => {
+  const { control, handleSubmit, onSubmitData } = props;
   const isWide = useContext(ResponsiveWide);
   return (
     <Box
@@ -110,8 +110,11 @@ export const UsersSignInLayout: VFC<UserSignInPageParams> = memo((props) => {
             <Stack
               component="form"
               onSubmit={(event: React.FormEvent<HTMLFormElement>) => {
+                // handleSubmit関数を実行するためにsubmitイベントをキャンセル
                 event.preventDefault();
-                // Todo: ログインボタン押下後の関数
+                // handleSubmit()を実行すると、onSubmitData関数に引数としてApiからのレスポンスデータ（オブジェクト型）を渡す。フォームの入力データをonSubmitData関数に渡す役割
+                // void演算子でhandleSubmitの返り値の型（Promise型）を無視。Promise型のすべての式は.then()関数と.catch()関数で終わらなければならない。
+                void handleSubmit(onSubmitData)();
               }}
               method="post"
               sx={{

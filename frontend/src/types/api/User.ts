@@ -30,12 +30,6 @@ export type UserSignUpForm = {
   password_confirmation: string;
 };
 
-export type UserSignUpPageParams = {
-  control: Control<UserSignUpForm>;
-  handleSubmit: UseFormHandleSubmit<UserSignUpForm>;
-  onSubmitData: SubmitHandler<UserSignUpForm>;
-};
-
 export type UserSignUpTextFieldInputs = {
   id: number;
   name: 'name' | 'email' | 'password' | 'password_confirmation';
@@ -43,14 +37,15 @@ export type UserSignUpTextFieldInputs = {
   type: string;
 };
 
+export type UserSignUpParams = {
+  control: Control<UserSignUpForm>;
+  handleSubmit: UseFormHandleSubmit<UserSignUpForm>;
+  onSubmitData: SubmitHandler<UserSignUpForm>;
+};
+
 // Sign In
 
 export type UserSignInForm = {
-  email: string;
-  password: string;
-};
-
-export type UserSignInRequest = {
   email: string;
   password: string;
 };
@@ -67,11 +62,13 @@ export type UserSignInTextFieldInputs = {
   type: string;
 };
 
-export type UserSignInPageParams = {
-  control: Control<UserSignInForm>;
-};
-
 export type SignInNavLinkProps = {
   id: number;
   children: ReactNode;
+};
+
+export type UserSignInParams = {
+  control: Control<UserSignInForm>;
+  handleSubmit: UseFormHandleSubmit<UserSignInForm>;
+  onSubmitData: SubmitHandler<UserSignInForm>;
 };
