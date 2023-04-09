@@ -1,5 +1,6 @@
 module SessionsHelper
-  # ログインしたユーザーのIDをセッション情報に保存する
+  # 認証に成功したユーザー情報をsessionストアー（session:IDとそれに紐づくユーザー情報）に保存する。※Rails側に情報をもたす
+  # session情報をcookieストアーに保存するかどうかの設定はconfig/application.rbで行う（ActionDispatch::Session::CookieStore）。※ブラウザ側に情報をもたす
   def login!(user)
     session[:user_id] = user.id
   end

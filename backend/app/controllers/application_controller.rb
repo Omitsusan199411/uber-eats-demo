@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::API
   before_action :fake
 
-  # Cookieに関するミドルウェアをコントローラーで使用する
+  # Cookieをコントローラーで使用するためのinclude
   include ActionController::Cookies
   # エラーハンドル（レスキュー）に関するカスタムモジュールをinclude
   include ErrorHandle
