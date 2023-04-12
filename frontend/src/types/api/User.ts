@@ -50,11 +50,6 @@ export type UserSignInForm = {
   password: string;
 };
 
-export type UserSignInResponse = {
-  email: string;
-  password: string;
-};
-
 export type UserSignInTextFieldInputs = {
   id: number;
   name: 'email' | 'password';
@@ -73,4 +68,11 @@ export type UserSignInParams = {
   handleSubmit: UseFormHandleSubmit<UserSignInForm>;
   onSubmitData: SubmitHandler<UserSignInForm>;
   failAuthenticateMessage: boolean;
+};
+
+export type UserSignInResponseState = {
+  // バックエンド側に合わせてキー名は小文字
+  email: string;
+  name: string;
+  sign_in_state: boolean;
 };

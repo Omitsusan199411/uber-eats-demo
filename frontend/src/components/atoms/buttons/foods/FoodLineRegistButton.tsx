@@ -8,7 +8,7 @@ import { useAuthLineFoodsPost } from '../../../../hooks/api/useAuthLineFoodsPost
 import { BasicButton } from '../BasicButton';
 
 // createContext import
-import { FoodModalContext } from '../../../../contexts/foods/foodModalContext';
+import { FoodModalContext } from '../../../../contexts/foods/FoodModalContext';
 
 export const FoodLineRegistButton: VFC = memo(() => {
   const { FoodModalState, setFoodModalState } = useContext(FoodModalContext);

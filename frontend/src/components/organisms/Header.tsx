@@ -15,11 +15,21 @@ import { DrawerProps } from '../../types/drawer/DrawerProps';
 import { DRAWER_WIDTH } from '../../constants/constants';
 
 // createContext import
-import { ResponsiveWide } from '../../contexts/responsiveWide';
+import { ResponsiveWide } from '../../contexts/ResponsiveWide';
+
+// カスタムフック import
+import { useAuthUsersSignIn } from '../../hooks/api/useAuthUsersSignIn';
 
 export const Header: VFC<DrawerProps> = memo((props) => {
   const { drawerOpen, setDrawerOpen } = props;
   const isWide = useContext(ResponsiveWide);
+  const { userSignInState } = useAuthUsersSignIn();
+  console.log(userSignInState);
+  /* eslint-disable @typescript-eslint/naming-convention */
+  const { sign_in_state, name } = userSignInState;
+  const signInState = sign_in_state;
+  console.log(signInState);
+  /* eslint-disable @typescript-eslint/naming-convention */
   return (
     <AppBar
       position="sticky"
@@ -54,10 +64,18 @@ export const Header: VFC<DrawerProps> = memo((props) => {
           <Stack component="div" direction="row">
             <TopPageMoveLink />
           </Stack>
-          <Stack component="div" direction="row" spacing={2} divider={<Divider orientation="vertical" flexItem />}>
-            <UsersSignUpLink />
-            <UsersSignInLink />
-          </Stack>
+
+          {/* サインイン可否表示切り替え (真：認証成功、偽：未認証) */}
+          {signInState ? (
+            <Stack component="div" direction="row" spacing={2} divider={<Divider orientation="vertical" flexItem />}>
+              <Box>{`${name}がログインしました`}</Box>
+            </Stack>
+          ) : (
+            <Stack component="div" direction="row" spacing={2} divider={<Divider orientation="vertical" flexItem />}>
+              <UsersSignUpLink />
+              <UsersSignInLink />
+            </Stack>
+          )}
         </Box>
       </Toolbar>
     </AppBar>

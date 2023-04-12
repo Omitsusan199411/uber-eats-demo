@@ -20,7 +20,7 @@ import { TwitterLink } from '../atoms/links/snses/TwitterLink';
 import { UserSignInParams } from '../../types/api/User';
 
 // createContext import
-import { ResponsiveWide } from '../../contexts/responsiveWide';
+import { ResponsiveWide } from '../../contexts/ResponsiveWide';
 
 // item import
 import { TextFieldInputs, SignInNavLink } from '../../items/users/UsersSignInItems';

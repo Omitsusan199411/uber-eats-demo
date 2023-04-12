@@ -18,7 +18,7 @@ import { CopyRightText } from '../atoms/texts/CopyRightText';
 import { DRAWER_WIDTH } from '../../constants/constants';
 
 // createContext import
-import { ResponsiveWide } from '../../contexts/responsiveWide';
+import { ResponsiveWide } from '../../contexts/ResponsiveWide';
 
 type BottomNavigationItemData = {
   id: number;

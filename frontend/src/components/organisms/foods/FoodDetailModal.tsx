@@ -16,7 +16,7 @@ import { FoodCountForm } from '../../molecules/form/FoodCountForm';
 import foodModalImage from '../../../images/foods/food-image.jpg';
 
 // createContext import
-import { FoodModalContext } from '../../../contexts/foods/foodModalContext';
+import { FoodModalContext } from '../../../contexts/foods/FoodModalContext';
 
 export const FoodDetailModal: VFC = memo(() => {
   const { FoodModalState, setFoodModalState } = useContext(FoodModalContext);

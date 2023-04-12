@@ -9,7 +9,7 @@ import { CountDownButton } from '../../atoms/buttons/foods/CountDownButton';
 import { FoodCountFormProps } from '../../../types/api/Food';
 
 // createContext import
-import { FoodModalContext } from '../../../contexts/foods/foodModalContext';
+import { FoodModalContext } from '../../../contexts/foods/FoodModalContext';
 
 export const FoodCountForm: VFC<FoodCountFormProps> = memo((props) => {
   const { CountUp, CountDown } = props;

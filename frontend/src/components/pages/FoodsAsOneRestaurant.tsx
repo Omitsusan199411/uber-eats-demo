@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 
 // コンポーネント import
 import { useAuthFoods } from '../../hooks/api/useAuthFoods';
-import { FoodModalContext } from '../../contexts/foods/foodModalContext';
+import { FoodModalContext } from '../../contexts/foods/FoodModalContext';
 import { FoodDetailModal } from '../organisms/foods/FoodDetailModal';
 import { NewFoodReplaceModal } from '../organisms/foods/NewFoodReplaceModal';
 import { FoodsAsOneRestaurantLayout } from '../templates/FoodsAsOneRestaurantLayout';

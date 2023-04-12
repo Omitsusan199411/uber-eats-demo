@@ -10,12 +10,18 @@ import { Router } from './router/Router';
 import './App.css';
 import './GoogleFonts.css';
 import { MaterialUiTheme } from './theme/MaterialUiTheme';
-import { ResponsiveWide } from './contexts/responsiveWide';
+
+// createContext import
+import { ResponsiveWide } from './contexts/ResponsiveWide';
+
+// 型 import
 
 export const App: VFC = () => {
+  // レスポンシブに伴う画面幅の切り替え指定
   const isWide: boolean = useMediaQuery({
     query: `(max-width: ${MaterialUiTheme.breakpoints.values.md}px`
   });
+
   return (
     <ThemeProvider theme={MaterialUiTheme}>
       {/* CssBaselineでブラウザに設定された固有のcssをリセット */}

@@ -10,7 +10,7 @@ import { BasicIconButton } from '../atoms/buttons/BasicIconButton';
 import { DRAWER_WIDTH } from '../../constants/constants';
 
 // createContext import
-import { ResponsiveWide } from '../../contexts/responsiveWide';
+import { ResponsiveWide } from '../../contexts/ResponsiveWide';
 
 type DrawerSideMenuProps = {
   drawerOpen: boolean;
