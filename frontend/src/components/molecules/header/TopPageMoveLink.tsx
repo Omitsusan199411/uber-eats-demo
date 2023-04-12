@@ -7,7 +7,7 @@ import { Link } from '@mui/material';
 import { MainTitle } from '../../atoms/titles/MainTitle';
 
 export const TopPageMoveLink: VFC = memo(() => (
-  <Link component={RouterLink} to="/restaurants" sx={{ textDecoration: 'none' }}>
+  <Link component={RouterLink} to="/" sx={{ textDecoration: 'none' }}>
     <MainTitle
       family="Roboto, sans-serif"
       weight={900}

@@ -10,20 +10,25 @@ import { useAuthUsersSignIn } from '../../hooks/api/useAuthUsersSignIn';
 import { UserSignInForm } from '../../types/api/User';
 
 export const UsersSignIn: VFC = memo(() => {
-  const { usersSignIn } = useAuthUsersSignIn();
-  const { control, handleSubmit, setError } = useForm<UserSignInForm>({
+  const { usersSignIn, failAuthenticateMessage } = useAuthUsersSignIn();
+  const { control, handleSubmit } = useForm<UserSignInForm>({
     mode: 'onSubmit',
     reValidateMode: 'onChange',
     defaultValues: { email: '', password: '' }
   });
 
   const onSubmitData: SubmitHandler<UserSignInForm> = useCallback((data): void => {
-    usersSignIn(data, setError);
+    usersSignIn(data);
   }, []);
 
   return (
     <>
-      <UsersSignInLayout handleSubmit={handleSubmit} control={control} onSubmitData={onSubmitData} />;
+      <UsersSignInLayout
+        handleSubmit={handleSubmit}
+        control={control}
+        onSubmitData={onSubmitData}
+        failAuthenticateMessage={failAuthenticateMessage}
+      />
     </>
   );
 });

@@ -35,6 +35,7 @@ module UberEatsDemo
     # Only loads a smaller set of middleware suitable for API only apps.
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
+    # apiモードの機能のみを使用する
     config.api_only = true
 
     # CSRF対策のチェックを行うかを指定する。5.2以降のデフォルト設定を読み込むとtrueになる
@@ -47,7 +48,7 @@ module UberEatsDemo
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]
 
     # 以下2つは、RailsのAPIモードでCookie使用するための設定
-    # # リクエストにcookieを設定する
+    # リクエストにcookieを設定する
     config.middleware.use ActionDispatch::Cookies
     # 【sessionストレージの設定】サーバーで発行したセッションをcookieに保存する役割を担う。※ブラウザ側にRails側で登録したsession情報（login!メソッド）をもたす
     config.middleware.use ActionDispatch::Session::CookieStore, key: '_auth_api_session', expire_after: 1.hour

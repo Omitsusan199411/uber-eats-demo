@@ -89,14 +89,15 @@ export const UsersSignUpLayout: VFC<UserSignUpParams> = memo((props) => {
           {/* アカウントをお持ちではない方向けの案内 */}
           <Link
             component={RouterLink}
-            to="/"
+            to="/usersAuth/signIn"
             color="basis.sub"
             sx={{
               display: 'flex',
               alignItems: 'center',
               textDecoration: 'none',
               mt: '30px',
-              fontSize: { xs: '13px', sm: '16px' }
+              fontSize: { xs: '13px', sm: '16px' },
+              '&:hover': { opacity: '0.5', cursor: 'pointer' }
             }}
           >
             <NavigateNextIcon />

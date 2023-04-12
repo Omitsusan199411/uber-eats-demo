@@ -35,7 +35,7 @@ export const FoodsAsOneRestaurant: VFC = memo(() => {
 
   // food Modal用のuseState
   const [FoodModalState, setFoodModalState] = useState<FoodModal>(FoodModalInitialState);
-  // contextの値をメモ化し、useContextを使うコンポーネントに対して不要なレンダリングを防ぐ。（contextValueの値が変わる、つまりFoodModalStateの値が更新されるとレンダリングが起こるようになる）
+  // contextの値をメモ化し、useContextを使うコンポーネントに対して不要なレンダリングを防ぐ。
   const contextValue = useMemo(
     () => ({
       FoodModalState,

@@ -64,6 +64,7 @@ export type UserSignInTextFieldInputs = {
 
 export type SignInNavLinkProps = {
   id: number;
+  path: string;
   children: ReactNode;
 };
 
@@ -71,4 +72,5 @@ export type UserSignInParams = {
   control: Control<UserSignInForm>;
   handleSubmit: UseFormHandleSubmit<UserSignInForm>;
   onSubmitData: SubmitHandler<UserSignInForm>;
+  failAuthenticateMessage: boolean;
 };

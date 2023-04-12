@@ -22,10 +22,12 @@ export const TextFieldInputs: UserSignInTextFieldInputs[] = [
 export const SignInNavLink: SignInNavLinkProps[] = [
   {
     id: 1,
+    path: '/usersAuth/signUp',
     children: <Box component="span">未登録の方はこちらへ</Box>
   },
   {
     id: 2,
+    path: '/',
     children: <Box component="span">パスワードを忘れた方はこちらへ</Box>
   }
 ];

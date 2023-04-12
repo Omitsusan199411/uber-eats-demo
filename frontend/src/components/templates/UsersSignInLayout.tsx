@@ -2,9 +2,10 @@
 import { VFC, memo, useContext } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { Controller } from 'react-hook-form';
-import { Box, Stack, TextField, Link, Divider } from '@mui/material';
+import { Box, Stack, TextField, Link, Divider, List, ListItem, ListItemText } from '@mui/material';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import LoginIcon from '@mui/icons-material/Login';
+import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 
 // コンポーネント import
 import { TopPageMoveLink } from '../molecules/header/TopPageMoveLink';
@@ -25,8 +26,9 @@ import { ResponsiveWide } from '../../contexts/responsiveWide';
 import { TextFieldInputs, SignInNavLink } from '../../items/users/UsersSignInItems';
 
 export const UsersSignInLayout: VFC<UserSignInParams> = memo((props) => {
-  const { control, handleSubmit, onSubmitData } = props;
+  const { control, handleSubmit, onSubmitData, failAuthenticateMessage } = props;
   const isWide = useContext(ResponsiveWide);
+  const isAuthenticateFail = Boolean(failAuthenticateMessage);
   return (
     <Box
       sx={{
@@ -57,11 +59,46 @@ export const UsersSignInLayout: VFC<UserSignInParams> = memo((props) => {
           <SignInText />
         </Stack>
 
+        {/* サインイン失敗時のエラーメッセージ */}
+        {isAuthenticateFail && (
+          <Box
+            component="section"
+            sx={{
+              width: { xs: '90%', sm: '80%' },
+              color: 'error.main',
+              border: '1px dotted #FF0000',
+              p: '7px',
+              m: '15px auto'
+            }}
+          >
+            <Stack component="section" direction="row" justifyContent="center" alignItems="center">
+              <WarningAmberIcon sx={{ fontSize: { xs: '18px', sm: '24px' } }} />
+              <Box component="span" sx={{ fontSize: { xs: '14px', sm: '20px' }, fontWeight: 'bold', ml: '5px' }}>
+                認証に失敗しました
+              </Box>
+            </Stack>
+            <List>
+              <ListItem sx={{ p: '0px' }}>
+                <ListItemText
+                  primary="・メールアドレスとパスワードの誤り"
+                  primaryTypographyProps={{ fontSize: { xs: '12px', sm: '14px' }, m: '0px' }}
+                />
+              </ListItem>
+              <ListItem sx={{ p: '0px' }}>
+                <ListItemText
+                  primary="・メールアドレスとパスワードが未登録"
+                  primaryTypographyProps={{ fontSize: { xs: '12px', sm: '14px' }, m: '0px' }}
+                />
+              </ListItem>
+            </List>
+          </Box>
+        )}
+
         {/* サインイン Snsボタンと入力フォーム */}
-        <Stack component="section" direction={{ xs: 'column', md: 'row' }} sx={{ width: '100%', mt: { md: '30px' } }}>
+        <Stack component="section" direction={{ xs: 'column', md: 'row' }} sx={{ width: '100%', mt: { md: '50px' } }}>
           {/* SNSログイン */}
           <Stack component="div" direction="column" sx={{ width: { xs: '100%', sm: '65%', md: '50%' }, m: '0 auto' }}>
-            {isWide || (
+            {isWide ? null : (
               <Box component="div" color="basis.sub" sx={{ textAlign: 'center' }}>
                 SNSでログイン
               </Box>
@@ -73,7 +110,6 @@ export const UsersSignInLayout: VFC<UserSignInParams> = memo((props) => {
               justifyContent="center"
               spacing={2}
               sx={{
-                pt: { xs: '20px', md: '0px' },
                 pl: { xs: '50px', md: '40px' },
                 pr: { xs: '50px', md: '40px' },
                 mt: '20px'
@@ -87,7 +123,7 @@ export const UsersSignInLayout: VFC<UserSignInParams> = memo((props) => {
           </Stack>
 
           {/* PC画面の時の中心線 */}
-          {isWide || (
+          {isWide ? null : (
             <Divider orientation="vertical" flexItem>
               <Box component="span" color="basis.sub">
                 OR
@@ -102,7 +138,7 @@ export const UsersSignInLayout: VFC<UserSignInParams> = memo((props) => {
             justifyContent="left"
             sx={{ width: { xs: '85%', sm: '60%', md: '50%' }, m: '0 auto' }}
           >
-            {isWide || (
+            {isWide ? null : (
               <Box component="div" color="basis.sub" sx={{ textAlign: 'center' }}>
                 メールアドレスでログイン
               </Box>
@@ -126,6 +162,7 @@ export const UsersSignInLayout: VFC<UserSignInParams> = memo((props) => {
                 mt: '20px'
               }}
             >
+              {/* テキストフィールド */}
               {TextFieldInputs.map((input) => (
                 <Controller
                   key={input.id}
@@ -159,7 +196,7 @@ export const UsersSignInLayout: VFC<UserSignInParams> = memo((props) => {
               key={link.id}
               component={RouterLink}
               color="basis.sub"
-              to="/"
+              to={link.path}
               sx={{
                 display: 'flex',
                 alignItems: 'center',

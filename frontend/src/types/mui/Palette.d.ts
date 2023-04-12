@@ -1,3 +1,4 @@
+// Materil-Uiのデフォルト型を拡張
 export declare module '@mui/material/styles' {
   interface Palette {
     secondary: {

@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  # has_secure_passwordメソッド
+  # has_secure_passwordメソッド（仮想的にUserモデルにpassword、password_confirmation属性が追加され、authenticateメソッドも使えるようになる。またpassword関連のバリデーションを追加してくれる）
   has_secure_password
   has_many :line_foods, dependent: :destroy
 
