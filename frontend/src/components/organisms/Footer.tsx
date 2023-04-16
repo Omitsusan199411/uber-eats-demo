@@ -1,15 +1,14 @@
 // ライブラリ import
-import { VFC, memo, useState, ReactNode, useContext } from 'react';
+import { VFC, memo, useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 // import { useMediaQuery } from 'react-responsive';
 import { Box, BottomNavigation, BottomNavigationAction } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
 import FastfoodIcon from '@mui/icons-material/Fastfood';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+// import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 // コンポーネント import
-// import { MaterialUiTheme } from '../../theme/MaterialUiTheme';
 import { FooterTextNavigation } from '../molecules/footer/FooterTextNavigation';
 import { FooterSnsIconsNavigation } from '../molecules/footer/FooterSnsIconsNavigation';
 import { CopyRightText } from '../atoms/texts/CopyRightText';
@@ -17,26 +16,14 @@ import { CopyRightText } from '../atoms/texts/CopyRightText';
 // 定数 import
 import { DRAWER_WIDTH } from '../../constants/constants';
 
-// createContext import
+// コンテキスト import
 import { ResponsiveWide } from '../../contexts/ResponsiveWide';
 
-type BottomNavigationItemData = {
-  id: number;
-  label: string;
-  value: string;
-  icon: ReactNode;
-  sx: {
-    color: string;
-    '&:hover': {
-      opacity: number;
-    };
-    span: {
-      fontSize: { xs: string; sm: string };
-    };
-  };
-};
+// 型 import
+import { FooterNavigationItemsProps } from '../../types/footer/FooterNavigationItemsProps';
 
-const bottomNavigationItem: BottomNavigationItemData[] = [
+//  import
+const FooterNavigationItems = [
   {
     id: 1,
     label: 'ホーム',
@@ -81,22 +68,22 @@ const bottomNavigationItem: BottomNavigationItemData[] = [
         fontSize: { xs: '10px', sm: '12px' }
       }
     }
-  },
-  {
-    id: 4,
-    label: 'カート',
-    value: '#',
-    icon: <ShoppingCartIcon sx={{ fontSize: { xs: '22px', sm: '28px' } }} />,
-    sx: {
-      color: 'primary.main',
-      '&:hover': {
-        opacity: 0.5
-      },
-      span: {
-        fontSize: { xs: '10px', sm: '12px' }
-      }
-    }
   }
+  //   {
+  //     id: 4,
+  //     label: 'カート',
+  //     value: '#',
+  //     icon: <ShoppingCartIcon sx={{ fontSize: { xs: '22px', sm: '28px' } }} />,
+  //     sx: {
+  //       color: 'primary.main',
+  //       '&:hover': {
+  //         opacity: 0.5
+  //       },
+  //       span: {
+  //         fontSize: { xs: '10px', sm: '12px' }
+  //       }
+  //     }
+  //   }
 ];
 
 export const Footer: VFC = memo(() => {
@@ -121,7 +108,7 @@ export const Footer: VFC = memo(() => {
             width: '100%'
           }}
         >
-          {bottomNavigationItem.map((element: BottomNavigationItemData) => (
+          {FooterNavigationItems.map((element: FooterNavigationItemsProps) => (
             <BottomNavigationAction
               key={element.id}
               label={element.label}
