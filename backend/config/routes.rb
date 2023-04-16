@@ -16,7 +16,7 @@ Rails.application.routes.draw do
       post '/sign_up', to: 'registrations#sign_up'
       post '/sign_in', to: 'sessions#sign_in'
       delete '/sign_out', to: 'sessions#sign_out'
-      get '/logged_in', to: 'sessions#logged_in?' # フロントエンド側でログインの追跡を行う
+      get '/signed_in', to: 'sessions#signed_in?' # フロントエンド側でログインの追跡を行う
     end
   end
 end

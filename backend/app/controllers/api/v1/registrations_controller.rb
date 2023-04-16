@@ -6,8 +6,7 @@ class Api::V1::RegistrationsController < ApplicationController
       @user.save!
       # login!のレシーバはApi::V1::RegistrationsControllerのインスタンス(sessions_helper.rbのSessionsHelperモジュールからinclude)
       login!(@user)
-      binding.pry
-      render json: { user: @user, status: :created }
+      render json: { user: @user, sign_in_state: true, status: :created }
     else
       render json: { name: @user.errors.full_messages_for(:name).first, email: @user.errors.full_messages_for(:email).first, password: @user.errors.full_messages_for(:password_digest).first }, status: :internal_server_error
     end

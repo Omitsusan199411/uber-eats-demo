@@ -1,5 +1,5 @@
 // ライブラリ import
-import { VFC, memo, useCallback } from 'react';
+import { VFC, memo, useCallback, useContext } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
@@ -9,6 +9,9 @@ import { useAuthUsersSignUp } from '../../hooks/api/useAuthUsersSignUp';
 
 // 型 import
 import { UserSignUpForm } from '../../types/api/User';
+
+// コンテキスト
+import { UserSignInContext } from '../../contexts/users/UserSignInContext';
 
 // バリデーションルール import
 import { schema } from '../../validates/users/usersSignUpValidationRules';
@@ -23,8 +26,10 @@ export const UsersSignUp: VFC = memo(() => {
     resolver: yupResolver(schema)
   });
 
+  const { userSignInState, setUserSignInState } = useContext(UserSignInContext);
+
   const onSubmitData: SubmitHandler<UserSignUpForm> = useCallback((data): void => {
-    usersSignUp(data, setError);
+    usersSignUp(data, userSignInState, setUserSignInState, setError);
   }, []);
 
   return (

@@ -11,10 +11,13 @@ export type UserSignUpRequest = {
 };
 
 export type UserSignUpResponse = {
-  name: string;
-  email: string;
-  password: string;
-  password_confirmation: string;
+  user: {
+    name: string;
+    email: string;
+    password: string;
+    password_confirmation: string;
+  };
+  sign_in_state: boolean;
 };
 
 export type UserSignUpErrorResponse = {

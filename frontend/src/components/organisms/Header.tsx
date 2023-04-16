@@ -7,6 +7,8 @@ import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 import { TopPageMoveLink } from '../molecules/header/TopPageMoveLink';
 import { UsersSignUpLink } from '../molecules/header/UsersSignUpLink';
 import { UsersSignInLink } from '../molecules/header/UsersSignInLink';
+import { UsersMyPageLink } from '../molecules/header/UsersMyPageLink';
+import { UsersCartLink } from '../molecules/header/UsersCartLink';
 
 // 型 import
 import { DrawerProps } from '../../types/drawer/DrawerProps';
@@ -14,22 +16,24 @@ import { DrawerProps } from '../../types/drawer/DrawerProps';
 // 定数 import
 import { DRAWER_WIDTH } from '../../constants/constants';
 
-// createContext import
+// コンテキスト import
 import { ResponsiveWide } from '../../contexts/ResponsiveWide';
-
-// カスタムフック import
-import { useAuthUsersSignIn } from '../../hooks/api/useAuthUsersSignIn';
+import { UserSignInContext } from '../../contexts/users/UserSignInContext';
 
 export const Header: VFC<DrawerProps> = memo((props) => {
   const { drawerOpen, setDrawerOpen } = props;
+
+  // レスポンシブデザイン
   const isWide = useContext(ResponsiveWide);
-  const { userSignInState } = useAuthUsersSignIn();
-  console.log(userSignInState);
+
+  // ユーザー認証情報
+  const { userSignInState } = useContext(UserSignInContext);
   /* eslint-disable @typescript-eslint/naming-convention */
-  const { sign_in_state, name } = userSignInState;
+  const { name, sign_in_state } = userSignInState;
   const signInState = sign_in_state;
   console.log(signInState);
   /* eslint-disable @typescript-eslint/naming-convention */
+
   return (
     <AppBar
       position="sticky"
@@ -62,13 +66,16 @@ export const Header: VFC<DrawerProps> = memo((props) => {
           }}
         >
           <Stack component="div" direction="row">
-            <TopPageMoveLink />
+            <Stack component="div" direction="row" spacing={2} divider={<Divider orientation="vertical" flexItem />}>
+              <TopPageMoveLink />
+            </Stack>
           </Stack>
 
           {/* サインイン可否表示切り替え (真：認証成功、偽：未認証) */}
           {signInState ? (
             <Stack component="div" direction="row" spacing={2} divider={<Divider orientation="vertical" flexItem />}>
-              <Box>{`${name}がログインしました`}</Box>
+              <UsersMyPageLink signInUserName={name} />
+              <UsersCartLink />
             </Stack>
           ) : (
             <Stack component="div" direction="row" spacing={2} divider={<Divider orientation="vertical" flexItem />}>

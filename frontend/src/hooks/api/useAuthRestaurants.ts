@@ -30,7 +30,7 @@ export const useAuthRestaurants = () => {
     });
     // axiosの戻り値はPromiseオブジェクト、then()の戻り値もPromiseオブジェクト
     axios
-      .get<Restaurant[]>(`${restaurants}`)
+      .get<Restaurant[]>(`${restaurants}`, { withCredentials: true })
       .then((res: AxiosResponse<Restaurant[]>) => {
         const { data } = res;
         dispatch({

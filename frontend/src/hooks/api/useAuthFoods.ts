@@ -23,7 +23,7 @@ export const useAuthFoods = () => {
     dispatch({ type: REDUCER_FETCHING_ACTION.FETCHING, payload: [] });
     // axiosの返り値はPromiseオブジェクト
     axios
-      .get<FoodIncludeRestaurant[]>(`${foodsIndex(restaurantId)}`)
+      .get<FoodIncludeRestaurant[]>(`${foodsIndex(restaurantId)}`, { withCredentials: true })
       .then((res: AxiosResponse<FoodIncludeRestaurant[]>) => {
         const { data } = res;
         dispatch({

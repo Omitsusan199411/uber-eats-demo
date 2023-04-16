@@ -25,3 +25,6 @@ export const usersSignInUrl = `${DEFALUT_API_URL}/sign_in`;
 
 // api/v1/sessions/sign_out
 export const usersSignOutUrl = `${DEFALUT_API_URL}/sign_out`;
+
+// api/v1/sessions/logged_in
+export const usersSignedInUrl = `${DEFALUT_API_URL}/signed_in`;
