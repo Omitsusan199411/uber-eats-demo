@@ -19,6 +19,7 @@ Rails.application.configure do
   # Run rails dev:cache to toggle caching.
   if Rails.root.join('tmp', 'caching-dev.txt').exist?
     config.cache_store = :memory_store
+    config.session_store = :redis_cache_store, { key: '_auth_api_redis_session', expires_after: 90.minutes, servers: ENV.fetch['REDIS_DEVELOPMENT_URL'] }
     config.public_file_server.headers = {
       'Cache-Control' => "public, max-age=#{2.days.to_i}"
     }

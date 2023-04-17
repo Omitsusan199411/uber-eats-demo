@@ -6,7 +6,7 @@ import { List, ListItem, Link } from '@mui/material';
 // 画像 import
 import twitterIcon from '../../../images/icons/twitter/twitter-icon.png';
 import facebookIcon from '../../../images/icons/facebook/facebook-icon.png';
-import instagramIcon from '../../../images/icons/instagram/instagram-icon.png';
+import instagramColorIcon from '../../../images/icons/instagram/instagram-color-icon.png';
 import lineIcon from '../../../images/icons/line/line-icon.png';
 
 type FooterSnsIconsData = {
@@ -32,7 +32,7 @@ const footerSnsIcons: FooterSnsIconsData[] = [
   {
     id: 3,
     href: 'https://www.instagram.com',
-    src: instagramIcon,
+    src: instagramColorIcon,
     alt: 'instagram'
   },
   {
@@ -60,7 +60,7 @@ const SnsIconImage = styled.img`
 export const FooterSnsIconsNavigation: VFC = memo(() => (
   <List component="ul" sx={{ display: 'flex', justifyContent: 'center', mt: '25px' }}>
     {footerSnsIcons.map((element: FooterSnsIconsData) => (
-      <ListItemCustom key={element.id} sx={{ width: { xs: '15%', md: '8%' } }}>
+      <ListItemCustom key={element.id} sx={{ width: { xs: '15%', md: '8%' }, mr: '15px' }}>
         <Link href={element.href}>
           <SnsIconImage src={element.src} alt={element.alt} />
         </Link>

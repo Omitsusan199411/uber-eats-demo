@@ -53,4 +53,7 @@ gem 'dotenv-rails'
 gem 'rails-i18n'
 
 # cookieのSameSite属性をnone、Secure属性をtrueにする
-gem "rails_same_site_cookie"
+gem 'rails_same_site_cookie'
+
+# redisによるセッション管理を実現(gem redis-railsをよりも推奨されるgem)
+gem 'redis-actionpack'

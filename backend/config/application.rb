@@ -50,10 +50,13 @@ module UberEatsDemo
     # 以下2つは、RailsのAPIモードでCookie使用するための設定
     # リクエストにcookieを設定する
     config.middleware.use ActionDispatch::Cookies
-    # 【sessionストレージの設定】サーバーで発行したセッションをcookieに保存する役割を担う。※ブラウザ側にRails側で登録したsession情報（login!メソッド）をもたす
-    config.middleware.use ActionDispatch::Session::CookieStore, key: '_auth_api_session', expire_after: 1.hour
-
     # 異なるオリジン間でCookieの送受信ができるようにするための設定（SameSite設定をnoneへ）
     config.action_dispatch.cookies_same_site_protection = :none
+    # 【sessionストレージの設定】サーバーで発行したセッションをcookieに保存する役割を担う。※ブラウザ側にRails側で登録したsession情報（login!メソッド）をもたす
+    # 以下、Cookie方式によるsession管理はredisに置き換えるためコメントアウト
+    # config.middleware.use ActionDispatch::Session::CookieStore, key: '_auth_api_session', expire_after: 1.hour
+
+    # redisによるsession管理を有効にする
+    config.middleware.use ActionDispatch::Session::RedisStore
   end
 end

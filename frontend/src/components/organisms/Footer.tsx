@@ -6,7 +6,7 @@ import { Box, BottomNavigation, BottomNavigationAction } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
 import FastfoodIcon from '@mui/icons-material/Fastfood';
-// import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import RestoreIcon from '@mui/icons-material/Restore';
 
 // コンポーネント import
 import { FooterTextNavigation } from '../molecules/footer/FooterTextNavigation';
@@ -68,22 +68,22 @@ const FooterNavigationItems = [
         fontSize: { xs: '10px', sm: '12px' }
       }
     }
+  },
+  {
+    id: 4,
+    label: '閲覧履歴',
+    value: '#',
+    icon: <RestoreIcon sx={{ fontSize: { xs: '22px', sm: '28px' } }} />,
+    sx: {
+      color: 'primary.main',
+      '&:hover': {
+        opacity: 0.5
+      },
+      span: {
+        fontSize: { xs: '10px', sm: '12px' }
+      }
+    }
   }
-  //   {
-  //     id: 4,
-  //     label: 'カート',
-  //     value: '#',
-  //     icon: <ShoppingCartIcon sx={{ fontSize: { xs: '22px', sm: '28px' } }} />,
-  //     sx: {
-  //       color: 'primary.main',
-  //       '&:hover': {
-  //         opacity: 0.5
-  //       },
-  //       span: {
-  //         fontSize: { xs: '10px', sm: '12px' }
-  //       }
-  //     }
-  //   }
 ];
 
 export const Footer: VFC = memo(() => {
