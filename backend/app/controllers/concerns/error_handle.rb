@@ -1,10 +1,13 @@
+# MVCモデルの中で全て共通な処理はconcernsに書くこと
 module ErrorHandle
-  # ActiveSupport::Concernモジュールに定義されたメソッドをErrorHandleモジュールのクラスメソッドとして使用可能（絶対に必要）
+  # ActiveSupport::Concernモジュールに定義されたメソッドをErrorHandleモジュールのメソッドとして使用可能（絶対に必要）
+  # モジュール間の依存関係を解消
   extend ActiveSupport::Concern
   # モジュールがincludeされた後にrescue_fromメソッドが動作できるようにする（NoMethodErrorの防止）
   included do
     # StandardErrorはNoMethodErrorやArgumentErrorの親クラス
-    rescue_from StandardError, with: :render_500
+    # Redisサーバーが落ちた場合のエラーハンドリングも行う。
+    rescue_from StandardError, Redis::CannotConnectError, with: :render_500
   end
 
   private
@@ -16,6 +19,6 @@ module ErrorHandle
     logger.error error.class
     logger.error error.message
     logger.error error.backtrace.join("\n")
-    render json: { ErrorMessage: error.message.to_s }, status: :internal_server_error
+    render json: { ErrorMessage: error }, status: :internal_server_error
   end
 end

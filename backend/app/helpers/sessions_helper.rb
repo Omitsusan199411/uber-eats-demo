@@ -1,3 +1,4 @@
+# CV（（コントローラーやビュー）の中で共通化したいヘルパーメソッドを書くこと
 module SessionsHelper
   # 認証に成功したユーザー情報をsessionストアー（session:IDとそれに紐づくユーザー情報）に保存する。※Rails側に情報をもたす
   # session情報をcookieストアーに保存するかどうかの設定はconfig/application.rbで行う（ActionDispatch::Session::CookieStore）。※ブラウザ側に情報をもたす

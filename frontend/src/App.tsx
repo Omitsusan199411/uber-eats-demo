@@ -1,16 +1,15 @@
 // ライブラリ import
-import { VFC, useState, useMemo, useEffect } from 'react';
-import axios from 'axios';
+import { VFC, useState, useMemo } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-import { Router } from './router/Router';
 
 // コンポーネント import
 import './App.css';
 import './GoogleFonts.css';
 import { MaterialUiTheme } from './theme/MaterialUiTheme';
+import { Router } from './router/Router';
 
 // createContext import
 import { ResponsiveWide } from './contexts/ResponsiveWide';
@@ -18,9 +17,6 @@ import { UserSignInContext } from './contexts/users/UserSignInContext';
 
 // 型 import
 import { UserSignInResponseState } from './types/api/User';
-
-// Url import
-import { usersSignedInUrl } from './urls/urlApi';
 
 export const App: VFC = () => {
   // レスポンシブに伴う画面幅の切り替え指定
@@ -42,24 +38,6 @@ export const App: VFC = () => {
       setUserSignInState
     };
   }, [userSignInState, setUserSignInState]);
-
-  // ユーザーのサインイン状態を毎回追跡（ページリロード後にもサインインしているユーザー情報を保持するため）
-  useEffect(() => {
-    axios
-      .get<UserSignInResponseState>(`${usersSignedInUrl}`, { withCredentials: true })
-      .then((res) => {
-        console.log(res);
-        setUserSignInState({
-          ...userSignInState,
-          email: res.data.email,
-          name: res.data.name,
-          sign_in_state: res.data.sign_in_state
-        });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
 
   return (
     <ThemeProvider theme={MaterialUiTheme}>

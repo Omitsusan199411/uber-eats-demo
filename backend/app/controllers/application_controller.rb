@@ -3,9 +3,9 @@ class ApplicationController < ActionController::API
 
   # Cookieをコントローラーで使用するためのinclude
   include ActionController::Cookies
-  # エラーハンドル（レスキュー）に関するカスタムモジュールをinclude
+  # エラーハンドル（レスキュー）に関するカスタムモジュールをinclude（concerns/error_handle.rb）
   include ErrorHandle
-  # login!やcurrent_userヘルパメソッドをinclude
+  # login!やcurrent_userヘルパメソッドをinclude(helpers/sessions_helper.rb)
   include SessionsHelper
 
   # TODO: フロントエンドのレンダリングの動きを見るために試験的に導入

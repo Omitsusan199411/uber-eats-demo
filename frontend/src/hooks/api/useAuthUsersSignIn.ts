@@ -40,7 +40,12 @@ export const useAuthUsersSignIn = () => {
         })
         .catch((error) => {
           console.log(error);
-          setFailAuthenticateMessage(true);
+          if (error.response.status === 401) {
+            setFailAuthenticateMessage(true);
+            history.push('/usersAuth/signIn');
+          } else {
+            history.push('/page500');
+          }
         });
     },
     []
