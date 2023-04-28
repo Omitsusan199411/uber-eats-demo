@@ -22,14 +22,14 @@ const SnsIconImage = styled.img`
   }
 `;
 
-export const InstagramLink: VFC = memo(() => {
+export const InstagramOauthLink: VFC = memo(() => {
   return (
     <Link
       component={RouterLink}
       to="/"
       sx={{
         display: 'flex',
-        width: '100%',
+        width: { xs: '100%', sm: '98%', md: '90%' },
         backgroundColor: '#d93078',
         justifyContent: 'left',
         p: '10px',

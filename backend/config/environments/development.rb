@@ -19,7 +19,7 @@ Rails.application.configure do
   # Run rails dev:cache to toggle caching.
   if Rails.root.join('tmp', 'caching-dev.txt').exist?
     config.cache_store = :memory_store
-    config.session_store = :redis_cache_store, { key: '_auth_api_redis_session', expires_after: 90.minutes, servers: ENV.fetch('REDIS_DEVELOPMENT_URL') }
+    config.session_store = :redis_cache_store, { key: '_auth_api_redis_session', expires_after: 90.minutes, servers: ENV.fetch('REDIS_DEVELOPMENT_URL'), same_site: :none, secure: true }
     config.public_file_server.headers = {
       'Cache-Control' => "public, max-age=#{2.days.to_i}"
     }
@@ -56,4 +56,5 @@ Rails.application.configure do
 
   # ログファイルが10MB以上になると違うログファイルを作成。そのファイル数が5個以上になると古いファイルから削除する
   config.logger = Logger.new('log/development.log', 5, 10 * 1024 * 1024)
+
 end

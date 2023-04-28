@@ -17,6 +17,7 @@ Rails.application.routes.draw do
       post '/sign_in', to: 'sessions#sign_in'
       delete '/sign_out', to: 'sessions#sign_out'
       get '/signed_in', to: 'sessions#signed_in?' # フロントエンド側でログインの追跡を行う
+      post 'auth/:provider/callback', to: 'sessions#oauth_sign_in' # SNS認証
     end
   end
 end

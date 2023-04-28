@@ -11,10 +11,11 @@ import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 import { TopPageMoveLink } from '../molecules/header/TopPageMoveLink';
 import { SignInText } from '../atoms/texts/SignInText';
 import { SignInButton } from '../atoms/buttons/users/SignInButton';
-import { FacebookLink } from '../atoms/links/snses/FacebookLink';
-import { InstagramLink } from '../atoms/links/snses/InstagramLink';
-import { LineLink } from '../atoms/links/snses/LineLink';
-import { TwitterLink } from '../atoms/links/snses/TwitterLink';
+import { FacebookOauthLink } from '../atoms/links/snses/FacebookOauthLink';
+// import { InstagramOauthLink } from '../atoms/links/snses/InstagramLink';
+import { GoogleOauthLink } from '../atoms/links/snses/GoogleOauthLink';
+import { LineOauthLink } from '../atoms/links/snses/LineOauthLink';
+import { TwitterOauthLink } from '../atoms/links/snses/TwitterOauthLink';
 
 // type import
 import { UserSignInParams } from '../../types/api/User';
@@ -115,10 +116,10 @@ export const UsersSignInLayout: VFC<UserSignInParams> = memo((props) => {
                 mt: '20px'
               }}
             >
-              <FacebookLink />
-              <InstagramLink />
-              <LineLink />
-              <TwitterLink />
+              <FacebookOauthLink />
+              <GoogleOauthLink />
+              <LineOauthLink />
+              <TwitterOauthLink />
             </Stack>
           </Stack>
 

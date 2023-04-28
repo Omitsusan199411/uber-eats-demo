@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_12_04_143035) do
+ActiveRecord::Schema.define(version: 2023_04_21_015623) do
 
   create_table "foods", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "restaurant_id", null: false
@@ -60,6 +60,16 @@ ActiveRecord::Schema.define(version: 2022_12_04_143035) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["name"], name: "index_users_on_name", unique: true
+  end
+
+  create_table "users_sns_credentials", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.string "uid", null: false
+    t.string "provider", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["uid", "provider"], name: "index_users_sns_credentials_on_uid_and_provider", unique: true
+    t.index ["user_id"], name: "index_users_sns_credentials_on_user_id"
   end
 
 end

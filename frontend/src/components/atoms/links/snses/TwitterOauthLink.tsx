@@ -22,14 +22,14 @@ const SnsIconImage = styled.img`
   }
 `;
 
-export const TwitterLink: VFC = memo(() => {
+export const TwitterOauthLink: VFC = memo(() => {
   return (
     <Link
       component={RouterLink}
       to="/"
       sx={{
         display: 'flex',
-        width: '100%',
+        width: { xs: '100%', sm: '98%', md: '90%' },
         backgroundColor: '#1DA1F2',
         justifyContent: 'left',
         p: '10px',

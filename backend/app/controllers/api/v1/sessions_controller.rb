@@ -25,6 +25,10 @@ class Api::V1::SessionsController < ApplicationController
     end
   end
 
+  # def oauth_sign_in
+  #   auth = request.env['omniauth.auth']
+  # end
+
   private
 
   def session_params

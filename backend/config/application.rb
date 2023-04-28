@@ -58,5 +58,8 @@ module UberEatsDemo
 
     # redisによるsession管理を有効にする
     config.middleware.use ActionDispatch::Session::RedisStore
+
+    # OmniAuthのログ管理
+    OmniAuth.config.logger = Rails.logger
   end
 end

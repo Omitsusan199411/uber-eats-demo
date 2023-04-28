@@ -7,9 +7,9 @@ import axios from 'axios';
 import { Home } from '../components/pages/Home';
 import { Page404 } from '../components/pages/Page404';
 import { Page500 } from '../components/pages/Page500';
-import { usersAuthRouter } from './UsersAuthRouter';
-import { restaurantsRouter } from './RestaurantsRouter';
-import { ordersRouter } from './OrdersRouter';
+import { usersAuthRouter } from './usersAuthRouter';
+import { restaurantsRouter } from './restaurantsRouter';
+import { ordersRouter } from './ordersRouter';
 
 // 型 import
 import { UserSignInResponseState } from '../types/api/User';
