@@ -6,9 +6,9 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :restaurants do
         # FoodモデルはRestaurantモデルに従属する
-        resources :foods, only: [:index, :new, :create]
+        resources :foods, only: %i[index new create]
       end
-      resources :line_foods, only: [:index, :create]
+      resources :line_foods, only: %i[index create]
       put 'line_foods/replace', to: 'line_foods#replace'
       resources :orders, only: [:create]
 
@@ -17,7 +17,9 @@ Rails.application.routes.draw do
       post '/sign_in', to: 'sessions#sign_in'
       delete '/sign_out', to: 'sessions#sign_out'
       get '/signed_in', to: 'sessions#signed_in?' # フロントエンド側でログインの追跡を行う
-      post 'auth/:provider/callback', to: 'sessions#oauth_sign_in' # SNS認証
+
+      # OAuth認証
+      post '/oauth_sign_up_or_sign_in', to: 'oauth_registration_session#sign_up_or_sign_in'
     end
   end
 end

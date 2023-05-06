@@ -33,7 +33,8 @@ export const useAuthUsersSignUp = () => {
           // バックエンドのキーの関係でスネークケースを特別許可
           setUserSignInState({
             ...userSignInState,
-            name: res.data.user.name,
+            name: res.data.name,
+            email: res.data.email,
             sign_in_state: res.data.sign_in_state
           });
           /* eslint-disable @typescript-eslint/naming-convention */

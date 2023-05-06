@@ -10,5 +10,6 @@ class CreateUsers < ActiveRecord::Migration[6.0]
     end
     add_index :users, :name, unique: true
     add_index :users, :email, unique: true
+    add_index :users, :password_digest, unique: true
   end
 end

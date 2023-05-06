@@ -28,3 +28,6 @@ export const usersSignOutUrl = `${DEFALUT_API_URL}/sign_out`;
 
 // api/v1/sessions/logged_in
 export const usersSignedInUrl = `${DEFALUT_API_URL}/signed_in`;
+
+// /api/v1/oauth_sign_up_or_sign_in
+export const oauthRegistrationSessionUrl = `${DEFALUT_API_URL}/oauth_sign_up_or_sign_in`;

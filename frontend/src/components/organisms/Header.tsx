@@ -22,12 +22,9 @@ import { UserSignInContext } from '../../contexts/users/UserSignInContext';
 
 export const Header: VFC<DrawerProps> = memo((props) => {
   const { drawerOpen, setDrawerOpen } = props;
-
-  // レスポンシブデザイン
   const isWide = useContext(ResponsiveWide);
-
-  // ユーザー認証情報
   const { userSignInState } = useContext(UserSignInContext);
+
   /* eslint-disable @typescript-eslint/naming-convention */
   const { name, sign_in_state } = userSignInState;
   const signInState = sign_in_state;

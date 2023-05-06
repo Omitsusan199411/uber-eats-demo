@@ -11,7 +11,6 @@ import { usersSignInUrl } from '../../urls/urlApi';
 
 export const useAuthUsersSignIn = () => {
   const [failAuthenticateMessage, setFailAuthenticateMessage] = useState<boolean>(false);
-
   const history = useHistory();
   const usersSignIn = useCallback(
     (
@@ -28,7 +27,7 @@ export const useAuthUsersSignIn = () => {
         .then((res) => {
           console.log(res);
           /* eslint-disable @typescript-eslint/naming-convention */
-          // バックエンドのキーの関係でスネークケースを特別許可
+          // バックエンドのkeyの関係でスネークケースを特別許可
           setUserSignInState({
             ...userSignInState,
             name: res.data.name,
