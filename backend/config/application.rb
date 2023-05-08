@@ -25,6 +25,9 @@ module UberEatsDemo
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
 
+    # config/locales/以下に設定した翻訳ファイルが全て読み込まれるように、以下のコードを設定する必要がある。
+    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]
+
     config.time_zone = 'Tokyo'
 
     # Settings in config/environments/* take precedence over those specified here.
@@ -44,9 +47,6 @@ module UberEatsDemo
     # gem「rails-i18n」による日本語化対応（デフォルトのlocaleを:en以外に変更する）
     config.i18n.default_locale = :ja
 
-    # config/locales/以下に設定した翻訳ファイルが全て読み込まれるように、以下のコードを設定する必要がある。
-    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]
-
     # 以下2つは、RailsのAPIモードでCookie使用するための設定
     # リクエストにcookieを設定する
     config.middleware.use ActionDispatch::Cookies
@@ -56,10 +56,7 @@ module UberEatsDemo
     # 以下、Cookie方式によるsession管理はredisに置き換えるためコメントアウト
     # config.middleware.use ActionDispatch::Session::CookieStore, key: '_auth_api_session', expire_after: 1.hour
 
-    # redisによるsession管理を有効にする
+    # redisによるsession管理を有効にする（デフォルト）
     config.middleware.use ActionDispatch::Session::RedisStore
-
-    # OmniAuthのログ管理
-    OmniAuth.config.logger = Rails.logger
   end
 end

@@ -19,7 +19,9 @@ Rails.application.configure do
   # Run rails dev:cache to toggle caching.
   if Rails.root.join('tmp', 'caching-dev.txt').exist?
     config.cache_store = :memory_store
-    config.session_store = :redis_cache_store, { key: '_auth_api_redis_session', expires_after: 90.minutes, servers: ENV.fetch('REDIS_DEVELOPMENT_URL'), same_site: :none, secure: true }
+    # todo 以下のsession_store = :redis_cache_storeは本環境においては記載なくてもRedisのセッション管理は可能（消すかも）
+    config.session_store = :redis_cache_store
+
     config.public_file_server.headers = {
       'Cache-Control' => "public, max-age=#{2.days.to_i}"
     }
@@ -45,7 +47,6 @@ Rails.application.configure do
 
   # Highlight code that triggered database queries in logs.
   config.active_record.verbose_query_logs = true
-
 
   # Raises error for missing translations.
   # config.action_view.raise_on_missing_translations = true

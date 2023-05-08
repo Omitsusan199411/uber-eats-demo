@@ -1,10 +1,13 @@
 // ライブラリ import
 import { useCallback, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
-import axios, { AxiosError, AxiosResponse } from 'axios';
+import axios from 'axios';
 
 // 型 import
-import { OauthAuthenticationUserInfo } from '../../types/api/OauthAuthentication';
+import {
+  OauthAuthenticationGoogleResponse,
+  OauthAuthenticationUserResponse
+} from '../../types/api/OauthAuthentication';
 
 // URL import
 import { oauthRegistrationSessionUrl } from '../../urls/urlApi';
@@ -16,17 +19,17 @@ export const useAuthGoogleUsersOauth = () => {
   const history = useHistory();
   const { userSignInState, setUserSignInState } = useContext(UserSignInContext);
   const googleOauthSignUpOrSignInPost = useCallback((googleOauthRes): void => {
+    console.log(googleOauthRes);
     const { googleId, profileObj, tokenObj } = googleOauthRes;
-    const params = {
+    const params: OauthAuthenticationGoogleResponse = {
       provider_uid: googleId,
       provider_name: tokenObj.idpId,
       email: profileObj.email,
       name: profileObj.name
     };
-    console.log(params);
     axios
-      .post(`${oauthRegistrationSessionUrl}`, params, { withCredentials: true })
-      .then((railsRes: AxiosResponse<OauthAuthenticationUserInfo>) => {
+      .post<OauthAuthenticationUserResponse>(`${oauthRegistrationSessionUrl}`, params, { withCredentials: true })
+      .then((railsRes) => {
         console.log(railsRes);
         setUserSignInState({
           ...userSignInState,
@@ -34,12 +37,15 @@ export const useAuthGoogleUsersOauth = () => {
           email: railsRes.data.email,
           sign_in_state: railsRes.data.sign_in_state
         });
-        console.log(userSignInState);
         history.push(`/restaurants`);
       })
-      .catch((railsError: AxiosError) => {
-        console.log(railsError);
-        history.push(`/usersAuth/signIn`);
+      .catch((railsError) => {
+        if (railsError.response.status === 401) {
+          console.log(railsError);
+          history.push(`/usersAuth/signIn`);
+        } else {
+          history.push(`/page500`);
+        }
       });
   }, []);
   return { googleOauthSignUpOrSignInPost };

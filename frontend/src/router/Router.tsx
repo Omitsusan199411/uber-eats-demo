@@ -24,7 +24,8 @@ export const Router: VFC = memo(() => {
   // 以下、ユーザー認証情報の追跡
   const { userSignInState, setUserSignInState } = useContext(UserSignInContext);
   const history = useHistory();
-  // レンダリング後におけるユーザーのサインイン状態を維持
+  // ブラウザ更新ボタン押下後におけるユーザーのサインイン状態を維持（ルートコンポーネントから再描画された場合の処理を想定）
+  // Router以下のコンポーネントの再描画においては以下の処理は関係ない
   useEffect(() => {
     axios
       .get<UserSignInResponseState>(`${usersSignedInUrl}`, { withCredentials: true })
@@ -39,7 +40,7 @@ export const Router: VFC = memo(() => {
       })
       .catch((error) => {
         console.log(error);
-        if (error.response.status === 500) {
+        if (error.status === 500) {
           history.push('/page500');
         }
       });

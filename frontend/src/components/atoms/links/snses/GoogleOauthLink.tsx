@@ -10,7 +10,7 @@ export const GoogleOauthLink: VFC = memo(() => {
   const { googleOauthSignUpOrSignInPost } = useAuthGoogleUsersOauth();
 
   useEffect(() => {
-    const initClient = () => {
+    const initClient = (): void => {
       void gapi.client.init({
         clientId: `${process.env.REACT_APP_GOOGLE_OAUTH_APP_ID}`,
         scope: 'email'

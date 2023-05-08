@@ -6,7 +6,6 @@ class Api::V1::SessionsController < ApplicationController
       login!(@user)
       # mergeメソッドを使用するために、Userモデル（@userのモデル）をハッシュに変換
       render json: @user.attributes.merge(sign_in_state: true), status: :created
-      render json: @user, status: :created
     else
       render json: { message: '認証に失敗しました。' }, status: :unauthorized
     end
@@ -20,15 +19,14 @@ class Api::V1::SessionsController < ApplicationController
   def signed_in?
     # current_userメソッドのレシーバはApi::V1::SessionsControllerのインスタンス(sessions_helper.rbのSessionsHelperモジュールからinclude)
     if current_user
-      # mergeメソッドを使用するために、Userモデル（@userのモデル）をハッシュに変換
+      # mergeメソッドを使用するために、Userモデル（@userのモデル）をハッシュに変換(attributesメソッド)
       render json: @current_user.attributes.merge(sign_in_state: true), status: :ok
     else
-      render json: { sign_in_state: false, message: 'ユーザーが存在しません' }, status: :ok
+      render json: { sign_in_state: false }, status: :ok
     end
   end
 
   private
-  
   def session_params
     params.permit(:email, :password)
   end
